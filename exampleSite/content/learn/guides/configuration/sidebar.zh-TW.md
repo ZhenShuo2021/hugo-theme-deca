@@ -1,7 +1,7 @@
 ---
-title: 側邊欄設置
+title: 側邊欄
 description: 配置多個側邊欄
-weight: 20
+weight: 30
 ---
 
 # 側邊欄設置
@@ -12,6 +12,7 @@ weight: 20
 
 ```toml
 [params.sidebars]
+  sidebarCollapsed = false
   [params.sidebars.docs]
     section = "docs"
   
@@ -23,7 +24,10 @@ weight: 20
 
 每個側邊欄需要指定：
 
-- `section`: 對應的內容區域（資料夾名稱）
+- `section`: 該 sidebar 的根，應設定對應的資料夾名稱
+
+> [!NOTE]
+> 「資料夾名稱」在 Hugo 的正式術語是[邏輯路徑 (logical path)](https://gohugo.io/methods/page/path/)，此設定方式的優點是避免模糊。
 
 ## 內容組織
 
@@ -50,4 +54,4 @@ weight: 10
 ---
 ```
 
-數字越小，排序越前面。
+數字越小，排序越前面，不同 page bundles 的權重獨立處理。如果頁面沒有配置權重，頁面的排序依據將按照 [Hugo 預設的排序方式](https://gohugo.io/quick-reference/glossary/#default-sort-order)。

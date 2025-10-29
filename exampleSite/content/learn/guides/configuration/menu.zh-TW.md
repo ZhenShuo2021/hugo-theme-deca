@@ -1,10 +1,10 @@
 ---
-title: 選單配置
-description: 設定頂部導航選單
-weight: 10
+title: 選單
+description: 設定頁面選單
+weight: 20
 ---
 
-# 選單配置
+# 選單設定
 
 Deca 支援多層級的頂部導航選單，包含下拉子選單功能。
 

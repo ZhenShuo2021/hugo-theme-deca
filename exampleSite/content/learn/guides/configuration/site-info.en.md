@@ -1,14 +1,14 @@
 ---
-title: Theme Customization
-description: Customize theme appearance and behavior
-weight: 30
+title: Site Information
+description: Configure your Deca theme site identity including title, language, logo, social media links, footer copyright, and homepage layout. Complete guide to essential site information settings.
+weight: 10
 ---
 
-# Theme Customization
+# Site Information
 
 Deca provides various customization options to adjust theme appearance and behavior.
 
-## Site Information
+## Basic
 
 Basic site configuration:
 
@@ -28,7 +28,6 @@ Configure site logo:
   dark = "images/logo-dark.png"
   alt = "Website Logo"
   text = "Website Name"
-  url = "/"
 ```
 
 ## Social Links
@@ -42,15 +41,6 @@ Add social media links:
   icon = '<svg>...</svg>'
 ```
 
-## Sidebar Behavior
-
-Control sidebar default state:
-
-```toml
-[params]
-  sidebarCollapsed = false
-```
-
 ## Footer Configuration
 
 Customize footer content:
@@ -60,3 +50,6 @@ Customize footer content:
   description = "Website description"
   copyright = "© 2024 My Website"
 ```
+## Home Page Settings
+
+Deca provides configurable homepage themes. For detailed settings, refer to [Homepage Layout Parameters](reference/home-params).

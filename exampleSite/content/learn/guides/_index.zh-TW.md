@@ -7,7 +7,7 @@ weight: 30
 
 這裡提供 Hugo Theme Deca 的實用指南，幫助你解決具體問題和完成特定任務。
 
-## 配置指南
+## 設定指南
 
 - [選單配置](./configuration/menu) - 設定頂部導航選單
 - [側邊欄設置](./configuration/sidebar) - 配置多個側邊欄

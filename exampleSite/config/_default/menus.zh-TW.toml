@@ -16,7 +16,7 @@
     weight = 10 
 
   [[main]]
-    name = '配置指南'
+    name = '設定指南'
     parent = '教學'
     pageRef = '/learn/guides'
     weight = 20

@@ -57,17 +57,17 @@ sections:
       description: "Learn the CSS design system and customize colors and code highlighting."
       pageRef: "/learn/guides/customization"
 
-  - title: "Core Features"
-    description: "The unique advantages of Deca"
-    items:
+  # - title: "Core Features"
+  #   description: "The unique advantages of Deca"
+  #   items:
 
-    - title: "Multiple Sidebars"
-      description: "A Docusaurus-like multi-sidebar layout for easy document organization."
-      pageRef: "/learn/guides/configuration/sidebar"
+  #   - title: "Multiple Sidebars"
+  #     description: "A Docusaurus-like multi-sidebar layout for easy document organization."
+  #     pageRef: "/learn/guides/configuration/sidebar"
 
-    - title: "SPA Experience"
-      description: "Seamless page transitions without re-rendering for smooth navigation."
-      pageRef: "/learn/guides/customization/css-design"
+  #   - title: "Customize theme"
+  #     description: "Customize Deca's default colors to create a distinctive, branded look for your project"
+  #     pageRef: "/learn/guides/customization/color-theme"
 ---
 
 # Hugo Theme Deca

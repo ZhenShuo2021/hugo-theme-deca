@@ -9,7 +9,7 @@ weight = 1
   [params.header]
     # Logo configuration
     [params.header.logo]
-      light = "images/logo-transparent-trim.webp"
+      light = "images/logo-resize.webp"
       dark = "images/logo.svg"  # Dark mode logo (optional, if not provided, light logo will be used)
       alt = "Hugo Theme Deca Logo"
       text = "Hugo Theme Deca"
@@ -38,7 +38,7 @@ weight = 1
     # Footer logo (optional)
     [params.footer.logo]
       text = ""
-      image = "/images/logo-transparent-trim.webp"
+      image = "/images/logo-resize.webp"
       # alt = "Hugo Fast Docs Logo"
     
     # Footer columns
@@ -60,7 +60,7 @@ weight = 1
         name = "快速入門"
         pageRef = "/learn/tutorials/"
       [[params.footer.columns.items]]
-        name = "自定義主題"
+        name = "色彩主題"
         pageRef = "/learn/guides/customization"
       [[params.footer.columns.items]]
         name = "GitHub"

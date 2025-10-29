@@ -1,14 +1,14 @@
 ---
-title: 主題自訂
-description: 自訂主題外觀和行為
-weight: 30
+title: 網站資訊
+description: 配置 Deca 主題的網站基本資訊，包含網站標題、語言設定、Logo 圖片、社群媒體連結、頁尾版權資訊，以及主頁佈局設定。完整的網站識別元素配置指南。
+weight: 10
 ---
 
-# 主題自訂
+# 網站資訊
 
 Deca 提供多種自訂選項來調整主題外觀和行為。
 
-## 網站資訊
+## 基礎設定
 
 基本網站設定：
 
@@ -28,7 +28,6 @@ languageCode = 'zh-TW'
   dark = "images/logo-dark.png"
   alt = "網站 Logo"
   text = "網站名稱"
-  url = "/"
 ```
 
 ## 社群連結
@@ -42,15 +41,6 @@ languageCode = 'zh-TW'
   icon = '<svg>...</svg>'
 ```
 
-## 側邊欄行為
-
-控制側邊欄預設狀態：
-
-```toml
-[params]
-  sidebarCollapsed = false
-```
-
 ## 頁尾設定
 
 自訂頁尾內容：
@@ -60,3 +50,7 @@ languageCode = 'zh-TW'
   description = "網站描述"
   copyright = "© 2024 我的網站"
 ```
+
+## 主頁設定
+
+Deca 提供配置化的主頁主題，具體設定請參照[主頁佈局參數](reference/home-params)。

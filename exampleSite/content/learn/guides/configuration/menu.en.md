@@ -1,7 +1,7 @@
 ---
-title: Menu Configuration
+title: Menu
 description: Set up top navigation menu
-weight: 10
+weight: 20
 ---
 
 # Menu Configuration
