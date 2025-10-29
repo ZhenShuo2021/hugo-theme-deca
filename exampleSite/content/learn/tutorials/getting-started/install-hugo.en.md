@@ -15,6 +15,7 @@ Install using Homebrew:
 ```bash
 brew install hugo
 ```
+
 {{< /tab >}}
 
 {{< tab >}}
@@ -33,6 +34,7 @@ Install using package manager, for example on Ubuntu:
 ```bash
 sudo apt install hugo
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 

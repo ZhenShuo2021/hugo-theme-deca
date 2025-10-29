@@ -37,6 +37,17 @@ languageCode = 'en'
 title = '我的文檔網站'
 theme = 'hugo-theme-deca'
 
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 4
+    ordered = false
+  [markup.highlight]
+    noClasses = false
+
 [params.sidebars]
   [params.sidebars.docs]
     section = "docs"
