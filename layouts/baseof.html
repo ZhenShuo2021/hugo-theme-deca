@@ -61,8 +61,8 @@
   {{ $debug := eq (lower $debugEnv) "true" -}}
   {{ $halfWidth := "flex: 1; max-height: 80vh; overflow: auto; padding: 1rem; box-sizing: border-box;" | safeCSS }}
   {{ if $debug }}
-    <div style="border: 2px solid green; padding: 2rem; margin: 1rem;" id="debug-sidebar-container">
-      <h2>Debug Info</h2>
+    <div style="border: 2px solid green; padding: 1rem 2rem; margin: 1rem;" id="debug-sidebar-container">
+      <h2 style="margin:0;">Debug Info</h2>
       {{ $meta := .Store.Get "sidebar-meta" }}
       <style>
       .info-grid {
@@ -133,8 +133,8 @@
       <div style="display: flex; gap: 1rem; padding-top: 1em;">
         <div style="{{ $halfWidth }} border: 2px solid blue;">
           <h3>Flat Structure</h3>
-          <p>Sidebar 名稱: {{ $meta.sidebar }}</p>
-          <p>頁面數量: {{ len $sidebarData.flat }}</p>
+          <p><b>Sidebar name:</b> {{ $meta.sidebar }}</p>
+          <p><b>Number of pages:</b> {{ len $sidebarData.flat }}</p>
           <ol>
             {{ range $i, $page := $sidebarData.flat }}
               <li style="{{ if eq $page.RelPermalink $.RelPermalink }}font-weight:bold; color:red;{{ end }}">
@@ -146,10 +146,10 @@
 
         <div style="{{ $halfWidth }} border: 2px solid blue;">
           <h3>Tree Structure</h3>
-          <p>Sidebar 名稱: {{ $meta.sidebar }}</p>
-          <p>根節點數: {{ len $sidebarData.tree }}</p>
+          <p><b>Sidebar name:</b> {{ $meta.sidebar }}</p>
+          <p><b>Number of root nodes:</b> {{ len $sidebarData.tree }}</p>
           <div>
-            根節點:
+            <b>Root nodes:</b>
             <ol>
               {{ range $sidebarData.tree }}
                 {{- $page := .page }}
