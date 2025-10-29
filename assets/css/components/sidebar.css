@@ -1,0 +1,122 @@
+/* ============================================
+   Sidebar Component
+   ============================================ */
+
+.sidebar {
+    background-color: var(--bg-primary);
+    padding: var(--space-sm);
+    border-right: 1px solid var(--border-color);
+    transition: background-color var(--transition-base), border-color var(--transition-base);
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar a {
+    display: block;
+    padding: var(--space-xs) var(--space-sm);
+    margin: var(--space-xs) 0;
+    color: var(--text-secondary);
+    text-decoration: none;
+    border-radius: var(--radius-sm);
+    transition: background-color var(--transition-fast), color var(--transition-fast);
+    font-size: 0.9rem;
+}
+
+.sidebar a:hover {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+.sidebar a.active {
+    background-color: var(--ifm-color-primary-lighter);
+    color: var(--bg-primary);
+}
+
+.sidebar a.active .collapse-icon {
+    color: var(--bg-primary);
+}
+
+/* Nested sidebar items */
+.sidebar ul ul {
+    margin: 0 0 0 var(--space-md);
+}
+
+.sidebar ul ul a {
+    font-size: 0.85rem;
+    padding: 0.3rem 0.5rem;
+}
+
+/* Collapsible sections */
+a.sidebar-item-collapsible {
+    margin: var(--space-xs) 0;
+}
+
+.sidebar-item-collapsible {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    padding-right: 2.5rem;
+    border-radius: var(--radius-sm);
+}
+
+.collapse-btn {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    color: var(--text-muted);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    transition: all var(--transition-fast);
+    width: 2.5rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+}
+
+.collapse-btn:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    color: var(--text-primary);
+}
+
+html.dark .collapse-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.collapse-icon {
+    width: 20px;
+    height: 20px;
+    transition: transform var(--transition-fast);
+    transform: rotate(0deg);
+    flex-shrink: 0;
+}
+
+.collapse-icon.expanded {
+    transform: rotate(90deg);
+}
+
+.sidebar-subsection {
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.sidebar-subsection.collapsed {
+    max-height: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .sidebar {
+        padding: 0.75rem;
+    }
+}

@@ -1,0 +1,233 @@
+{{/* 側邊欄數據收集器（全站一次呼叫版本）
+
+  職責：為所有 sidebar 收集數據並存入 Store
+  呼叫時機：全站構建開始時呼叫一次（如 baseof.html 的開頭加上條件判斷）
+
+  ============================================
+  資料儲存結構
+  ============================================
+
+  1. 資料 Store (site.Store)
+  Key: "sidebar-data-{sidebarKey}"
+  Value: {
+    flat: [Page物件列表],  // DFS 順序的扁平列表
+    tree: [樹結構]         // 每個節點 {page: Page, children: [...]}
+  }
+
+  2. 頁面 Store (page.Store)
+  Key: "sidebar-meta"
+  Value: {
+    sidebar: "sidebarKey",        // 所屬 sidebar 標籤
+    path: "docs/intro/_index.md", // 頁面路徑
+    prev: Page物件或false,         // 前一頁
+    next: Page物件或false,         // 後一頁
+    isCollapsed: true/false,      // 摺疊狀態
+    displayName: "顯示名稱"        // sidebar_label 或 Title
+  }
+
+  ============================================
+  範例：渲染導航
+  ============================================
+
+  {{ if not (site.Store.Get "sidebar-initialized") }}
+    {{ partial "sidebar-init.html" . }}
+    {{ site.Store.Set "sidebar-initialized" true }}
+  {{ end }}
+
+  {{ $meta := .Store.Get "sidebar-meta" }}
+  {{ if $meta }}
+    {{ $sidebarData := site.Store.Get (printf "sidebar-data-%s" $meta.sidebar) }}
+    {{ partial "sidebar.html" (dict "tree" $sidebarData.tree "current" .) }}
+
+    {{ if $meta.prev }}
+      <a href="{{ $meta.prev.RelPermalink }}">← {{ $meta.prev.Title }}</a>
+    {{ end }}
+    {{ if $meta.next }}
+      <a href="{{ $meta.next.RelPermalink }}">{{ $meta.next.Title }} →</a>
+    {{ end }}
+  {{ end }}
+
+  ============================================
+  範例：印出當前 sidebar 所有頁面排列順序
+  ============================================
+  {{ $meta := .Store.Get "sidebar-meta" }}
+  {{ if $meta }}
+    {{ $sidebarData := site.Store.Get (printf "sidebar-data-%s" $meta.sidebar) }}
+    <div style="border:2px solid red; padding:1rem; margin:1rem;">
+      <h3>Sidebar Debug: {{ $meta.sidebar }}</h3>
+      <p>當前頁面: {{ .Title }} ({{ .RelPermalink }})</p>
+      <ol>
+        {{ range $i, $page := $sidebarData.flat }}
+          <li style="{{ if eq $page.RelPermalink $.RelPermalink }}font-weight:bold; color:red;{{ end }}">
+            {{ $page.Title }} ({{ $page.RelPermalink }})
+          </li>
+        {{ end }}
+      </ol>
+    </div>
+  {{ end }}
+
+  */}}
+{{/* ============================================
+  主流程：遍歷所有 sidebar 配置
+  ============================================
+*/}}
+
+{{ $key := "calledCtr" }}
+{{ $ctr := .Site.Store.Get $key | default 0 }}
+{{ $ctr = add $ctr 1 }}
+{{ .Site.Store.Set $key $ctr }}
+
+{{- range $sidebarKey, $cfg := site.Params.sidebars }}
+  {{- $section := site.GetPage "section" $cfg.section }}
+
+  {{- if $section }}
+
+    {{/* 生成扁平化頁面列表（DFS）*/}}
+    {{- $flat := slice }}
+    {{- $flat = $flat | append $section }}
+    {{- $flat = partial "inline/dfs-flatten" (dict "pages" $section.Pages "result" $flat) }}
+
+    {{/* 生成樹結構（純 Page 物件）*/}}
+    {{- $tree := partial "inline/build-simple-tree" (dict "pages" $section.Pages) }}
+
+    {{/* 存入資料 Store (site.Store) */}}
+    {{- $dataStoreKey := printf "sidebar-data-%s" $sidebarKey }}
+    {{- $dataStore := dict
+      "flat" $flat
+      "tree" $tree
+    }}
+    {{- site.Store.Set $dataStoreKey $dataStore }}
+
+    {{/* 為每個頁面生成元數據並存入頁面 Store */}}
+    {{- range $i, $page := $flat }}
+
+      {{/* 計算 prev/next */}}
+      {{- $prev := false }}
+      {{- $next := false }}
+      {{- if gt $i 0 }}
+        {{- $prev = index $flat (sub $i 1) }}
+      {{- end }}
+      {{- if lt $i (sub (len $flat) 1) }}
+        {{- $next = index $flat (add $i 1) }}
+      {{- end }}
+
+      {{/* 取得顯示名稱 */}}
+      {{- $displayName := $page.Title }}
+      {{- if $page.Params.sidebar_label }}
+        {{- $displayName = $page.Params.sidebar_label }}
+      {{- end }}
+
+      {{/* 取得摺疊狀態 */}}
+      {{- $isCollapsed := site.Params.sidebarCollapsed }}
+      {{- if isset $page.Params "collapsed" }}
+        {{- $isCollapsed = $page.Params.collapsed }}
+      {{- end }}
+
+      {{/* 組裝頁面元數據並存入頁面 Store */}}
+      {{- $pageMetadata := dict
+        "sidebar" $sidebarKey
+        "path" $page.Path
+        "prev" $prev
+        "next" $next
+        "isCollapsed" $isCollapsed
+        "displayName" $displayName
+      }}
+
+      {{- $page.Store.Set "sidebar-meta" $pageMetadata }}
+    {{- end }}
+
+  {{- end }}
+{{- end }}
+
+{{/* ============================================
+  輔助函數：DFS 扁平化
+
+  目的：深度優先遍歷生成扁平頁面列表
+  輸入：pages (當前層級頁面), result (累積結果)
+  輸出：扁平化的頁面列表，保持 DFS 順序
+
+  範例：
+  A/          →  [A, B, B1, B2, C]
+  ├─ B/
+  │  ├─ B1
+  │  └─ B2
+  └─ C
+  ============================================
+*/}}
+{{- define "partials/inline/dfs-flatten" }}
+  {{- $pages := .pages }}
+  {{- $result := .result }}
+
+  {{- $pages = $pages.ByWeight }}
+
+  {{- range $pages }}
+    {{- $result = $result | append . }}
+    {{- if .Pages }}
+      {{- $result = partial "inline/dfs-flatten" (dict "pages" .Pages "result" $result) }}
+    {{- end }}
+  {{- end }}
+
+  {{- return $result }}
+{{- end }}
+
+{{/* ============================================
+  輔助函數：建立簡單頁面樹
+
+  目的：生成純 Page 物件的樹結構（不包含任何頁面特定元數據）
+  輸入：pages
+  輸出：樹結構，每個節點包含：
+  - page: 頁面物件
+  - children: 子頁面樹（遞迴結構）
+
+  注意：不包含 isActive, hasActivePage 等頁面相關狀態
+  這些狀態在渲染時由當前頁面動態計算
+  ============================================
+*/}}
+{{- define "partials/inline/build-simple-tree" }}
+  {{- $pages := .pages }}
+  {{- $pages = $pages.ByWeight }}
+
+  {{- $result := slice }}
+  {{- range $pages }}
+    {{- $page := . }}
+
+    {{/* 遞迴處理子頁面 */}}
+    {{- $children := slice }}
+    {{- if .Pages }}
+      {{- $children = partial "inline/build-simple-tree" (dict "pages" .Pages) }}
+    {{- end }}
+
+    {{/* 組裝節點數據（只包含 Page 物件和子節點） */}}
+    {{- $data := dict
+      "page" $page
+      "children" $children
+    }}
+
+    {{- $result = $result | append $data }}
+  {{- end }}
+
+  {{- return $result }}
+{{- end }}
+
+{{- define "partials/inline/simplify-tree-for-debug" }}
+  {{- $tree := . }}
+  {{- $result := slice }}
+  
+  {{- range $tree }}
+    {{- $simplified := dict
+      "title" .page.Title
+      "path" .page.RelPermalink
+      "weight" .page.Weight
+      "hasChildren" (gt (len .children) 0)
+      "kind" .page.Kind
+    }}
+    
+    {{- if .children }}
+      {{- $simplified = merge $simplified (dict "children" (partial "inline/simplify-tree-for-debug" .children)) }}
+    {{- end }}
+    
+    {{- $result = $result | append $simplified }}
+  {{- end }}
+  
+  {{- return $result }}
+{{- end }}

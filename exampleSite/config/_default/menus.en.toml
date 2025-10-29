@@ -1,0 +1,37 @@
+[[main]]
+  name = 'Tutorial'
+  pageRef = '/learn'
+  weight = 10
+
+  [[main]]
+    name = 'Getting Started'
+    parent = 'Tutorial'
+    pageRef = '/learn/tutorials'
+    weight = 10 
+
+  [[main]]
+    name = 'Page Types'
+    parent = 'Tutorial'
+    pageRef = '/learn/tutorials/content-management/page-types'
+    weight = 10 
+
+  [[main]]
+    name = 'User Guides'
+    parent = 'Tutorial'
+    pageRef = '/learn/guides'
+    weight = 20
+
+[[main]]
+  name = 'Shortcode'
+  pageRef = '/shortcodes'
+  weight = 30
+
+[[main]]
+  name = 'Reference'
+  pageRef = '/reference'
+  weight = 40
+
+[[main]]
+  name = 'Blog'
+  pageRef = '/blog'
+  weight = 50

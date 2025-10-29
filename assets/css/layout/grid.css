@@ -1,0 +1,125 @@
+/* ============================================
+   Layout Grid System
+   ============================================ */
+
+/* Base layout containers */
+.layout-home,
+.layout-404 {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.layout-home main,
+.layout-404 main {
+    flex: 1;
+}
+
+/* Unified Layout Base */
+.layout-unified {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header - consistent across all layouts */
+.layout-unified .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: var(--header-height);
+    flex-shrink: 0;
+}
+
+/* Content Wrapper - flexible container */
+.layout-unified .content-wrapper {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+}
+
+/* Documentation Layout (Three Column) */
+.layout-docs .content-wrapper {
+    display: grid;
+    grid-template-columns: var(--sidebar-width) 1fr var(--toc-width);
+    grid-template-areas: "sidebar content toc";
+    gap: 0;
+    container-type: inline-size;
+}
+
+.layout-docs .content-wrapper:not(:has(.toc-column)) {
+    grid-template-columns: var(--sidebar-width) 1fr;
+    grid-template-areas: "sidebar content";
+}
+
+.layout-docs .sidebar {
+    grid-area: sidebar;
+    position: sticky;
+    top: var(--header-height);
+    height: calc(100vh - var(--header-height));
+    overflow-y: auto;
+}
+
+.layout-docs .content {
+    grid-area: content;
+    overflow-y: auto;
+    min-width: 0;
+    overflow-x: hidden;
+}
+
+.layout-docs .toc-column {
+    grid-area: toc;
+    position: sticky;
+    top: var(--header-height);
+    height: calc(100vh - var(--header-height));
+    align-self: start;
+}
+
+.layout-unified .site-footer {
+    margin-top: auto;
+}
+
+/* ===== Responsive Design ===== */
+
+/* Medium width: Hide TOC, content expands */
+@media (max-width: 1200px) {
+    .layout-docs .content-wrapper {
+        grid-template-columns: var(--sidebar-width) 1fr !important;
+        grid-template-areas: "sidebar content" !important;
+    }
+
+    .layout-docs .toc-column {
+        display: none !important;
+    }
+}
+
+/* Small width: Mobile layout */
+@media (max-width: 768px) {
+    /* Documentation layout becomes single column */
+    .layout-docs .content-wrapper {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .layout-docs .sidebar {
+        display: none;
+    }
+
+    .layout-docs .toc-column {
+        display: none !important;
+    }
+
+    /* Blog layout remains single column but adjusts content width */
+    .layout-blog .content {
+        max-width: 100%;
+        padding: 0 var(--space-md);
+    }
+
+    /* Unified header adjustments */
+    .layout-unified .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        height: auto;
+    }
+}

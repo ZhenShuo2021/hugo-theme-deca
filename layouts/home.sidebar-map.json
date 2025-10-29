@@ -1,0 +1,25 @@
+{{- $debugEnv := getenv "HUGO_DEBUG_SIDEBAR" | default "false" -}}
+{{- $debug := eq (lower $debugEnv) "true" -}}
+
+{{- $key := "sidebarMap" -}}
+
+{{/* 初始化暫存 Store */}}
+{{- .Site.Home.Store.Set $key (dict) -}}
+
+{{/* 掃描所有頁面 */}}
+{{- range .Site.RegularPages }}
+  {{- $sidebar := .Params.swupId | default "default" -}}
+  {{- $info := dict
+      "relPermalink" .RelPermalink
+      "sidebar" $sidebar
+      "path" .Path
+  -}}
+  {{- .Site.Home.Store.Set $key (merge (.Site.Home.Store.Get $key) (dict .RelPermalink $info)) -}}
+{{- end }}
+
+{{/* 若 debug 模式輸出 JSON；否則輸出空檔案 */}}
+{{- if $debug }}
+  {{- jsonify (dict "indent" "  ") (.Site.Home.Store.Get $key) }}
+{{- else }}
+  {{- jsonify (dict "comment" "Intentionally empty placeholder; built at build time.") }}
+{{- end }}

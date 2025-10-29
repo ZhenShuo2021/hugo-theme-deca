@@ -1,0 +1,47 @@
+<script>
+  window.SITE_CONFIG = {
+    sidebars: {
+      {{- range $key, $cfg := site.Params.sidebars -}}
+      "{{ $key }}": {
+        section: "{{ $cfg.section }}",
+        title: "{{ $cfg.title }}"
+      },
+      {{- end }}
+    }
+  };
+</script>
+
+{{- with resources.Get "js/theme-init.js" }}
+  {{- $opts := dict "minify" (not hugo.IsDevelopment) }}
+  {{- with . | js.Build $opts | fingerprint }}
+    <script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous"></script>
+  {{- end }}
+{{- end }}
+
+{{- with resources.Get "lib/swup/swup.js" }}
+  {{- if hugo.IsDevelopment }}
+    <script src="{{ .RelPermalink }}"></script>
+  {{- else }}
+    {{- with . | fingerprint }}
+      <script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous"></script>
+    {{- end }}
+  {{- end }}
+{{- end }}
+
+{{- with resources.Get "js/main.js" }}
+  {{- $opts := dict
+    "minify" (not hugo.IsDevelopment)
+    "sourceMap" (cond hugo.IsDevelopment "external" "")
+    "targetPath" "js/main.js"
+    "format" "esm"
+  }}
+  {{- with . | js.Build $opts }}
+    {{- if hugo.IsDevelopment }}
+      <script type="module" src="{{ .RelPermalink }}"></script>
+    {{- else }}
+      {{- with . | fingerprint }}
+        <script type="module" src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous"></script>
+      {{- end }}
+    {{- end }}
+  {{- end }}
+{{- end }}

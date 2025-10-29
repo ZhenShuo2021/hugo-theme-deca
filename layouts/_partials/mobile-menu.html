@@ -1,0 +1,248 @@
+{{- /*
+Mobile Menu Component
+統一的移動端菜單，支援tab切換顯示site navigation或sidebar menu
+使用統一的樣式類別以減少代碼重複
+*/ -}}
+
+{{- $currentPage := . }}
+{{- $chevronIcon := resources.Get "icons/chevron-right.svg" -}}
+
+{{- /* 獲取sidebar數據 */ -}}
+{{- $meta := .Store.Get "sidebar-meta" }}
+{{- $sidebarData := false }}
+{{- $sectionPage := false }}
+{{- if $meta }}
+  {{- $sidebarData = site.Store.Get (printf "sidebar-data-%s" $meta.sidebar) }}
+  {{- $sectionPage = site.GetPage "section" (index site.Params.sidebars $meta.sidebar).section }}
+{{- end }}
+
+<div class="mobile-menu-overlay" id="mobile-menu-overlay"></div>
+<nav class="mobile-menu" id="mobile-menu">
+  <div class="mobile-menu-header">
+    <h3>Menu</h3>
+    <button class="mobile-menu-close" id="mobile-menu-close" aria-label="Close menu">
+      {{- $closeIcon := resources.Get "icons/close.svg" -}}
+      <div class="icon">{{ $closeIcon.Content | safeHTML }}</div>
+    </button>
+  </div>
+
+  {{- /* Tab Navigation */ -}}
+  <div class="mobile-menu-tabs">
+    <button class="mobile-tab-btn active" data-tab="navigation" aria-label="Site Navigation">
+      {{- $globeIcon := resources.Get "icons/globe.svg" -}}
+      {{- if $globeIcon -}}
+      <div class="icon">{{ $globeIcon.Content | safeHTML }}</div>
+      {{- end -}}
+      <span>Navigation</span>
+    </button>
+    <button class="mobile-tab-btn" data-tab="sidebar" aria-label="Page Contents">
+      {{- $listIcon := resources.Get "icons/list.svg" -}}
+      {{- if $listIcon -}}
+      <div class="icon">{{ $listIcon.Content | safeHTML }}</div>
+      {{- end -}}
+      <span>Contents</span>
+    </button>
+  </div>
+
+  <div class="mobile-menu-content">
+    {{- /* Site Navigation Tab Content */ -}}
+    <div class="mobile-tab-content active" id="mobile-tab-navigation">
+      <ul class="mobile-menu-list">
+        {{- /* Main Menu Items */ -}}
+        {{- if site.Menus.main }}
+        {{- range site.Menus.main -}}
+        {{- if not .Parent -}}
+        {{- if ne .Params.type "search" -}}
+        <li>
+          {{- if .Children -}}
+          {{- $isActive := $currentPage.IsMenuCurrent .Menu . -}}
+          {{- $isAncestor := $currentPage.HasMenuCurrent .Menu . -}}
+          <a class="mobile-menu-item-with-children {{ if $isActive }}active{{ else if $isAncestor }}ancestor{{ end }}"
+            href="{{ .URL }}">
+            {{ .Name }}
+            <button class="mobile-collapse-btn" aria-expanded="false">
+              <div class="mobile-collapse-icon">{{ $chevronIcon.Content | safeHTML }}</div>
+            </button>
+          </a>
+          <ul class="mobile-menu-subsection collapsed">
+            {{- range .Children -}}
+            <li>
+              {{- $childActive := $currentPage.IsMenuCurrent .Menu . -}}
+              <a class="mobile-menu-link {{ if $childActive }}active{{ end }}" {{ if $childActive }}aria-current="page"
+                {{ end }} href="{{ .URL }}">{{ .Name }}</a>
+            </li>
+            {{- end -}}
+          </ul>
+          {{- else -}}
+          {{- $isActive := $currentPage.IsMenuCurrent .Menu . -}}
+          {{- $isAncestor := $currentPage.HasMenuCurrent .Menu . -}}
+          <a class="mobile-menu-link {{ if $isActive }}active{{ else if $isAncestor }}ancestor{{ end }}" {{ if $isActive
+            }}aria-current="page" {{ else if $isAncestor }}aria-current="true" {{ end }} href="{{ .URL }}">
+            {{ .Name }}
+          </a>
+          {{- end -}}
+        </li>
+        {{- end -}}
+        {{- end -}}
+        {{- end -}}
+        {{- end }}
+
+        {{- /* Additional Sections */ -}}
+        {{- /* Search Button */ -}}
+        {{- range site.Menus.main -}}
+        {{- if eq .Params.type "search" -}}
+        <li class="mobile-menu-section">
+          <button class="mobile-search-btn" aria-label="Search">
+            {{- $searchIcon := resources.Get "icons/search.svg" -}}
+            <div class="icon">{{ $searchIcon.Content | safeHTML }}</div>
+            <span>Search</span>
+          </button>
+        </li>
+        {{- end -}}
+        {{- end -}}
+
+        {{- /* Social Links */ -}}
+        {{- if site.Params.header.social }}
+        <li class="mobile-menu-section">
+          <h4 class="mobile-menu-section-title">Connect</h4>
+          <ul class="mobile-social-list">
+            {{- range site.Params.header.social -}}
+            <li>
+              <a href="{{ .url }}" target="_blank" rel="noopener noreferrer" class="mobile-social-link">
+                <div class="icon">{{ .icon | safeHTML }}</div>
+                <span>{{ .name }}</span>
+              </a>
+            </li>
+            {{- end -}}
+          </ul>
+        </li>
+        {{- end }}
+
+        {{- /* Theme Toggle */ -}}
+        <li class="mobile-menu-section">
+          <button id="mobile-theme-toggle" class="mobile-theme-btn" aria-label="Toggle dark mode">
+            {{- $sunIcon := resources.Get "icons/sun.svg" -}}
+            {{- $moonIcon := resources.Get "icons/moon.svg" -}}
+            <div class="icon theme-light">{{ $sunIcon.Content | safeHTML }}</div>
+            <div class="icon theme-dark">{{ $moonIcon.Content | safeHTML }}</div>
+            <span class="theme-text">
+              <span class="theme-light-text">Dark Mode</span>
+              <span class="theme-dark-text">Light Mode</span>
+            </span>
+          </button>
+        </li>
+      </ul>
+    </div>
+
+    {{- /* Sidebar Menu Tab Content */ -}}
+    <div class="mobile-tab-content" id="mobile-tab-sidebar">
+      {{- if and $meta $sidebarData $sectionPage }}
+      <ul class="mobile-menu-list">
+        {{- /* 顯示section首頁 */ -}}
+        {{- if $sectionPage.Content }}
+        {{- /* 檢查 section index 是否有子頁面 */ -}}
+        {{- $hasChildren := gt (len $sectionPage.Pages) 0 }}
+        <li>
+          {{- if $hasChildren }}
+          <a href="{{ $sectionPage.RelPermalink }}"
+            class="mobile-menu-item-with-children {{ if eq $currentPage.RelPermalink $sectionPage.RelPermalink }}active{{ end }}">
+            {{ or $sectionPage.Params.sidebar_label $sectionPage.Title }}
+            <button class="mobile-collapse-btn" aria-expanded="true">
+              {{- $chevronIcon := resources.Get "icons/chevron-right.svg" -}}
+              <div class="mobile-collapse-icon expanded">{{ $chevronIcon.Content | safeHTML }}</div>
+            </button>
+          </a>
+          <ul class="mobile-menu-subsection">
+            {{- /* 渲染樹結構 */ -}}
+            {{- range $sidebarData.tree }}
+            {{- partial "inline/mobile-menu-item" (dict "item" . "currentPage" $currentPage) }}
+            {{- end }}
+          </ul>
+          {{- else }}
+          <a href="{{ $sectionPage.RelPermalink }}"
+            class="mobile-menu-link {{ if eq $currentPage.RelPermalink $sectionPage.RelPermalink }}active{{ end }}">
+            {{ or $sectionPage.Params.sidebar_label $sectionPage.Title }}
+          </a>
+          {{- end }}
+        </li>
+        {{- else }}
+        {{- /* 如果沒有 section index content，直接渲染樹結構 */ -}}
+        {{- range $sidebarData.tree }}
+        {{- partial "inline/mobile-menu-item" (dict "item" . "currentPage" $currentPage) }}
+        {{- end }}
+        {{- end }}
+      </ul>
+      {{- else }}
+      <div class="mobile-menu-empty">
+        <p>No sidebar content available</p>
+      </div>
+      {{- end }}
+    </div>
+  </div>
+</nav>
+
+{{- define "_partials/inline/mobile-menu-item" }}
+  {{- $item := .item }}
+  {{- $currentPage := .currentPage }}
+  {{- $page := $item.page }}
+
+  {{- /* Get page metadata for display name and collapse state */ -}}
+  {{- $pageMeta := $page.Store.Get "sidebar-meta" }}
+  {{- $displayName := $page.Title }}
+  {{- $isCollapsed := site.Params.sidebarCollapsed }}
+  {{- if $pageMeta }}
+    {{- $displayName = $pageMeta.displayName }}
+    {{- $isCollapsed = $pageMeta.isCollapsed }}
+  {{- end }}
+
+  {{- /* Calculate dynamic states */ -}}
+  {{- $isActive := eq $currentPage.RelPermalink $page.RelPermalink }}
+  {{- $hasChildren := gt (len $item.children) 0 }}
+  {{- $hasActivePage := or $isActive ($page.IsAncestor $currentPage) }}
+
+  {{- /* If contains current page, force expand */ -}}
+  {{- if $hasActivePage }}
+    {{- $isCollapsed = false }}
+  {{- end }}
+
+  <li>
+    {{- if $hasChildren }}
+      <a
+        href="{{ $page.RelPermalink }}"
+        class="mobile-menu-item-with-children {{ if $isActive }}active{{ end }}">
+        {{ $displayName }}
+        <button
+          class="mobile-collapse-btn"
+          aria-expanded="{{ if not $isCollapsed }}
+            true
+          {{ else }}
+            false
+          {{ end }}">
+          <div class="mobile-collapse-icon {{ if not $isCollapsed }}expanded{{ end }}">
+            {{/* inlined chevron-right for performance */}}
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round">
+              <polyline points="9,18 15,12 9,6"></polyline>
+            </svg>
+          </div>
+        </button>
+      </a>
+      <ul class="mobile-menu-subsection {{ if $isCollapsed }}collapsed{{ end }}">
+        {{- range $item.children }}
+          {{- partial "inline/mobile-menu-item" (dict "item" . "currentPage" $currentPage) }}
+        {{- end }}
+      </ul>
+    {{- else }}
+      <a href="{{ $page.RelPermalink }}" class="mobile-menu-link {{ if $isActive }}active{{ end }}">
+        {{ $displayName }}
+      </a>
+    {{- end }}
+  </li>
+{{- end }}

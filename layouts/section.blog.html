@@ -1,0 +1,49 @@
+{{ define "main" }}
+{{ partial "breadcrumbs.html" . }}
+
+<header class="section-header">
+  <h1 class="section-title">{{ .Title }}</h1>
+</header>
+
+<!-- Nested sections for blog categories -->
+{{ if .Sections }}
+<div class="blog-sections">
+  {{ range .Sections }}
+  <div class="blog-section-card">
+    <h2 class="blog-section-title">
+      <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+    </h2>
+    <div class="blog-section-count">
+      {{ len .RegularPages }} 篇文章
+    </div>
+  </div>
+  {{ end }}
+</div>
+{{ end }}
+
+<!-- Blog posts list -->
+<div class="posts-list">
+  {{ range .Paginator.Pages }}
+  <article class="post-item">
+    <div class="post-meta">
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+      {{ with .Params.author }}
+      <span class="post-author">{{ . }}</span>
+      {{ end }}
+    </div>
+    
+    <h2 class="post-title">
+      <a href="{{ .RelPermalink }}" data-no-swup>{{ .LinkTitle }}</a>
+    </h2>
+    
+    {{ with .Summary }}
+    <div class="post-summary">
+      {{ . | plainify | truncate 120 "" | strings.TrimSpace }}
+    </div>
+    {{ end }}
+  </article>
+  {{ end }}
+</div>
+
+{{ partial "page-navigation.html" . }}
+{{ end }}

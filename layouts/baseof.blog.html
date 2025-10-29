@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="{{ site.Language.LanguageCode }}" dir="{{ or site.Language.LanguageDirection `ltr` }}">
+  {{- partialCached "sidebar-init.html" . -}}
+  <head>
+    {{ partial "head.html" . }}
+  </head>
+  <body class="scrollbar-thin">
+    {{ partial "inline/debug-sidebar" . }}
+    <!-- Blog Layout (Single Column) -->
+    <div class="layout-unified layout-blog">
+      {{ partial "header.html" . }}
+      <div class="content-wrapper">
+        <div class="content" id="swup">
+          <main>
+            {{ block "main" . }}{{ end }}
+          </main>
+        </div>
+      </div>
+      {{ partial "footer.html" . }}
+    </div>
+    {{ partial "inline/debug-sidebar" . }}
+
+    <!-- Mobile Components (only visible on mobile) -->
+    {{ partial "mobile-menu.html" . }}
+  </body>
+</html>

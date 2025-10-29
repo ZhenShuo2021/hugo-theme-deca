@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="{{ site.Language.LanguageCode }}" dir="{{ or site.Language.LanguageDirection `ltr` }}">
+  {{- partialCached "sidebar-init.html" . -}}
+  <head>
+    {{ partial "head.html" . }}
+  </head>
+  <body class="scrollbar-thin">
+    {{ partial "inline/debug-sidebar" . }}
+    {{ if eq .Kind "404" }}
+      <!-- 404 Page Layout -->
+      <div class="layout-404">
+        {{ partial "header.html" . }}
+        <main>
+          {{ block "main" . }}{{ end }}
+        </main>
+        {{ partial "footer.html" . }}
+      </div>
+    {{ else if eq .Kind "home" }}
+      <!-- Home Page Layout -->
+      <div class="layout-home">
+        {{ partial "header.html" . }}
+        <main>
+          {{ block "main" . }}{{ end }}
+        </main>
+        {{ partial "footer.html" . }}
+      </div>
+    {{ else }}
+      <!-- Documentation Layout (Three Column) -->
+      <div class="layout-unified layout-docs">
+        {{ partial "header.html" . }}
+        <div class="content-wrapper">
+          {{ partial "sidebar.html" . }}
+          <div class="content" id="swup">
+            <main>
+              {{ block "main" . }}{{ end }}
+            </main>
+          </div>
+          {{ if ge (len (.TableOfContents)) 33 -}}
+            <div class="toc-column" id="toc-container">
+              <nav class="toc-nav">
+                {{ .TableOfContents }}
+              </nav>
+            </div>
+          {{ else }}
+            <div class="toc-column" id="toc-container" style="visibility: hidden;">
+              <nav class="toc-nav"></nav>
+            </div>
+          {{ end }}
+        </div>
+        {{ partial "footer.html" . }}
+      </div>
+    {{ end }}
+
+    <!-- Mobile Components (only visible on mobile) -->
+    {{ partial "mobile-menu.html" . }}
+  </body>
+</html>
+
+{{ define "_partials/inline/debug-sidebar" }}
+  {{ $debugEnv := getenv "HUGO_DEBUG_SIDEBAR" | default "false" -}}
+  {{ $debug := eq (lower $debugEnv) "true" -}}
+  {{ $halfWidth := "flex: 1; max-height: 80vh; overflow: auto; padding: 1rem; box-sizing: border-box;" | safeCSS }}
+  {{ if $debug }}
+    <div style="border: 2px solid green; padding: 2rem; margin: 1rem;" id="debug-sidebar-container">
+      <h2>Debug Info</h2>
+      {{ $meta := .Store.Get "sidebar-meta" }}
+      <style>
+      .info-grid {
+        display: grid;
+        grid-template-columns: max-content 1fr;
+        gap: 4px 16px;
+        font-family: monospace;
+        line-height: 1.6;
+      }
+      .info-grid div:nth-child(odd) {
+        font-weight: bold;
+      }
+      </style>
+
+      <div class="info-grid">
+        <div>Current page:</div><div>{{ .Title }} ({{ .RelPermalink }})</div>
+        <div>Current sidebar:</div><div>{{ $meta.sidebar }}</div>
+        <div>Path:</div><div>{{ .Path }}</div>
+        <div>File:</div><div>{{ .File }}</div>
+        <div>Kind:</div><div>{{ .Kind }}</div>
+        <div>Type:</div><div>{{ .Type }}</div>
+        <div>Section:</div><div>{{ .Section }}</div>
+        <div>IsPage:</div><div>{{ printf "%t" .IsPage }}</div>
+        <div>IsSection:</div><div>{{ printf "%t" .IsSection }}</div>
+        <div>sidebar-init.html called counter:</div><div>{{ printf "%d" (.Site.Store.Get "calledCtr") }}</div>
+        <div>Sidebar config:</div>
+        <div>
+          {{ range $sidebarKey, $cfg := site.Params.sidebars }}
+            <li>{{ $cfg.section }}</li>
+          {{ end }}
+        </div>
+      </div>
+
+      <nav style="display: flex; gap: 1rem; padding-top: 1em;">
+        <div style="{{ $halfWidth }} border: 2px solid brown;">
+          {{- if $meta.prev -}}
+          <a href="{{ $meta.prev.RelPermalink }}">
+            <div>Previous {{ $meta.prev.Title }}</div>
+          </a>
+          {{- else -}}
+          No Previous Page
+          {{- end -}}
+        </div>
+
+        <div style="{{ $halfWidth }} border: 2px solid brown;">
+          {{- if $meta.next -}}
+          <a href="{{ $meta.next.RelPermalink }}">
+            <div>Next {{ $meta.next.Title }}</div>
+          </a>
+          {{- else -}}
+          No Next Page
+          {{- end -}}
+        </div>
+      </nav>
+
+      {{ $sidebarData := site.Store.Get (printf "sidebar-data-%s" $meta.sidebar) }}
+      {{ if $sidebarData }}
+      {{ $pages := slice }}
+      {{ range $sidebarData.flat }}
+        {{ $pages = $pages | append (dict "title" .Title "permalink" .RelPermalink) }}
+      {{ end }}
+      {{ $currentIndex := -1 }}
+      {{ range $i, $page := $sidebarData.flat }}
+        {{ if eq $page.RelPermalink $.RelPermalink }}
+          {{ $currentIndex = $i }}
+        {{ end }}
+      {{ end }}
+      <div style="display: flex; gap: 1rem; padding-top: 1em;">
+        <div style="{{ $halfWidth }} border: 2px solid blue;">
+          <h3>Flat Structure</h3>
+          <p>Sidebar 名稱: {{ $meta.sidebar }}</p>
+          <p>頁面數量: {{ len $sidebarData.flat }}</p>
+          <ol>
+            {{ range $i, $page := $sidebarData.flat }}
+              <li style="{{ if eq $page.RelPermalink $.RelPermalink }}font-weight:bold; color:red;{{ end }}">
+                {{ $page.Title }} ({{ $page.RelPermalink }})
+              </li>
+            {{ end }}
+          </ol>
+        </div>
+
+        <div style="{{ $halfWidth }} border: 2px solid blue;">
+          <h3>Tree Structure</h3>
+          <p>Sidebar 名稱: {{ $meta.sidebar }}</p>
+          <p>根節點數: {{ len $sidebarData.tree }}</p>
+          <div>
+            根節點:
+            <ol>
+              {{ range $sidebarData.tree }}
+                {{- $page := .page }}
+                  <li>{{ $page.Title }} ({{ $page.RelPermalink }})</li>
+              {{ end }}
+            </ol>
+          </div>
+          {{ $simplifiedTree := partial "inline/simplify-tree-for-debug" $sidebarData.tree }}
+          {{ highlight (jsonify (dict "indent" "  ") $simplifiedTree) "json" }}
+        </div>
+      </div>
+      {{ end }}
+    </div>
+  {{ end }}
+{{ end }}

@@ -1,0 +1,15 @@
+{{- $map := site.Home.Store.Get "sidebarMap" -}}
+{{- if not $map }}
+  {{ errorf "sidebar-map.json not initialized before use" }}
+{{- end -}}
+
+{{- $currentSidebar := .Page.Params.swupId | default "default" -}}
+
+{{- $href := .href | default "" -}}
+{{- with (index $map $href) }}
+  {{- if ne .sidebar $currentSidebar }}
+    data-no-swup
+  {{- else }}
+    swup
+  {{- end }}
+{{- end }}

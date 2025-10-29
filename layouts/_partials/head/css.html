@@ -1,0 +1,81 @@
+{{- /* 1. Variables and Design Tokens */ -}}
+{{- $variables := resources.Get "css/tokens/variables.css" }}
+
+{{- /* 2. Base Styles */ -}}
+{{- $typography := resources.Get "css/base/typography.css" }}
+{{- $code := resources.Get "css/base/code.css" }}
+
+{{- /* 3. Layout System */ -}}
+{{- $grid := resources.Get "css/layout/grid.css" }}
+
+{{- /* 4. Components */ -}}
+{{- $header := resources.Get "css/components/header.css" }}
+{{- $sidebar := resources.Get "css/components/sidebar.css" }}
+{{- $content := resources.Get "css/components/content.css" }}
+{{- $toc := resources.Get "css/components/toc.css" }}
+{{- $navigation := resources.Get "css/components/navigation.css" }}
+{{- $breadcrumbs := resources.Get "css/components/breadcrumbs.css" }}
+{{- $tabs := resources.Get "css/components/tabs.css" }}
+{{- $footer := resources.Get "css/components/footer.css" }}
+{{- $mobileMenu := resources.Get "css/components/mobile-menu.css" }}
+{{- $codeCopy := resources.Get "css/components/code-copy.css" }}
+
+{{- /* 5. Pages */ -}}
+{{- /* home.css is loaded in head.html because css.html is partialCached */ -}}
+{{- if eq .Kind "home" }}
+  {{- with resources.Get "css/pages/home.css" }}
+    {{- if hugo.IsDevelopment }}
+      <link rel="stylesheet" href="{{ .RelPermalink }}">
+    {{- else }}
+      {{- with . | minify | fingerprint }}
+        <link
+          rel="stylesheet"
+          href="{{ .RelPermalink }}"
+          integrity="{{ .Data.Integrity }}"
+          crossorigin="anonymous">
+      {{- end }}
+    {{- end }}
+  {{- else }}
+    {{- warnf "home.css not found in resources/css/pages/" }}
+  {{- end }}
+{{- end }}
+
+{{- /* Blog page styles */ -}}
+{{- if eq .Section "blog" }}
+  {{- with resources.Get "css/pages/blog.css" }}
+    {{- if hugo.IsDevelopment }}
+      <link rel="stylesheet" href="{{ .RelPermalink }}">
+    {{- else }}
+      {{- with . | minify | fingerprint }}
+        <link
+          rel="stylesheet"
+          href="{{ .RelPermalink }}"
+          integrity="{{ .Data.Integrity }}"
+          crossorigin="anonymous">
+      {{- end }}
+    {{- end }}
+  {{- else }}
+    {{- warnf "blog.css not found in resources/css/pages/" }}
+  {{- end }}
+{{- end }}
+
+{{- $error404 := resources.Get "css/pages/404.css" }}
+{{- $section := resources.Get "css/pages/section.css" }}
+
+{{- /* 6. Utilities */ -}}
+{{- $scrollbar := resources.Get "css/utilities/scrollbar.css" }}
+
+{{- /* 7. Syntax Highlighting */ -}}
+{{- $chroma := resources.Get "css/vendor/chroma.css" }}
+
+{{- $css := slice $variables $typography $code $grid $header $sidebar $content $toc $navigation $breadcrumbs $tabs
+  $footer $mobileMenu $codeCopy $error404 $section $scrollbar $chroma | resources.Concat "css/bundle.css"
+}}
+
+{{- if hugo.IsDevelopment }}
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}">
+{{- else }}
+  {{- with $css | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
+  {{- end }}
+{{- end }}
