@@ -4,10 +4,6 @@
 
 Deca is a modern documentation theme built for [Hugo](https://gohugo.io/), supporting multiple sidebars and Single-Page Application (SPA) functionality to deliver a smoother and more scalable documentation browsing experience.
 
-## Project Overview
-
-Deca is the first documentation theme in the Hugo ecosystem that supports an SPA architecture. This design allows large documentation sets to be organized with a clearer structure while maintaining stability and responsiveness during page transitions, offering a reading experience comparable to Docusaurus and Vitepress.
-
 ## Core Features
 
 * Supports multiple sidebars, suitable for large or multi-module documentation structures
@@ -18,10 +14,6 @@ Deca is the first documentation theme in the Hugo ecosystem that supports an SPA
 ## Why Choose Deca
 
 Existing Hugo documentation themes lack SPA navigation, resulting in less smooth user experiences when switching pages. Deca aims to offer a solution that balances performance and scalability, enabling Hugo to deliver a documentation experience on par with modern front-end frameworks.
-
-## Project Status
-
-Deca has completed its Proof of Concept (POC) stage and includes basic functionality. The project is a personal research and experimental exploration with significant room for improvement.
 
 ## License
 
