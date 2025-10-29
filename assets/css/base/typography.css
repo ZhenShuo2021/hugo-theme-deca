@@ -32,7 +32,9 @@ img {
 }
 
 hr {
-  border: 0;
+  border: none;
+  border-top: 1px solid gray;
+  margin: 2rem 0;
 }
 
 :where(h1) {
