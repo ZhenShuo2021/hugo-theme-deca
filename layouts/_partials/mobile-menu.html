@@ -60,7 +60,7 @@ Mobile Menu Component
           <a class="mobile-menu-item-with-children {{ if $isActive }}active{{ else if $isAncestor }}ancestor{{ end }}"
             href="{{ .URL }}">
             {{ .Name }}
-            <button class="mobile-collapse-btn" aria-expanded="false">
+            <button class="mobile-collapse-btn" aria-expanded="false" aria-label="Expand sidebar category '{{ .Title }}'">
               <div class="mobile-collapse-icon">{{ $chevronIcon.Content | safeHTML }}</div>
             </button>
           </a>
@@ -147,7 +147,7 @@ Mobile Menu Component
           <a href="{{ $sectionPage.RelPermalink }}"
             class="mobile-menu-item-with-children {{ if eq $currentPage.RelPermalink $sectionPage.RelPermalink }}active{{ end }}">
             {{ or $sectionPage.Params.sidebar_label $sectionPage.Title }}
-            <button class="mobile-collapse-btn" aria-expanded="true">
+            <button class="mobile-collapse-btn" aria-expanded="true" aria-label="Collapse sidebar category '{{ .Title }}'">
               {{- $chevronIcon := resources.Get "icons/chevron-right.svg" -}}
               <div class="mobile-collapse-icon expanded">{{ $chevronIcon.Content | safeHTML }}</div>
             </button>
@@ -213,11 +213,11 @@ Mobile Menu Component
         {{ $displayName }}
         <button
           class="mobile-collapse-btn"
-          aria-expanded="{{ if not $isCollapsed }}
-            true
+          {{ if $isCollapsed }}
+          aria-expanded="false" arie-label="Expand sidebar category '{{ .Title }}'"
           {{ else }}
-            false
-          {{ end }}">
+          aria-expanded="true" aria-label="Collapse sidebar category '{{ .Title }}'"
+          {{ end }}>
           <div class="mobile-collapse-icon {{ if not $isCollapsed }}expanded{{ end }}">
             {{/* inlined chevron-right for performance */}}
             <svg

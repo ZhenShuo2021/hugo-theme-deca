@@ -146,7 +146,7 @@
 
 .home__section-item {
   padding: 1.5rem;
-  background: var(--bg-secondary);
+  background: var(--bg-primary);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
   transition: all var(--transition-fast);

@@ -12,7 +12,6 @@
 
 .tabs-nav {
     display: flex;
-    background-color: var(--bg-secondary);
     border-bottom: 1px solid var(--border-color);
     overflow-x: auto;
 }

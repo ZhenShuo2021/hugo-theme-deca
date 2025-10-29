@@ -70,7 +70,12 @@ is handled by sidebar-init.html which is called once at build start.
     {{ if $hasChildren }}
       <a href="{{ $page.RelPermalink }}" class="sidebar-item-collapsible {{ if $isActive }}active{{ end }}">
         {{ $displayName }}
-        <button class="collapse-btn" aria-expanded="{{ if $isCollapsed }}false{{ else }}true{{ end }}">
+        <button class="collapse-btn" 
+          {{ if $isCollapsed }}
+            aria-expanded="false" aria-label="Expand sidebar category '{{ .Title }}'"
+          {{ else }}
+            aria-expanded="true" aria-label="Collapse sidebar category '{{ .Title }}'"
+          {{ end}}>
           {{ $chevronRightIcon := resources.Get "icons/chevron-right.svg" -}}
           <div class="collapse-icon {{ if not $isCollapsed }}expanded{{ end }}">
             {{/* inlined chevron-right for performance */}}

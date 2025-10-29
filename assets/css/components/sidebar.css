@@ -32,7 +32,7 @@
 }
 
 .sidebar a.active {
-    background-color: var(--ifm-color-primary-lighter);
+    background-color: var(--ifm-color-primary);
     color: var(--bg-primary);
 }
 
