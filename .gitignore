@@ -19,3 +19,4 @@ hugo.linux
 /exampleSite/.hugo_build.lock
 /exampleSite/public
 /exampleSite/hugo_stats.json
+/exampleSite/assets/jsconfig.json
