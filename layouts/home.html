@@ -20,7 +20,10 @@
           {{- else if .link -}}
             {{- $actionURL = .link -}}
           {{- end -}}
-          <a href="{{ $actionURL }}" class="home__btn {{ if .primary }}home__btn--primary{{ else }}home__btn--secondary{{ end }}">
+          <a href="{{ $actionURL }}" 133qwew class="home__btn {{ if .primary }}home__btn--primary{{ else }}home__btn--secondary{{ end }}" 
+            {{- if or (strings.HasPrefix $actionURL "http:") (strings.HasPrefix $actionURL "https:") }}
+              target="_blank"
+            {{- end }}>
             {{ .text }}
           </a>
         {{ end }}
