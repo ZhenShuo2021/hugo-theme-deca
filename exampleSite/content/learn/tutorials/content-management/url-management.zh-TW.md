@@ -42,7 +42,7 @@ content/
 
 這是 Hugo 非常強大的功能，很多其他 SSG 都做不到同樣的事情。
 
-> [!NOTE]  
+> [!NOTE]
 > Hugo-theme-deca 部分功能基於判斷路徑匹配，因此修改可能會導致部分功能異常。
 
 ### 自訂規則
@@ -88,5 +88,5 @@ params:
 ---
 ```
 
-> [!NOTE]  
-> Frontmatter 的 url 設定是最高層級一定生效，而 slug 優先級可能會低於 hugo.toml 的設定。
+> [!NOTE]
+> Front matter 的 url 設定是最高層級，此設定一定生效。slug 設定的優先級可能會低於 hugo.toml 的設定。

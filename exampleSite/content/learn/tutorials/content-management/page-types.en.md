@@ -1,35 +1,36 @@
 ---
 title: Page Types
-description: Hugo's three basic page types
+description: The three basic page types in Hugo
 weight: 10
 ---
 
 # Page Types
 
-Hugo has two basic page types:
+Hugo has two basic types of pages:
 
 ## Single Page
 
-Regular content pages, such as articles or documentation pages, rendered as page.html in [base templates](https://gohugo.io/templates/types/), also known as [leaf bundles](https://gohugo.io/content-management/page-bundles/#leaf-bundles).
+A regular content page, such as an article or documentation page, is rendered using `page.html` in the [base templates](https://gohugo.io/templates/types/). It corresponds to a [leaf bundle](https://gohugo.io/content-management/page-bundles/#leaf-bundles).
 
 ```txt
 content/
   docs/
     my-post/
-      index.md      ← Single page
-      image.png     ← Page resource for single page
+      index.md      ← single page
+      image.png     ← page resource of the single page
 ```
 
 ## List Page
 
-Used to display lists of child pages, rendered as section.html in base templates, also known as [branch bundles](https://gohugo.io/content-management/page-bundles/#branch-bundles).
-
-Note that you must use `_index.md` with an underscore for Hugo to recognize it as a list page.
+A page used to display a list of subpages is rendered using `section.html` in the base templates. It corresponds to a [branch bundle](https://gohugo.io/content-management/page-bundles/#branch-bundles).
 
 ```txt
 content/
   docs/
     tutorial/
-      _index.md     ← List page
-      image.png     ← Page resource for list page
+      _index.md     ← list page
+      image.png     ← page resource of the list page
 ```
+
+> [!NOTE]
+> If a directory contains other pages, its markdown file should not be named `index.md`.

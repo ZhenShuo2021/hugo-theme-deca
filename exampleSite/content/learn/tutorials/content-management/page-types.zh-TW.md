@@ -10,7 +10,7 @@ Hugo 有兩種基本頁面類型：
 
 ## 單頁 (Single Page)
 
-普通內容頁面，如文章或文檔頁面，在[基礎模板](https://gohugo.io/templates/types/)中以 page.html 渲染，也可稱作子葉包裹 ([leaf Bundle](https://gohugo.io/content-management/page-bundles/#leaf-bundles))。
+普通內容頁面，如文章或文檔頁面，在[基礎模板](https://gohugo.io/templates/types/)中以 page.html 渲染，和子葉包裹 ([leaf Bundle](https://gohugo.io/content-management/page-bundles/#leaf-bundles))是對應的觀念。
 
 ```txt
 content/
@@ -22,9 +22,7 @@ content/
 
 ## 列表頁 (List Page)
 
-用於顯示子頁面的列表頁，在基礎模板中以 section.html 渲染，也可稱作分支包裹 ([branch bundle](https://gohugo.io/content-management/page-bundles/#branch-bundles))。
-
-請注意，一定要使用包含底線 (underscore) 的 `_index.md` Hugo 才會將他判斷為列表頁。
+用於顯示子頁面的列表頁，在基礎模板中以 section.html 渲染，和分支包裹 ([branch bundle](https://gohugo.io/content-management/page-bundles/#branch-bundles))是對應的觀念。
 
 ```txt
 content/
@@ -33,3 +31,6 @@ content/
       _index.md     ← 列表頁
       image.png     ← 列表頁的頁面資源
 ```
+
+> [!NOTE]
+> 如果一個目錄還包含其他頁面，就不應該將 markdown 命名為 `index.md`。

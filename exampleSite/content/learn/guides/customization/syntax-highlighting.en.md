@@ -10,7 +10,7 @@ Deca uses Hugo’s built-in Chroma syntax highlighter. By leveraging Hugo’s ov
 
 ## Generating a Theme
 
-Use the Hugo command to generate theme styles:
+Create `assets/css/vendor/chroma.css`, and use the Hugo command to generate theme styles:
 
 > The pipe symbol (`|`) works only on Unix-based systems. Windows users should remove everything after the pipe and manually prepend the selector prefix to the generated file.
 

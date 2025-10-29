@@ -42,7 +42,7 @@ content/
 
 This is a very powerful feature of Hugo that many other SSGs cannot achieve.
 
-> [!NOTE]  
+> [!NOTE]
 > Some features of Hugo-theme-deca are based on path matching, so modifications may cause some features to malfunction.
 
 ### Custom Rules
@@ -88,5 +88,5 @@ params:
 ---
 ```
 
-> [!NOTE]  
+> [!NOTE]
 > The url setting in frontmatter is the highest priority and will always take effect, while slug priority may be lower than hugo.toml settings.
