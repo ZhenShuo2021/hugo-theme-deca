@@ -12,7 +12,7 @@
     --ifm-color-primary-lighter: #359962;
     --ifm-color-primary-lightest: #3cad6e;
 
-    /* ===== Neutral Colors (9-level scale) ===== */
+    /* ===== Neutral Colors ===== */
     --color-neutral-50: #fafafa;
     --color-neutral-100: #f5f5f5;
     --color-neutral-200: #e5e5e5;
@@ -85,6 +85,18 @@ html.dark {
     --ifm-color-primary-light: #29d5b0;
     --ifm-color-primary-lighter: #32d8b4;
     --ifm-color-primary-lightest: #4fddbf;
+
+    /* ===== Neutral Colors ===== */
+    /* --color-neutral-50: #171717;
+    --color-neutral-100: #262626;
+    --color-neutral-200: #404040;
+    --color-neutral-300: #525252;
+    --color-neutral-400: #737373;
+    --color-neutral-500: #a3a3a3;
+    --color-neutral-600: #d4d4d4;
+    --color-neutral-700: #e5e5e5;
+    --color-neutral-800: #f5f5f5;
+    --color-neutral-900: #fafafa; */
 
     /* ===== Semantic Colors ===== */
     --color-accent: var(--ifm-color-primary);

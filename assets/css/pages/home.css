@@ -61,6 +61,10 @@
   color: white;
 }
 
+.dark .home__btn--primary {
+  color: var(--color-neutral-800);
+}
+
 .home__btn--primary:hover {
   background: var(--color-accent-hover);
 }
