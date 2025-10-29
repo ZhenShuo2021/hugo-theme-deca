@@ -33,8 +33,9 @@
       {{- end -}}
     </span>
     <span class="gbq__title">
-      {{- with .AlertTitle -}}
-        {{- . -}}
+      {{- $plainTitle := .AlertTitle | plainify | strings.TrimSpace -}}
+      {{- if ne $plainTitle "" -}}
+        {{- .AlertTitle -}}
       {{- else -}}
         {{- if eq .AlertType "note" -}}Note
         {{- else if eq .AlertType "tip" -}}Tip
