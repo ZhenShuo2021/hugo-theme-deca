@@ -4,19 +4,15 @@ Deca (ten) is a [Hugo](https://gohugo.io/) documentation-style theme, notable fo
 
 ## Motivation
 
-Hugo's main advantage is its speed and capability to build large-scale websites. For example, this article mentions that Hugo [can generate a collection site with 1.2 million pages](https://discourse.gohugo.io/t/v-a-explore-the-collections-over-1-million-pages-generated-by-hugo/33227), whereas Docusaurus fails to build [20,000-page MDX sites](https://github.com/facebook/docusaurus/discussions/11259). Despite this, Hugo has never had a good documentation theme that allows users to read smoothly. My requirements were modest: at minimum, no flickering, preferably with SPA functionality. Observing existing Hugo documentation themes, even the most well-known ones still have flickering issues, and none support SPA.
+After experimenting with various SSG generators, I realized that the most fundamental user experience for documentation sites is a **three-column layout combined with SPA navigation**. The three-column layout clearly shows users where they are, while SPA avoids re-rendering the entire DOM when navigating between pages, maintaining visual stability and providing a smooth reading experience.
 
-Since submitting PRs ultimately contributes to someone else's project and may not be accepted, I decided to create my own theme.
+Experienced readers will recognize that I am referring to [Docusaurus](https://docusaurus.io/) and [Vitepress](https://vitepress.dev/). Compared to other documentation sites that do not support this, such a reading experience can be described as a clear competitive advantage. I wondered whether it would be possible to achieve the same in Hugo by integrating SPA for documentation sites, supporting very large systems while making smaller systems even faster.
+
+Since submitting PRs ultimately contributes to someone else's project and may not be accepted, I decided to create my own theme. Readers may also notice that Deca's layout is not exactly the same as Docusaurus, but it is almost entirely **inspired by it**.
 
 ## Market Research
 
-After experimenting with various SSG generators, I realized that the most fundamental user experience for documentation sites is a **three-column layout combined with SPA navigation**. The three-column layout clearly shows users where they are, while SPA avoids re-rendering the entire DOM when navigating between pages, maintaining visual stability and providing a smooth reading experience.
-
-Experienced readers will recognize that I am referring to [Docusaurus](https://docusaurus.io/) and [Vitepress](https://vitepress.dev/). Compared to other documentation sites that do not support this, such a reading experience can be described as a clear competitive advantage.
-
-I wondered whether it would be possible to achieve the same in Hugo by integrating SPA for documentation sites, supporting very large systems while making smaller systems even faster. This led to the Deca project.
-
-Readers may also notice that Deca's layout is not exactly the same as Docusaurus, but it is almost entirely **inspired by it**.
+Hugo's main advantage is its speed and capability to build large-scale websites. For example, this article mentions that Hugo [can generate a collection site with 1.2 million pages](https://discourse.gohugo.io/t/v-a-explore-the-collections-over-1-million-pages-generated-by-hugo/33227), whereas Docusaurus fails to build [20,000-page MDX sites](https://github.com/facebook/docusaurus/discussions/11259). Despite this, Hugo has never had a good documentation theme that allows users to read smoothly. My requirements were modest: at minimum, no flickering, preferably with SPA functionality. Observing existing Hugo documentation themes, even the most well-known ones still have flickering issues, and none support SPA.
 
 ## Design Approach
 
