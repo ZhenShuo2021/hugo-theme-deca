@@ -69,9 +69,15 @@
 {{- /* 7. Syntax Highlighting */ -}}
 {{- $chroma := resources.Get "css/vendor/chroma.css" }}
 
+{{- /* 8. Custom CSS (if exists) */ -}}
+{{- $custom := resources.Get "css/custom.css" }}
+
 {{- $css := slice $variables $typography $code $grid $header $sidebar $content $toc $navigation $breadcrumbs $tabs
-  $footer $mobileMenu $codeCopy $gbq $error404 $section $scrollbar $chroma | resources.Concat "css/bundle.css"
-}}
+$footer $mobileMenu $codeCopy $gbq $error404 $section $scrollbar $chroma }}
+{{- if $custom }}
+{{- $css = $css | append $custom }}
+{{- end }}
+{{- $css = $css | resources.Concat "css/bundle.css" }}
 
 {{- if hugo.IsDevelopment }}
   <link rel="stylesheet" href="{{ $css.RelPermalink }}">
