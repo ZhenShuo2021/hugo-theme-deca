@@ -19,6 +19,7 @@
 {{- $footer := resources.Get "css/components/footer.css" }}
 {{- $mobileMenu := resources.Get "css/components/mobile-menu.css" }}
 {{- $codeCopy := resources.Get "css/components/code-copy.css" }}
+{{- $gbq := resources.Get "css/components/github-blockquote.css" }}
 
 {{- /* 5. Pages */ -}}
 {{- /* home.css is loaded in head.html because css.html is partialCached */ -}}
@@ -69,7 +70,7 @@
 {{- $chroma := resources.Get "css/vendor/chroma.css" }}
 
 {{- $css := slice $variables $typography $code $grid $header $sidebar $content $toc $navigation $breadcrumbs $tabs
-  $footer $mobileMenu $codeCopy $error404 $section $scrollbar $chroma | resources.Concat "css/bundle.css"
+  $footer $mobileMenu $codeCopy $gbq $error404 $section $scrollbar $chroma | resources.Concat "css/bundle.css"
 }}
 
 {{- if hugo.IsDevelopment }}
