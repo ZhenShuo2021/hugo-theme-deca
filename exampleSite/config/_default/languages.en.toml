@@ -9,7 +9,7 @@ weight = 3
   [params.header]
     # Logo configuration
     [params.header.logo]
-      light = "images/logo-transparent-trim.png"
+      light = "images/logo-transparent-trim.webp"
       dark = "images/logo.svg"  # Dark mode logo (optional, if not provided, light logo will be used)
       alt = "Hugo Theme Deca Logo"
       text = "Hugo Theme Deca"
@@ -38,7 +38,7 @@ weight = 3
     # Footer logo (optional)
     [params.footer.logo]
       text = "Hugo Theme Deca"
-      # image = "/images/logo.svg"
+      image = "images/logo-transparent-trim.webp"
       # alt = "Hugo Fast Docs Logo"
     
     # Footer columns
