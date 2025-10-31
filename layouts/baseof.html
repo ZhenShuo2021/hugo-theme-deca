@@ -19,7 +19,11 @@
             <main>
               {{ block "main" . }}{{ end }}
             </main>
-          {{ if and (ge (len (.TableOfContents)) 33) (ne .Kind "section") -}}
+          {{ $renderToc :=  and (ge (len (.TableOfContents)) 33) (ne .Kind "section") }}
+          {{ if and (eq .Kind "section") (eq .Params.layout "page-regular") }}
+            {{ $renderToc = true }}
+          {{ end }}
+          {{ if $renderToc -}}
             <div class="toc-column" id="toc-container">
               <nav class="toc-nav">
                 {{ .TableOfContents }}
