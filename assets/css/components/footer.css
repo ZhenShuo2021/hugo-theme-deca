@@ -128,7 +128,7 @@
 
   .footer-column {
     align-items: flex-start;
-    text-align: left;
+    text-align: start;
   }
 
   .footer-bottom {

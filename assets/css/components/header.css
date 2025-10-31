@@ -235,6 +235,7 @@ html.dark .logo-dark {
     z-index: 1000;
     display: flex;
     flex-direction: column;
+    text-align: start;
 }
 
 .menu-item:hover .dropdown-menu,

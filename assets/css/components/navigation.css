@@ -41,11 +41,11 @@ a.page-nav-link:hover {
 }
 
 .page-nav-prev {
-    text-align: left;
+    text-align: start;
 }
 
 .page-nav-next {
-    text-align: right;
+    text-align: end;
 }
 
 .page-nav-direction {

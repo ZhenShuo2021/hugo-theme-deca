@@ -16,8 +16,8 @@ is handled by sidebar-init.html which is called once at build start.
     {{- if $meta.prev -}}
     <a href="{{ $meta.prev.RelPermalink }}" class="page-nav-link page-nav-prev">
       <div class="page-nav-direction">
-        {{- $chevronLeftIcon := resources.Get "icons/chevron-left.svg" -}}
-        <div class="icon">{{ $chevronLeftIcon.Content | safeHTML }}</div>
+        {{/*  {{- $chevronLeftIcon := resources.Get "icons/chevron-left.svg" -}}
+        <div class="icon">{{ $chevronLeftIcon.Content | safeHTML }}</div>  */}}
         Previous
       </div>
       <div class="page-nav-title">{{ $meta.prev.Title }}</div>
@@ -30,8 +30,8 @@ is handled by sidebar-init.html which is called once at build start.
     <a href="{{ $meta.next.RelPermalink }}" class="page-nav-link page-nav-next">
       <div class="page-nav-direction">
         Next
-        {{- $chevronRightIcon := resources.Get "icons/chevron-right.svg" -}}
-        <div class="icon">{{ $chevronRightIcon.Content | safeHTML }}</div>
+        {{/*  {{- $chevronRightIcon := resources.Get "icons/chevron-right.svg" -}}
+        <div class="icon">{{ $chevronRightIcon.Content | safeHTML }}</div>  */}}
       </div>
       <div class="page-nav-title">{{ $meta.next.Title }}</div>
     </a>
