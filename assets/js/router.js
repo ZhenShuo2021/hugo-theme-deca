@@ -14,7 +14,15 @@ export function initRouter({ onContentReplace }) {
     cache: true,
     preload: true,
     animationSelector: false,
-    skipPopStateHandling: () => false
+    skipPopStateHandling: () => false,
+    plugins: [
+      new SwupPreloadPlugin({
+        throttle: 5,
+        preloadHoveredLinks: true,
+        preloadVisibleLinks: false,
+        preloadInitialPage: true
+      })
+    ]
   });
 
   swup.hooks.on('page:view', () => {

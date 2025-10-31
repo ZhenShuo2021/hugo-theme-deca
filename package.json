@@ -16,6 +16,7 @@
     "prettier-plugin-go-template": "^0.0.15"
   },
   "dependencies": {
-    "swup": "^4.8.2"
+    "swup": "^4.8.2",
+    "@swup/preload-plugin": "^3.2.8"
   }
 }

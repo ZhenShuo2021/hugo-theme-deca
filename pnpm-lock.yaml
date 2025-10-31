@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@swup/preload-plugin':
+        specifier: ^3.2.8
+        version: 3.2.11(swup@4.8.2)
       swup:
         specifier: ^4.8.2
         version: 4.8.2
@@ -28,6 +31,14 @@ packages:
     resolution: {integrity: sha512-NMwspO5GtUU9PESivdrx86z7XTm0lM5DDoMMVtYUp7nBQXak23j9/aB9tNR9XuVyoXYhdvxhEjXal9DfUqZnNg==}
     peerDependencies:
       prettier: 3.0.0 - 3.6.x
+
+  '@swup/plugin@4.0.0':
+    resolution: {integrity: sha512-3Kq31BJxnzoPg643YxGoWQggoU6VPKZpdE5CqqmP7wwkpCYTzkRmrfcQ29mGhsSS7xfS7D33iZoBiwY+wPoo2A==}
+
+  '@swup/preload-plugin@3.2.11':
+    resolution: {integrity: sha512-dq50u+d8L+63/pU6dUDnypuBoF49ubjRzRJqitGem2K7wRn7xccxRSvdyeGKdA2vNvzGDAmLfwVTZdSotvvDrw==}
+    peerDependencies:
+      swup: ^4.0.0
 
   delegate-it@6.3.0:
     resolution: {integrity: sha512-WAa6cA61M5mfDR31PBgMNQQ3LY1q++TxnZzcm7E9XV8ODBPxDutxH0toTR/BXqIkLaVuU7ntFe1uOqDllhA22A==}
@@ -65,6 +76,15 @@ snapshots:
   '@awmottaz/prettier-plugin-void-html@1.9.0(prettier@3.6.2)':
     dependencies:
       prettier: 3.6.2
+
+  '@swup/plugin@4.0.0':
+    dependencies:
+      swup: 4.8.2
+
+  '@swup/preload-plugin@3.2.11(swup@4.8.2)':
+    dependencies:
+      '@swup/plugin': 4.0.0
+      swup: 4.8.2
 
   delegate-it@6.3.0:
     dependencies:
