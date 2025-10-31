@@ -2,6 +2,8 @@
 title: 安裝 Hugo
 description: 安裝 Hugo 靜態網站產生器
 weight: 10
+tags:
+  - getting-started
 ---
 
 # 安裝 Hugo

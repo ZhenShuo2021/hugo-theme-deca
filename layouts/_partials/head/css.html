@@ -41,27 +41,9 @@
   {{- end }}
 {{- end }}
 
-{{- /* Blog page styles */ -}}
-{{- if eq .Section "blog" }}
-  {{- with resources.Get "css/pages/blog.css" }}
-    {{- if hugo.IsDevelopment }}
-      <link rel="stylesheet" href="{{ .RelPermalink }}">
-    {{- else }}
-      {{- with . | minify | fingerprint }}
-        <link
-          rel="stylesheet"
-          href="{{ .RelPermalink }}"
-          integrity="{{ .Data.Integrity }}"
-          crossorigin="anonymous">
-      {{- end }}
-    {{- end }}
-  {{- else }}
-    {{- warnf "blog.css not found in resources/css/pages/" }}
-  {{- end }}
-{{- end }}
-
 {{- $error404 := resources.Get "css/pages/404.css" }}
 {{- $section := resources.Get "css/pages/section.css" }}
+{{- $taxonomy := resources.Get "css/pages/taxonomy.css" }}
 
 {{- /* 6. Utilities */ -}}
 {{- $scrollbar := resources.Get "css/utilities/scrollbar.css" }}
@@ -73,7 +55,7 @@
 {{- $custom := resources.Get "css/custom.css" }}
 
 {{- $css := slice $variables $typography $code $grid $header $sidebar $content $toc $navigation $breadcrumbs $tabs
-$footer $mobileMenu $codeCopy $gbq $error404 $section $scrollbar $chroma }}
+$footer $mobileMenu $codeCopy $gbq $error404 $section $taxonomy $scrollbar $chroma }}
 {{- if $custom }}
 {{- $css = $css | append $custom }}
 {{- end }}

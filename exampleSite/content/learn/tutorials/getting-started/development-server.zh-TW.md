@@ -4,6 +4,8 @@ description: 在本地環境預覽你的 Deca 網站
 weight: 30
 params:
   sidebar_label: 開發伺服器
+tags:
+  - getting-started
 ---
 
 # 啟動開發伺服器

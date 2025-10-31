@@ -2,6 +2,8 @@
 title: 安裝 Deca 主題
 description: 下載並設定 Hugo Theme Deca
 weight: 20
+tags:
+  - getting-started
 ---
 
 # 安裝 Deca 主題

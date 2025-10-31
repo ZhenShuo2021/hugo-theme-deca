@@ -5,9 +5,13 @@
 */ -}}
 
 {{- $currentMeta := .Page.Store.Get "sidebar-meta" -}}
-{{- $targetPage := site.GetPage .Destination -}}
+{{- $targetPage := "" -}}
 {{- $swupAttr := "" -}}
-
+{{- $dest := .Destination -}}
+{{- if not (hasPrefix $dest "/") -}}
+  {{- $dest = printf "/%s" $dest -}}
+{{- end -}}
+{{- $targetPage = site.GetPage $dest -}}
 {{- if and $targetPage $currentMeta -}}
   {{- $targetMeta := $targetPage.Store.Get "sidebar-meta" -}}
   {{- $swupAttr = cond (or (not $targetMeta) (ne $currentMeta.sidebar $targetMeta.sidebar)) "data-no-swup" "" -}}

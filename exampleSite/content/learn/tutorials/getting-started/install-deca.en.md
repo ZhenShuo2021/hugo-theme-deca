@@ -2,6 +2,8 @@
 title: Install Deca Theme
 description: Download and configure Hugo Theme Deca
 weight: 20
+tags:
+  - getting-started
 ---
 
 # Install Deca Theme

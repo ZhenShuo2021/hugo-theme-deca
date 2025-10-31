@@ -4,6 +4,8 @@ description: Preview your Deca website in local environment
 weight: 30
 params:
   sidebar_label: Development Server
+tags:
+  - getting-started
 ---
 
 # Start Development Server

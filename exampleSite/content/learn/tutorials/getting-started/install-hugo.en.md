@@ -2,6 +2,8 @@
 title: Install Hugo
 description: Install Hugo static site generator
 weight: 10
+tags:
+  - getting-started
 ---
 
 # Install Hugo
