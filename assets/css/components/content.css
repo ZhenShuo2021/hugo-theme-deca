@@ -79,14 +79,8 @@ h1 {
 }
 
 /* Responsive */
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
     .content > main {
         padding: var(--space-md);
-    }
-}
-
-@media (max-width: 480px) {
-    .content > main {
-        padding: var(--space-sm);
     }
 }

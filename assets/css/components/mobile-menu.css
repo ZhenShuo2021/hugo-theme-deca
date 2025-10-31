@@ -394,7 +394,7 @@ html.dark .mobile-collapse-btn:hover {
   color: var(--text-muted);
 }
 
-@media (min-width: 769px) {
+@media (max-width: 768px) {
   .mobile-menu,
   .mobile-menu-overlay {
     display: none;
