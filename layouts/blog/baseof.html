@@ -6,7 +6,7 @@
   </head>
   <body class="scrollbar-thin">
     {{ partial "sidebar-debug.html" . }}
-    <div class="layout-{{ .Kind }}">
+    <div class="layout-blog">
       {{ partial "header.html" . }}
       {{ if or (eq .Kind "404") (eq .Kind "home") }}
         <main>
@@ -14,7 +14,10 @@
         </main>
       {{ else }}
         <div class="content-wrapper">
-          {{ partial "sidebar.html" . }}
+          <aside class="sidebar">
+            <!-- Future content here -->
+          </aside>
+
           <div class="content" id="swup">
             <main>
               {{ block "main" . }}{{ end }}
@@ -31,8 +34,6 @@
       {{ end }}
       {{ partial "footer.html" . }}
     </div>
-
-    <!-- Mobile Components (only visible on mobile) -->
     {{ partial "mobile-menu.html" . }}
   </body>
 </html>

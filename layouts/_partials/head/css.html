@@ -43,6 +43,7 @@
 
 {{- $error404 := resources.Get "css/pages/404.css" }}
 {{- $section := resources.Get "css/pages/section.css" }}
+{{- $blog := resources.Get "css/pages/blog.css" }}
 {{- $taxonomy := resources.Get "css/pages/taxonomy.css" }}
 
 {{- /* 6. Utilities */ -}}
@@ -55,7 +56,7 @@
 {{- $custom := resources.Get "css/custom.css" }}
 
 {{- $css := slice $variables $typography $code $grid $header $sidebar $content $toc $navigation $breadcrumbs $tabs
-$footer $mobileMenu $codeCopy $gbq $error404 $section $taxonomy $scrollbar $chroma }}
+$footer $mobileMenu $codeCopy $gbq $error404 $section $blog $taxonomy $scrollbar $chroma }}
 {{- if $custom }}
 {{- $css = $css | append $custom }}
 {{- end }}
