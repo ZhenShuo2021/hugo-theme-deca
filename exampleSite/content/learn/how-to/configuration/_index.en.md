@@ -1,5 +1,5 @@
 ---
-title: Configuration Guides
+title: Configuration
 description: Deca theme configuration instructions
 weight: 10
 params:

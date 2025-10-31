@@ -1,24 +1,24 @@
 [[main]]
-  name = 'Tutorial'
+  name = 'Learn Deca'
   pageRef = '/learn'
   weight = 10
 
   [[main]]
     name = 'Getting Started'
-    parent = 'Tutorial'
+    parent = 'Learn Deca'
     pageRef = '/learn/tutorials'
-    weight = 10 
+    weight = 10
 
   [[main]]
     name = 'Page Types'
-    parent = 'Tutorial'
+    parent = 'Learn Deca'
     pageRef = '/learn/tutorials/content-management/page-types'
-    weight = 10 
+    weight = 10
 
   [[main]]
-    name = 'User Guides'
-    parent = 'Tutorial'
-    pageRef = '/learn/guides'
+    name = 'How-to'
+    parent = 'Learn Deca'
+    pageRef = '/learn/how-to'
     weight = 20
 
 [[main]]

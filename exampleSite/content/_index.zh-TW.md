@@ -19,23 +19,23 @@ features:
   - icon: "📚"
     title: "多側邊欄支援"
     description: "Hugo 生態系首個支援多個獨立側邊欄的主題，讓大型文件結構更清晰。"
-  
+
   - icon: "⚡"
     title: "SPA 導航"
     description: "整合 Swup 提供單頁應用般的導航體驗，頁面切換無閃爍。"
-  
+
   - icon: "🎨"
     title: "現代化設計"
     description: "採用 Infima 風格的 CSS 設計系統，易於自訂且美觀。"
-  
+
   - icon: "📖"
     title: "Diátaxis 架構"
     description: "支援 Diátaxis 文件編排理念，提供結構化的內容設計。"
-  
+
   - icon: "🚀"
     title: "高效能"
     description: "基於 Hugo 靜態生成，適用於中大型文件系統。"
-  
+
   - icon: "🌙"
     title: "深色模式"
     description: "內建深色模式支援，提供舒適的閱讀體驗。"
@@ -48,21 +48,21 @@ sections:
       - title: "教學"
         description: "從安裝 Hugo 到啟動 Deca 主題的完整教學。"
         pageRef: "/learn/tutorials"
-      
+
       - title: "指南"
         description: "配置選單、側邊欄和主題自訂的實用指南。"
-        pageRef: "/learn/guides"
-      
+        pageRef: "/learn/how-to"
+
       - title: "自定義主題"
         description: "了解 CSS 設計系統，自訂顏色和程式碼高亮。"
-        pageRef: "/learn/guides/customization"
+        pageRef: "/learn/how-to/customization"
 
   # - title: "核心特色"
   #   description: "Deca 的獨特優勢"
-  #   items:      
+  #   items:
   #     - title: "SPA 體驗"
   #       description: "頁面切換無重渲染，保持流暢的閱讀體驗。"
-  #       pageRef: "/learn/guides/customization/css-design"
+  #       pageRef: "/learn/how-to/customization/css-design"
 ---
 
 # Hugo Theme Deca

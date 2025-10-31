@@ -16,9 +16,9 @@ These parameters are defined in the `[params]` section of `hugo.toml` and contro
   [params.sidebars]
     [params.sidebars.tutorial]
       section = "tutorial"
-    
-    [params.sidebars.guides]
-      section = "guides"
+
+    [params.sidebars.how-to]
+      section = "how-to"
 ```
 
 | Option             | Sub-option | Description                                                                  |

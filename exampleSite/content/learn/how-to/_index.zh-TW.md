@@ -11,11 +11,10 @@ weight: 30
 
 - [選單配置](./configuration/menu) - 設定頂部導航選單
 - [側邊欄設置](./configuration/sidebar) - 配置多個側邊欄
-- [主題自訂](./configuration/customization) - 自訂主題外觀
+- [主題自訂](learn/how-to/customization/) - 自訂主題外觀
 
 ## 自定義主題
 
-- [CSS 設計系統](./customization/css-design) - 了解 Deca 的 CSS 架構
 - [顏色主題](./customization/color-theme) - 自訂顏色和深色模式
 - [程式碼高亮](./customization/syntax-highlighting) - 自訂 Chroma 語法高亮
 

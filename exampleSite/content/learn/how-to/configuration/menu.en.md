@@ -18,7 +18,7 @@ Add menu items in `hugo.toml`:
     name = 'Home'
     pageRef = '/'
     weight = 10
-  
+
   [[menus.main]]
     name = 'Documentation'
     pageRef = '/docs'
@@ -31,20 +31,20 @@ Create items with submenus:
 
 ```toml
 [[menus.main]]
-  name = 'Guides'
-  pageRef = '/guides'
+  name = 'how-to'
+  pageRef = '/how-to'
   weight = 30
 
   [[menus.main]]
     name = 'Getting Started'
-    pageRef = '/guides/getting-started'
-    parent = 'Guides'
+    pageRef = '/how-to/getting-started'
+    parent = 'how-to'
     weight = 1
 
   [[menus.main]]
     name = 'Advanced Setup'
-    pageRef = '/guides/advanced'
-    parent = 'Guides'
+    pageRef = '/how-to/advanced'
+    parent = 'how-to'
     weight = 2
 ```
 

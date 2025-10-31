@@ -15,9 +15,9 @@ Define sidebars in `hugo.toml`:
   sidebarCollapsed = false
   [params.sidebars.docs]
     section = "docs"
-  
-  [params.sidebars.guides]
-    section = "guides"
+
+  [params.sidebars.how-to]
+    section = "how-to"
 ```
 
 ## Sidebar Configuration
@@ -38,7 +38,7 @@ content/
 ├── docs/
 │   ├── _index.md
 │   └── page1.md
-└── guides/
+└── how-to/
     ├── _index.md
     └── page2.md
 ```

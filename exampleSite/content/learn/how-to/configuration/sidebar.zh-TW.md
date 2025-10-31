@@ -15,9 +15,9 @@ weight: 30
   sidebarCollapsed = false
   [params.sidebars.docs]
     section = "docs"
-  
-  [params.sidebars.guides]
-    section = "guides"
+
+  [params.sidebars.how-to]
+    section = "how-to"
 ```
 
 ## 側邊欄配置
@@ -38,7 +38,7 @@ content/
 ├── docs/
 │   ├── _index.md
 │   └── page1.md
-└── guides/
+└── how-to/
     ├── _index.md
     └── page2.md
 ```

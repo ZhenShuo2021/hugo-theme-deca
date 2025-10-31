@@ -25,7 +25,7 @@ enableGitInfo = false
   [cascade.params]
     swupId = 'blue'
   [cascade.target]
-    path = '{/learn/guides,/learn/guides/**}'
+    path = '{/learn/how-to,/learn/how-to/**}'
 
 [taxonomies]
   tag = "tags"
@@ -53,7 +53,7 @@ enableGitInfo = false
   version = "1.0.0"
   description = "Hugo 首個支援 SPA 功能的現代化文件主題"
   author = "Hugo Theme Deca Team"
-  
+
   # Global sidebar collapse setting
   sidebarCollapsed = false
 
@@ -64,7 +64,7 @@ enableGitInfo = false
 
     [params.sidebars.thisCanBeAnyText]
       section = "shortcodes"
-    
+
     [params.sidebars.reference]
       section = "reference"
 

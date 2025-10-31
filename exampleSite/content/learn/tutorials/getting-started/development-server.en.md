@@ -42,4 +42,4 @@ Press `Ctrl+C` to stop the development server.
 
 You have successfully installed and started the Deca theme! Now you can begin creating your documentation content.
 
-Next, check out the [Guides](../../guides) section to learn how to configure multiple sidebars and other advanced features.
+Next, check out the [how-to](../../how-to) section to learn how to configure multiple sidebars and other advanced features.

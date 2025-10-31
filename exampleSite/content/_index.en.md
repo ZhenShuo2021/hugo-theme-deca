@@ -49,13 +49,13 @@ sections:
       description: "A complete guide from installing Hugo to launching the Deca theme."
       pageRef: "/learn/tutorials"
 
-    - title: "Guides"
+    - title: "How-to"
       description: "Practical guides on configuring menus, sidebars, and customizing the theme."
-      pageRef: "/learn/guides"
+      pageRef: "/learn/how-to"
 
     - title: "Theme Customization"
       description: "Learn the CSS design system and customize colors and code highlighting."
-      pageRef: "/learn/guides/customization"
+      pageRef: "/learn/how-to/customization"
 
   # - title: "Core Features"
   #   description: "The unique advantages of Deca"
@@ -63,11 +63,11 @@ sections:
 
   #   - title: "Multiple Sidebars"
   #     description: "A Docusaurus-like multi-sidebar layout for easy document organization."
-  #     pageRef: "/learn/guides/configuration/sidebar"
+  #     pageRef: "/learn/how-to/configuration/sidebar"
 
   #   - title: "Customize theme"
   #     description: "Customize Deca's default colors to create a distinctive, branded look for your project"
-  #     pageRef: "/learn/guides/customization/color-theme"
+  #     pageRef: "/learn/how-to/customization/color-theme"
 ---
 
 # Hugo Theme Deca

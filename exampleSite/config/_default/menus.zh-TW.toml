@@ -1,24 +1,24 @@
 [[main]]
-  name = '教學'
+  name = '使用教學'
   pageRef = '/learn'
   weight = 10
 
   [[main]]
     name = '快速入門'
-    parent = '教學'
+    parent = '使用教學'
     pageRef = '/learn/tutorials'
-    weight = 10 
+    weight = 10
 
   [[main]]
     name = '頁面類型'
-    parent = '教學'
+    parent = '使用教學'
     pageRef = '/learn/tutorials/content-management/page-types'
-    weight = 10 
+    weight = 10
 
   [[main]]
     name = '設定指南'
-    parent = '教學'
-    pageRef = '/learn/guides'
+    parent = '使用教學'
+    pageRef = '/learn/how-to'
     weight = 20
 
 [[main]]

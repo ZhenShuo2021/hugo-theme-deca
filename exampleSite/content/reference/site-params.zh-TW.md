@@ -16,9 +16,9 @@ weight: 10
   [params.sidebars]
     [params.sidebars.tutorial]
       section = "tutorial"
-    
-    [params.sidebars.guides]
-      section = "guides"
+
+    [params.sidebars.how-to]
+      section = "how-to"
 ```
 
 | 選項                 | 子選項       | 說明                            |

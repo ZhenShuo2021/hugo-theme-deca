@@ -18,7 +18,7 @@ Deca 支援多層級的頂部導航選單，包含下拉子選單功能。
     name = '首頁'
     pageRef = '/'
     weight = 10
-  
+
   [[menus.main]]
     name = '文檔'
     pageRef = '/docs'
@@ -32,18 +32,18 @@ Deca 支援多層級的頂部導航選單，包含下拉子選單功能。
 ```toml
 [[menus.main]]
   name = '指南'
-  pageRef = '/guides'
+  pageRef = '/how-to'
   weight = 30
 
   [[menus.main]]
     name = '快速入門'
-    pageRef = '/guides/getting-started'
+    pageRef = '/how-to/getting-started'
     parent = '指南'
     weight = 1
 
   [[menus.main]]
     name = '進階設定'
-    pageRef = '/guides/advanced'
+    pageRef = '/how-to/advanced'
     parent = '指南'
     weight = 2
 ```
