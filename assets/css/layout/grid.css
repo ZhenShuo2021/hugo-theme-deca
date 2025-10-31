@@ -35,90 +35,73 @@
     flex-shrink: 0;
 }
 
-/* Content Wrapper - flexible container */
-.layout-blog .content-wrapper,
-.layout-page .content-wrapper,
-.layout-section .content-wrapper {
-    display: flex;
-    flex: 1;
-    min-height: 0;
-}
-
-/* Page and Section Layout (Three Column) */
+/* Content Wrapper - Two Column (Sidebar + Content) */
 .layout-blog .content-wrapper,
 .layout-page .content-wrapper,
 .layout-section .content-wrapper {
     display: grid;
-    grid-template-columns: var(--sidebar-width) 1fr var(--toc-width);
-    grid-template-areas: "sidebar content toc";
-    gap: 0;
-    container-type: inline-size;
-}
-
-.layout-page .content-wrapper:not(:has(.toc-column)),
-.layout-section .content-wrapper:not(:has(.toc-column)) {
     grid-template-columns: var(--sidebar-width) 1fr;
-    grid-template-areas: "sidebar content";
 }
 
 .layout-blog .sidebar,
 .layout-page .sidebar,
 .layout-section .sidebar {
-    grid-area: sidebar;
     position: sticky;
     top: var(--header-height);
     height: calc(100vh - var(--header-height));
     overflow-y: auto;
 }
 
+/* Content area - grid layout for main and TOC */
 .layout-blog .content,
 .layout-page .content,
 .layout-section .content {
-    grid-area: content;
-    overflow-y: auto;
-    min-width: 0;
-    overflow-x: hidden;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) var(--toc-width);
 }
 
-.layout-blog .toc-column,
-.layout-page .toc-column,
-.layout-section .toc-column {
-    grid-area: toc;
+/* Main content */
+.layout-blog .content main,
+.layout-page .content main,
+.layout-section .content main {
+    min-width: 0;
+}
+
+/* TOC - sticky */
+.layout-blog .content .toc-column,
+.layout-page .content .toc-column,
+.layout-section .content .toc-column {
     position: sticky;
     top: var(--header-height);
-    height: calc(100vh - var(--header-height));
     align-self: start;
+    max-height: calc(100vh - var(--header-height));
+    overflow-y: auto;
 }
 
 .layout-blog .site-footer,
 .layout-page .site-footer,
 .layout-section .site-footer {
-    margin-top: auto;
+    grid-column: 1 / -1;
 }
 
 /* ===== Responsive Design ===== */
 
-/* Medium width: Hide TOC, content expands */
 @media (max-width: 1200px) {
-    .layout-page .content-wrapper,
-    .layout-section .content-wrapper {
-        grid-template-columns: var(--sidebar-width) 1fr !important;
-        grid-template-areas: "sidebar content" !important;
+    .layout-page .content,
+    .layout-section .content {
+        grid-template-columns: 1fr;
     }
 
     .layout-page .toc-column,
     .layout-section .toc-column {
-        display: none !important;
+        display: none;
     }
 }
 
-/* Small width: Mobile layout */
 @media (max-width: 768px) {
-    /* Page and section layouts become single column */
     .layout-page .content-wrapper,
     .layout-section .content-wrapper {
-        display: flex !important;
-        flex-direction: column !important;
+        display: block;
     }
 
     .layout-page .sidebar,
@@ -126,23 +109,13 @@
         display: none;
     }
 
+    .layout-page .content,
+    .layout-section .content {
+        display: block;
+    }
+
     .layout-page .toc-column,
     .layout-section .toc-column {
-        display: none !important;
-    }
-
-    /* Blog layout remains single column but adjusts content width */
-    .layout-blog .content {
-        max-width: 100%;
-        padding: 0 var(--space-md);
-    }
-
-    /* Header adjustments for all layouts */
-    .layout-page .site-header,
-    .layout-section .site-header {
-        position: sticky;
-        top: 0;
-        z-index: 100;
-        height: auto;
+        display: none;
     }
 }

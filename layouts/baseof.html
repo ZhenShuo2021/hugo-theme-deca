@@ -19,18 +19,14 @@
             <main>
               {{ block "main" . }}{{ end }}
             </main>
-          </div>
           {{ if ge (len (.TableOfContents)) 33 -}}
             <div class="toc-column" id="toc-container">
               <nav class="toc-nav">
                 {{ .TableOfContents }}
               </nav>
             </div>
-          {{ else }}
-            <div class="toc-column" id="toc-container" style="visibility: hidden;">
-              <nav class="toc-nav"></nav>
-            </div>
           {{ end }}
+          </div>
         </div>
       {{ end }}
       {{ partial "footer.html" . }}
