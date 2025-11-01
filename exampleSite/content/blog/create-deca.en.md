@@ -69,7 +69,7 @@ This primarily tests the speed of **page framework** and **basic text rendering*
 
 ## Performance Bottlenecks{#performance-bottle-neck}
 
-Deca uses `partialCached` to cache sidebar data collection, so sidebar data retrieval is essentially a simple lookup. However, all performance bottlenecks lie in sidebar rendering, as each page must traverse the sidebar pages, resulting in a time complexity of O(NxM).
+Deca uses `partialCached` to cache sidebar data collection, so sidebar data retrieval is essentially a simple lookup. However, all performance bottlenecks lie in sidebar rendering, as each page must traverse the sidebar pages, resulting in a time complexity of O(N^2).
 
 Following Docusaurus, rendering was changed to render only expanded pages; collapsed pages are not rendered. Testing with 1000 pages showed that not rendering the sidebar at all still yields a 70% performance improvement.
 

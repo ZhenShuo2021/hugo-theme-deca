@@ -74,7 +74,7 @@ Hugo 最大的特色就是速度很快，且有能力構建規模化的網站，
 
 ## 效能瓶頸{#performance-bottle-neck}
 
-Deca 已經將 sidebar 資料蒐集以 partialCached 快取處理，因此所有 sidebar 的資料蒐集都是簡單查表，然而一切的效能瓶頸都在 sidebar 渲染上，由於每個頁面都要走訪該 sidebar 的頁面，時間複雜度是 O(NxM)。
+Deca 已經將 sidebar 資料蒐集以 partialCached 快取處理，因此所有 sidebar 的資料蒐集都是簡單查表，然而一切的效能瓶頸都在 sidebar 渲染上，由於每個頁面都要走訪該 sidebar 的頁面，時間複雜度是 O(N^2)。
 
 參考 Docusaurus，現在把渲染改為只渲染已經展開的頁面，摺疊頁面就不會再渲染，然而測試 1000 頁面的環境下，直接不渲染 sidebar 還是可以得到 70% 的效能提升。
 
