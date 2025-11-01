@@ -7,29 +7,9 @@ export function initSidebar() {
   expandToCurrentPage();
 }
 
-export function updateSidebarAfterNavigation() {
-  const currentSection = getCurrentSection();
-
-  if (previousSection !== currentSection) {
-    resetSidebar();
-  }
-
-  updateActiveLinks();
-  expandToCurrentPage();
-  previousSection = currentSection;
-}
-
-function resetSidebar() {
-  // Reset all checkboxes to unchecked state
-  document.querySelectorAll('.sidebar .sidebar-toggle').forEach(checkbox => {
-    checkbox.checked = false;
-  });
-}
-
 function updateActiveLinks() {
-  // Clear all active states
-  document.querySelectorAll('.sidebar .active, .sidebar .active-section').forEach(el => {
-    el.classList.remove('active', 'active-section');
+  document.querySelectorAll('.sidebar .active').forEach(el => {
+    el.classList.remove('active');
   });
 
   const currentLink = document.querySelector(`.sidebar a[href="${window.location.pathname}"]`);
@@ -40,13 +20,6 @@ function updateActiveLinks() {
   // Mark parent label as active if exists
   const parentLabel = currentLink.closest('.sidebar-item-collapsible');
   if (parentLabel) parentLabel.classList.add('active');
-
-  // Mark all parent subsections as active
-  let parent = currentLink.closest('.sidebar-subsection');
-  while (parent) {
-    parent.classList.add('active-section');
-    parent = parent.parentElement.closest('.sidebar-subsection');
-  }
 }
 
 function expandToCurrentPage() {

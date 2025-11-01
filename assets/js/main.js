@@ -1,4 +1,4 @@
-import { initSidebar, updateSidebarAfterNavigation } from "./sidebar.js";
+import { initSidebar } from "./sidebar.js";
 import { initTheme, initMermaid } from "./theme.js";
 import { initTabs } from "./tabs.js";
 import { tocHighlight } from "./toc.js";
@@ -49,20 +49,22 @@ export function initRouter({ pageView, visitEnd }) {
 document.addEventListener("DOMContentLoaded", () => {
   initRouter({
     pageView: () => {
-      updateSidebarAfterNavigation();
       updateMobileAfterNavigation();
     },
     visitEnd: () => {
-      initCodeCopy();
       tocHighlight();
+      initSidebar();
+      initTabs();
+      initCodeCopy();
       initMermaid();
+      initMobile();
     },
   });
+  tocHighlight();
   initSidebar();
-  initTheme();
   initTabs();
+  initTheme();
   initMobile();
   initCodeCopy();
-  tocHighlight();
   initMermaid();
 });
