@@ -27,30 +27,21 @@ function resetSidebar() {
 }
 
 function updateActiveLinks() {
-  document.querySelectorAll('.sidebar a').forEach(link => {
-    link.classList.remove('active');
+  // Clear all active states
+  document.querySelectorAll('.sidebar .active, .sidebar .active-section').forEach(el => {
+    el.classList.remove('active', 'active-section');
   });
 
-  document.querySelectorAll('.sidebar .sidebar-item-collapsible').forEach(label => {
-    label.classList.remove('active');
-  });
-
-  document.querySelectorAll('.sidebar .active-section').forEach(section => {
-    section.classList.remove('active-section');
-  });
-
-  const currentPath = window.location.pathname;
-  const currentLink = document.querySelector(`.sidebar a[href="${currentPath}"]`);
+  const currentLink = document.querySelector(`.sidebar a[href="${window.location.pathname}"]`);
   if (!currentLink) return;
 
   currentLink.classList.add('active');
 
-  // If the current link is inside a collapsible item, mark the label as active
+  // Mark parent label as active if exists
   const parentLabel = currentLink.closest('.sidebar-item-collapsible');
-  if (parentLabel) {
-    parentLabel.classList.add('active');
-  }
+  if (parentLabel) parentLabel.classList.add('active');
 
+  // Mark all parent subsections as active
   let parent = currentLink.closest('.sidebar-subsection');
   while (parent) {
     parent.classList.add('active-section');
@@ -62,16 +53,23 @@ function expandToCurrentPage() {
   const currentLink = document.querySelector(`.sidebar a[href="${window.location.pathname}"]`);
   if (!currentLink) return;
 
-  // Expand all parent sections by checking their corresponding checkboxes
-  let element = currentLink.parentElement;
+  // If current link is in a collapsible label, expand it
+  const parentLabel = currentLink.closest('.sidebar-item-collapsible');
+  if (parentLabel) {
+    const checkbox = document.getElementById(parentLabel.getAttribute('for'));
+    if (checkbox) checkbox.checked = true;
+  }
+
+  // Expand all parent subsections
+  let element = currentLink;
   while (element) {
-    if (element.classList?.contains('sidebar-subsection')) {
-      // Find the checkbox that controls this subsection
-      const checkbox = element.parentElement?.querySelector(':scope > .sidebar-toggle');
-      if (checkbox) {
-        checkbox.checked = true;
-      }
+    const subsection = element.closest('.sidebar-subsection');
+    if (subsection) {
+      const checkbox = subsection.parentElement.querySelector('.sidebar-toggle');
+      if (checkbox) checkbox.checked = true;
+      element = subsection.parentElement;
+    } else {
+      break;
     }
-    element = element.parentElement;
   }
 }
