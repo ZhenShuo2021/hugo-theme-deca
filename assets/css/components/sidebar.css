@@ -1,7 +1,3 @@
-/* ============================================
-   Sidebar Component
-   ============================================ */
-
 .sidebar {
     background-color: var(--bg-primary);
     padding: var(--space-sm);
@@ -11,8 +7,6 @@
 
 .sidebar ul {
     list-style: none;
-    padding: 0;
-    margin: 0;
 }
 
 .sidebar a {
@@ -26,7 +20,7 @@
     font-size: 0.9rem;
 }
 
-.sidebar a:hover {
+.sidebar a:not(.active):hover {
     background-color: var(--bg-tertiary);
     color: var(--text-primary);
 }
@@ -40,78 +34,87 @@
     color: var(--bg-primary);
 }
 
-/* Nested sidebar items */
-.sidebar ul ul {
-    margin: 0 0 0 var(--space-md);
-}
-
-.sidebar ul ul a {
-    font-size: 0.85rem;
-    padding: 0.3rem 0.5rem;
-}
-
 /* Collapsible sections */
-a.sidebar-item-collapsible {
-    margin: var(--space-xs) 0;
+.sidebar-toggle {
+    display: none;
 }
 
 .sidebar-item-collapsible {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    display: block;
+    margin: var(--space-xs) 0;
     position: relative;
-    padding-right: 2.5rem;
+    cursor: pointer;
     border-radius: var(--radius-sm);
+    transition: background-color var(--transition-fast), color var(--transition-fast);
 }
 
-.collapse-btn {
-    position: absolute;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    color: var(--text-muted);
-    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-    transition: all var(--transition-fast);
-    width: 2.5rem;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.sidebar-item-collapsible:hover {
+    background-color: var(--bg-tertiary);
+}
+
+.sidebar-item-collapsible .sidebar-link {
+    display: block;
+    padding: var(--space-xs) var(--space-sm);
+    padding-left: 1.6rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    border-radius: var(--radius-sm);
+    font-size: 0.9rem;
     margin: 0;
 }
 
-.collapse-btn:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-    color: var(--text-primary);
+.sidebar-item-collapsible.active {
+    background-color: var(--ifm-color-primary);
 }
 
-html.dark .collapse-btn:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+.sidebar-item-collapsible.active .sidebar-link {
+    color: var(--bg-primary);
 }
 
-.collapse-icon {
-    width: 20px;
-    height: 20px;
+/* CSS pseudo element for chevron icon using SVG */
+.sidebar-item-collapsible::before {
+    content: '';
+    position: absolute;
+    left: var(--space-xs);
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9,18 15,12 9,6'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
     transition: transform var(--transition-fast);
-    transform: rotate(0deg);
-    flex-shrink: 0;
 }
 
-.collapse-icon.expanded {
-    transform: rotate(90deg);
+.sidebar-item-collapsible.active::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9,18 15,12 9,6'%3E%3C/polyline%3E%3C/svg%3E");
 }
 
-.sidebar-subsection {
+/* Rotate to chevron-down when expanded */
+.sidebar-toggle:checked+.sidebar-item-collapsible::before {
+    transform: translateY(-50%) rotate(90deg);
+}
+
+.sidebar ul {
+    padding: 0;
+    margin: 0;
+}
+
+ul .sidebar-subsection{
     overflow: hidden;
-    transition: max-height 0.3s ease;
+    max-height: 0;
+    margin-inline-start: 12px;
+    border-inline-start: #eaeaea 1px solid;
 }
 
-.sidebar-subsection.collapsed {
-    max-height: 0;
+ul .sidebar-subsection li {
+    margin-inline-start: 10px;
+}
+
+/* Show subsection when checkbox is checked */
+.sidebar-toggle:checked~.sidebar-subsection {
+    max-height: none;
 }
 
 /* Responsive */

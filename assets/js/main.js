@@ -26,7 +26,7 @@ export function initRouter({ pageView, visitEnd }) {
       new SwupPreloadPlugin({
         throttle: 5,
         preloadHoveredLinks: true,
-        preloadVisibleLinks: false,
+        preloadVisibleLinks: true,
         preloadInitialPage: true,
       }),
     ],

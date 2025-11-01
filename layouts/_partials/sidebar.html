@@ -29,13 +29,13 @@ is handled by sidebar-init.html which is called once at build start.
         </a>
       </li>
       {{- /* Render tree structure with dynamic state calculation */ -}}
-      {{- range $sidebarData.tree }}
-        {{- partial "inline/render-sidebar-item" (dict "item" . "currentPage" $currentPage) }}
+      {{- range $index, $item := $sidebarData.tree }}
+        {{- partial "inline/render-sidebar-item" (dict "item" $item "currentPage" $currentPage "level" 0 "path" (printf "%d" $index)) }}
       {{- end }}
     {{- else }}
       {{- /* If no section index content, just render tree structure */ -}}
-      {{- range $sidebarData.tree }}
-        {{- partial "inline/render-sidebar-item" (dict "item" . "currentPage" $currentPage) }}
+      {{- range $index, $item := $sidebarData.tree }}
+        {{- partial "inline/render-sidebar-item" (dict "item" $item "currentPage" $currentPage "level" 0 "path" (printf "%d" $index)) }}
       {{- end }}
     {{- end }}
   </ul>
@@ -46,6 +46,8 @@ is handled by sidebar-init.html which is called once at build start.
   {{ $item := .item }}
   {{ $currentPage := .currentPage }}
   {{ $page := $item.page }}
+  {{ $level := .level | default 0 }}
+  {{ $path := .path | default "0" }}
 
   {{/* Get page metadata for display name and collapse state */}}
   {{ $pageMeta := $page.Store.Get "sidebar-meta" }}
@@ -68,34 +70,17 @@ is handled by sidebar-init.html which is called once at build start.
 
   <li>
     {{ if $hasChildren }}
-      <a href="{{ $page.RelPermalink }}" class="sidebar-item-collapsible {{ if $isActive }}active{{ end }}">
-        {{ $displayName }}
-        <button class="collapse-btn" 
-          {{ if $isCollapsed }}
-            aria-expanded="false" aria-label="Expand sidebar category '{{ .Title }}'"
-          {{ else }}
-            aria-expanded="true" aria-label="Collapse sidebar category '{{ .Title }}'"
-          {{ end}}>
-          {{ $chevronRightIcon := resources.Get "icons/chevron-right.svg" -}}
-          <div class="collapse-icon {{ if not $isCollapsed }}expanded{{ end }}">
-            {{/* inlined chevron-right for performance */}}
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round">
-              <polyline points="9,18 15,12 9,6"></polyline>
-            </svg>
-          </div>
-        </button>
-      </a>
-      <ul class="sidebar-subsection {{ if $isCollapsed }}collapsed{{ end }}">
-        {{ range $item.children }}
-          {{ partial "inline/render-sidebar-item" (dict "item" . "currentPage" $currentPage) }}
+      {{ $checkboxId := printf "sidebar-toggle-%s" $path }}
+      <input type="checkbox" id="{{ $checkboxId }}" class="sidebar-toggle" {{ if not $isCollapsed }}checked{{ end }}>
+      <label for="{{ $checkboxId }}" class="sidebar-item-collapsible {{ if $isActive }}active{{ end }}">
+        <a href="{{ $page.RelPermalink }}" class="sidebar-link">
+          {{ $displayName }}
+        </a>
+      </label>
+      <ul class="sidebar-subsection">
+        {{ range $index, $child := $item.children }}
+          {{ $childPath := printf "%s__%d" $path $index }}
+          {{ partial "inline/render-sidebar-item" (dict "item" $child "currentPage" $currentPage "level" (add $level 1) "path" $childPath) }}
         {{ end }}
       </ul>
     {{ else }}
