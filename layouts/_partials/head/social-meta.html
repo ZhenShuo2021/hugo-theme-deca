@@ -1,0 +1,138 @@
+{{/* 社交媒體 Meta Tags - Open Graph & Twitter Cards */}}
+
+{{/* 共用變數 */}}
+{{- $title := cond .IsHome site.Title .Title -}}
+{{- $description := "" -}}
+{{- if .Description -}}
+  {{- $description = .Description -}}
+{{- else if .Summary -}}
+  {{- $description = .Summary | plainify | truncate 160 -}}
+{{- else if .IsHome -}}
+  {{- $description = site.Params.description | default site.Title -}}
+{{- else -}}
+  {{- $description = site.Params.description | default site.Title -}}
+{{- end -}}
+
+{{/* 圖片處理 */}}
+{{- $socialImage := "" -}}
+{{- $imageAlt := "" -}}
+
+{{/* 頁面特定圖片優先順序 */}}
+{{- if .Params.social_image -}}
+  {{- $socialImage = .Params.social_image | absURL -}}
+  {{- $imageAlt = .Params.social_image_alt | default .Title -}}
+{{- else if .Params.twitter_image -}}
+  {{- $socialImage = .Params.twitter_image | absURL -}}
+  {{- $imageAlt = .Params.twitter_image_alt | default .Title -}}
+{{- else if .Params.image -}}
+  {{- $socialImage = .Params.image | absURL -}}
+  {{- $imageAlt = .Params.image_alt | default .Title -}}
+{{- else if .Params.featured_image -}}
+  {{- $socialImage = .Params.featured_image | absURL -}}
+  {{- $imageAlt = .Params.featured_image_alt | default .Title -}}
+{{- else -}}
+  {{/* 預設社交圖片 */}}
+  {{- with site.Params.seo.default_social_image -}}
+    {{- $socialImage = . | absURL -}}
+    {{- $imageAlt = site.Title -}}
+  {{- else with site.Params.seo.default_og_image -}}
+    {{- $socialImage = . | absURL -}}
+    {{- $imageAlt = site.Title -}}
+  {{- else -}}
+    {{/* 生成預設圖片 URL */}}
+    {{- $socialImage = printf "%simages/social-default.png" site.BaseURL -}}
+    {{- $imageAlt = site.Title -}}
+  {{- end -}}
+{{- end -}}
+
+{{/* Open Graph Meta Tags */}}
+<meta
+  property="og:type"
+  content="{{ if .IsHome }}
+    website
+  {{ else if eq .Type `post` }}
+    article
+  {{ else }}
+    website
+  {{ end }}">
+<meta property="og:title" content="{{ $title }}">
+<meta property="og:description" content="{{ $description }}">
+<meta property="og:site_name" content="{{ site.Title }}">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:locale" content="{{ replace site.LanguageCode `-` `_` }}">
+
+{{- if $socialImage }}
+  <meta property="og:image" content="{{ $socialImage }}">
+  <meta property="og:image:alt" content="{{ $imageAlt }}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/png">
+{{- end }}
+
+{{/* 文章特定 Open Graph Tags */}}
+{{- if eq .Type "post" }}
+  {{- with .Params.author | default site.Params.author }}
+    <meta property="article:author" content="{{ . }}">
+  {{- end }}
+
+  {{- if not .Date.IsZero }}
+    <meta property="article:published_time" content="{{ .Date.Format `2006-01-02T15:04:05Z07:00` }}">
+  {{- end }}
+
+  {{- if not .Lastmod.IsZero }}
+    <meta property="article:modified_time" content="{{ .Lastmod.Format `2006-01-02T15:04:05Z07:00` }}">
+  {{- end }}
+
+  {{- with .Params.tags }}
+    {{- range . }}
+      <meta property="article:tag" content="{{ . }}">
+    {{- end }}
+  {{- end }}
+
+  {{- with .Params.category }}
+    <meta property="article:section" content="{{ . }}">
+  {{- end }}
+{{- end }}
+
+{{/* Twitter Card Meta Tags */}}
+<meta name="twitter:card" content="{{ .Params.twitter_card | default `summary_large_image` }}">
+<meta name="twitter:title" content="{{ $title }}">
+<meta name="twitter:description" content="{{ $description }}">
+
+{{/* Twitter 帳號 */}}
+{{- with site.Params.social.twitter }}
+  <meta name="twitter:site" content="@{{ . }}">
+{{- end }}
+
+{{- with .Params.twitter_creator | default site.Params.social.twitter_creator }}
+  <meta name="twitter:creator" content="@{{ . }}">
+{{- end }}
+
+{{/* Twitter 圖片 */}}
+{{- if $socialImage }}
+  <meta name="twitter:image" content="{{ $socialImage }}">
+  <meta name="twitter:image:alt" content="{{ $imageAlt }}">
+{{- end }}
+
+{{/* Twitter 應用程式 */}}
+{{- with site.Params.social.twitter_app_id }}
+  <meta name="twitter:app:id:iphone" content="{{ . }}">
+  <meta name="twitter:app:id:ipad" content="{{ . }}">
+  <meta name="twitter:app:id:googleplay" content="{{ . }}">
+{{- end }}
+
+{{/* Facebook 特定 */}}
+{{- with site.Params.social.facebook_app_id }}
+  <meta property="fb:app_id" content="{{ . }}">
+{{- end }}
+
+{{- with site.Params.social.facebook_admins }}
+  <meta property="fb:admins" content="{{ . }}">
+{{- end }}
+
+{{/* LinkedIn 特定 */}}
+{{- if eq .Type "post" }}
+  {{- with .Params.linkedin_author | default site.Params.social.linkedin }}
+    <meta property="article:author" content="{{ . }}">
+  {{- end }}
+{{- end }}

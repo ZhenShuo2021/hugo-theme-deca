@@ -1,0 +1,85 @@
+baseURL = 'https://example.org/'
+defaultContentLanguage = 'zh-TW'
+theme = 'hugo-theme-deca'
+
+enableRobotsTXT = true
+enableGitInfo = false
+
+# min Hugo version: v0.147.9
+[outputFormats.sidebarInit]
+  mediaType = "application/json"
+  baseName = "sidebar-init"
+  isPlainText = true
+  notAlternative = true
+  weight = 1
+
+[outputs]
+  home = ['sidebarInit', 'html']
+
+[taxonomies]
+  tag = "tags"
+
+# Hugo version requirements
+[module]
+  [module.hugoVersion]
+    extended = false
+    min = '0.149.1'
+
+# Markup configuration
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 4
+    ordered = false
+  [markup.highlight]
+    noClasses = false
+
+# Params for site configuration
+[params]
+  version = "1.0.0"
+  description = "Hugo 首個支援無重載換頁 (AJAX) 功能的現代化文檔主題"
+  author = "Hugo Theme Deca Team"
+
+  # Global sidebar setting
+  sidebarCollapsed = false
+  sidebarCachedRender = false
+
+  # Sidebar configuration
+  [params.sidebars]
+    [params.sidebars.learn]
+      section = "learn"
+
+    [params.sidebars.thisCanBeAnyText]
+      section = "shortcodes"
+
+    [params.sidebars.reference]
+      section = "reference"
+
+  # SEO 設定
+  [params.seo]
+    default_og_image = "/images/og-default.png"
+    default_twitter_image = "/images/twitter-default.png"
+    google_site_verification = ""
+    bing_site_verification = ""
+    yandex_verification = ""
+
+  # 社交媒體
+  [params.social]
+    twitter = "hugotheme"
+    twitter_creator = "hugotheme"
+    facebook = ""
+    linkedin = ""
+    github = "https://github.com"
+
+  # 分析工具
+  [params.analytics]
+    google = ""  # Google Analytics 4 測量 ID
+
+  # 404 Page configuration
+  [params.error404]
+    title = "Oops! Page Not Found"
+    description = "The page you are looking for might have been removed, had its name changed, or is temporarily unavailable."
+

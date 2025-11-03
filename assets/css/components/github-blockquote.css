@@ -1,0 +1,76 @@
+/* Github flavored Block Quote */
+
+.gbq {
+  margin: var(--space-md) 0;
+  padding: var(--space-xs) var(--space-md);
+  border-left: 4px solid;
+  border-color: var(--border-color);
+}
+
+.gbq__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
+  font-weight: 600;
+}
+
+.gbq__icon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.gbq__title {
+  text-transform: uppercase;
+}
+
+.gbq__content > :first-child {
+  margin-top: 0;
+}
+
+.gbq__content > :last-child {
+  margin-bottom: 0;
+}
+
+/* ===== gbq Variants ===== */
+
+.gbq--note {
+  border-color: #2563eb;
+}
+
+.gbq--note .gbq__header {
+  color: #2563eb;
+}
+
+.gbq--tip {
+  border-color: #059669;
+}
+
+.gbq--tip .gbq__header {
+  color: #059669;
+}
+
+.gbq--important {
+  border-color: #7c3aed;
+}
+
+.gbq--important .gbq__header {
+  color: #7c3aed;
+}
+
+.gbq--warning {
+  border-color: #d97706;
+}
+
+.gbq--warning .gbq__header {
+  color: #d97706;
+}
+
+.gbq--caution {
+  border-color: #dc2626;
+}
+
+.gbq--caution .gbq__header {
+  color: #dc2626;
+}

@@ -1,0 +1,98 @@
+{{- /*
+  Renders an independent sidebar for the current section.
+  This partial ONLY handles HTML rendering. All data collection and processing
+  is handled by sidebar-init.html which is called once at build start.
+  */
+-}}
+
+{{- $currentPage := . }}
+
+{{- /* Get sidebar metadata from page store */ -}}
+{{- $meta := .Store.Get "sidebar-meta" }}
+{{- $sidebarData := false }}
+{{- if $meta }}
+  {{- $sidebarData = site.Store.Get (printf "sidebar-data-%s" $meta.sidebar) }}
+{{- end }}
+
+{{- /* Only render sidebar if we have valid data */ -}}
+{{- if and $meta $sidebarData }}
+  {{- $sectionPage := site.GetPage "section" (index site.Params.sidebars $meta.sidebar).section }}
+  <nav class="sidebar">
+    <ul>
+      {{- /* Show section index if it exists */ -}}
+      {{- if $sectionPage.Params.showTopLevelSidebar | default true }}
+        <li>
+          {{- /* Top-level _index.md: render as regular page item (no section/chevron) */ -}}
+          <a
+            href="{{ $sectionPage.RelPermalink }}"
+            class="{{ if eq $currentPage.RelPermalink $sectionPage.RelPermalink }}active{{ end }}">
+            {{ or $sectionPage.Params.sidebar_label $sectionPage.Title }}
+          </a>
+        </li>
+        {{- /* Render tree structure with dynamic state calculation */ -}}
+        {{- range $index, $item := $sidebarData.tree }}
+          {{- partial "inline/render-sidebar-item" (dict "item" $item "currentPage" $currentPage "level" 0 "path" (printf "%d" $index)) }}
+        {{- end }}
+      {{- else }}
+        {{- /* If no section index content, just render tree structure */ -}}
+        {{- range $index, $item := $sidebarData.tree }}
+          {{- partial "inline/render-sidebar-item" (dict "item" $item "currentPage" $currentPage "level" 0 "path" (printf "%d" $index)) }}
+        {{- end }}
+      {{- end }}
+    </ul>
+  </nav>
+{{- end }}
+
+{{ define "_partials/inline/render-sidebar-item" }}
+  {{ $item := .item }}
+  {{ $currentPage := .currentPage }}
+  {{ $page := $item.page }}
+  {{ $level := .level | default 0 }}
+  {{ $path := .path | default "0" }}
+
+  {{/* Get page metadata for display name and collapse state */}}
+  {{ $pageMeta := $page.Store.Get "sidebar-meta" }}
+  {{ $displayName := $page.Title }}
+  {{ $isCollapsed := site.Params.sidebarCollapsed }}
+  {{ if $pageMeta }}
+    {{ $displayName = $pageMeta.displayName }}
+    {{ $isCollapsed = $pageMeta.isCollapsed }}
+  {{ end }}
+
+  {{/* Calculate dynamic states */}}
+  {{ $isActive := eq $currentPage.RelPermalink $page.RelPermalink }}
+  {{ $hasChildren := gt (len $item.children) 0 }}
+  {{ $hasActivePage := or $isActive ($page.IsAncestor $currentPage) }}
+
+  {{/* If contains current page, force expand */}}
+  {{ if $hasActivePage }}
+    {{ $isCollapsed = false }}
+  {{ end }}
+
+
+  <li>
+    {{ if $hasChildren }}
+      {{ $checkboxId := printf "sidebar-toggle-%s" $path }}
+      <input
+        type="checkbox"
+        id="{{ $checkboxId }}"
+        class="sidebar-toggle"
+        {{ if not $isCollapsed }}checked{{ end }}>
+      <label for="{{ $checkboxId }}" class="sidebar-item-collapsible">
+        <a href="{{ $page.RelPermalink }}" class="sidebar-link {{ if $isActive }}active{{ end }}">
+          {{ $displayName }}
+        </a>
+      </label>
+      <ul class="sidebar-subsection">
+        {{ range $index, $child := $item.children }}
+          {{ $childPath := printf "%s__%d" $path $index }}
+          {{ partial "inline/render-sidebar-item" (dict "item" $child "currentPage" $currentPage "level" (add $level 1) "path" $childPath) }}
+        {{ end }}
+      </ul>
+    {{ else }}
+      <a href="{{ $page.RelPermalink }}" {{ if $isActive }}class="active"{{ end }}>
+        {{ $displayName }}
+      </a>
+    {{ end }}
+  </li>
+{{ end }}

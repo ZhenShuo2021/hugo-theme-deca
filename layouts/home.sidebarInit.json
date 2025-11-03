@@ -1,0 +1,26 @@
+{{- /* 
+  Initialize sidebar data
+  This file executes before all other pages are rendered, ensuring that the Store contains the complete sidebar data.
+*/ -}}
+
+{{- $debugEnv := getenv "HUGO_DEBUG_SIDEBAR" | default "false" -}}
+{{- $debug := eq (lower $debugEnv) "true" -}}
+{{- $noop := partial "sidebar-init.html" . -}}
+
+{{- if $debug -}}
+  {{- $debugData := dict -}}
+  {{- range $key, $cfg := site.Params.sidebars -}}
+    {{- $dataStoreKey := printf "sidebar-data-%s" $key -}}
+    {{- $sidebarData := site.Store.Get $dataStoreKey -}}
+    {{- if $sidebarData -}}
+      {{- $debugData = merge $debugData (dict $key (dict
+        "section" $cfg.section
+        "tree" (partial "inline/simplify-tree-for-debug" $sidebarData.tree)
+      )) -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- jsonify (dict "indent" "  ") $debugData -}}
+{{- else -}}
+  {{- jsonify (dict "indent" "  ") (dict "comment" "This file is intentionally empty.") -}}
+{{- end -}}

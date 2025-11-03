@@ -1,0 +1,45 @@
+{{- /*
+  Renders previous/next page navigation using pre-collected sidebar data.
+  This partial ONLY handles HTML rendering. All data collection and processing
+  is handled by sidebar-init.html which is called once at build start.
+  */
+-}}
+
+{{- $currentPage := . -}}
+
+{{- /* Get sidebar metadata from page store */ -}}
+{{- $meta := .Store.Get "sidebar-meta" -}}
+
+{{- /* Only render navigation if we have sidebar metadata */ -}}
+{{- if $meta -}}
+  <nav class="page-navigation" aria-label="Page navigation">
+    <div class="page-nav-container">
+      {{- if $meta.prev -}}
+        <a href="{{ $meta.prev.RelPermalink }}" class="page-nav-link page-nav-prev">
+          <div class="page-nav-direction">
+            {{/* {{- $chevronLeftIcon := resources.Get "icons/chevron-left.svg" -}}
+            <div class="icon">{{ $chevronLeftIcon.Content | safeHTML }}</div>
+            */}} Previous
+          </div>
+          <div class="page-nav-title">{{ $meta.prev.Title }}</div>
+        </a>
+      {{- else -}}
+        <div></div>
+      {{- end -}}
+
+      {{- if $meta.next -}}
+        <a href="{{ $meta.next.RelPermalink }}" class="page-nav-link page-nav-next">
+          <div class="page-nav-direction">
+            Next
+            {{/* {{- $chevronRightIcon := resources.Get "icons/chevron-right.svg" -}}
+            <div class="icon">{{ $chevronRightIcon.Content | safeHTML }}</div>
+            */}}
+          </div>
+          <div class="page-nav-title">{{ $meta.next.Title }}</div>
+        </a>
+      {{- else -}}
+        <div></div>
+      {{- end -}}
+    </div>
+  </nav>
+{{- end }}

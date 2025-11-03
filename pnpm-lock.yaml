@@ -1,0 +1,112 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .:
+    dependencies:
+      '@swup/preload-plugin':
+        specifier: ^3.2.8
+        version: 3.2.11(swup@4.8.2)
+      swup:
+        specifier: ^4.8.2
+        version: 4.8.2
+    devDependencies:
+      '@awmottaz/prettier-plugin-void-html':
+        specifier: ^1.9.0
+        version: 1.9.0(prettier@3.6.2)
+      prettier:
+        specifier: ^3.6.2
+        version: 3.6.2
+      prettier-plugin-go-template:
+        specifier: ^0.0.15
+        version: 0.0.15(prettier@3.6.2)
+
+packages:
+
+  '@awmottaz/prettier-plugin-void-html@1.9.0':
+    resolution: {integrity: sha512-NMwspO5GtUU9PESivdrx86z7XTm0lM5DDoMMVtYUp7nBQXak23j9/aB9tNR9XuVyoXYhdvxhEjXal9DfUqZnNg==}
+    peerDependencies:
+      prettier: 3.0.0 - 3.6.x
+
+  '@swup/plugin@4.0.0':
+    resolution: {integrity: sha512-3Kq31BJxnzoPg643YxGoWQggoU6VPKZpdE5CqqmP7wwkpCYTzkRmrfcQ29mGhsSS7xfS7D33iZoBiwY+wPoo2A==}
+
+  '@swup/preload-plugin@3.2.11':
+    resolution: {integrity: sha512-dq50u+d8L+63/pU6dUDnypuBoF49ubjRzRJqitGem2K7wRn7xccxRSvdyeGKdA2vNvzGDAmLfwVTZdSotvvDrw==}
+    peerDependencies:
+      swup: ^4.0.0
+
+  delegate-it@6.3.0:
+    resolution: {integrity: sha512-WAa6cA61M5mfDR31PBgMNQQ3LY1q++TxnZzcm7E9XV8ODBPxDutxH0toTR/BXqIkLaVuU7ntFe1uOqDllhA22A==}
+
+  opencollective-postinstall@2.0.3:
+    resolution: {integrity: sha512-8AV/sCtuzUeTo8gQK5qDZzARrulB3egtLzFgteqB2tcT4Mw7B8Kt7JcDHmltjz6FOAHsvTevk70gZEbhM4ZS9Q==}
+    hasBin: true
+
+  path-to-regexp@6.3.0:
+    resolution: {integrity: sha512-Yhpw4T9C6hPpgPeA28us07OJeqZ5EzQTkbfwuhsUg0c237RomFoETJgmp2sa3F/41gfLE6G5cqcYwznmeEeOlQ==}
+
+  prettier-plugin-go-template@0.0.15:
+    resolution: {integrity: sha512-WqU92E1NokWYNZ9mLE6ijoRg6LtIGdLMePt2C7UBDjXeDH9okcRI3zRqtnWR4s5AloiqyvZ66jNBAa9tmRY5EQ==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      prettier: ^3.0.0
+
+  prettier@3.6.2:
+    resolution: {integrity: sha512-I7AIg5boAr5R0FFtJ6rCfD+LFsWHp81dolrFD8S79U9tb8Az2nGrJncnMSnys+bpQJfRUzqs9hnA81OAA3hCuQ==}
+    engines: {node: '>=14'}
+    hasBin: true
+
+  swup@4.8.2:
+    resolution: {integrity: sha512-Art2vB4idZ7EFZQhhA47ZifkmZMPgcAwE6z28BhorbTYCO8jcovcc5MasX49GGdXYJWO43DTut7iZb5yrQdEfA==}
+
+  typed-query-selector@2.12.0:
+    resolution: {integrity: sha512-SbklCd1F0EiZOyPiW192rrHZzZ5sBijB6xM+cpmrwDqObvdtunOHHIk9fCGsoK5JVIYXoyEp4iEdE3upFH3PAg==}
+
+  ulid@2.4.0:
+    resolution: {integrity: sha512-fIRiVTJNcSRmXKPZtGzFQv9WRrZ3M9eoptl/teFJvjOzmpU+/K/JH6HZ8deBfb5vMEpicJcLn7JmvdknlMq7Zg==}
+    hasBin: true
+
+snapshots:
+
+  '@awmottaz/prettier-plugin-void-html@1.9.0(prettier@3.6.2)':
+    dependencies:
+      prettier: 3.6.2
+
+  '@swup/plugin@4.0.0':
+    dependencies:
+      swup: 4.8.2
+
+  '@swup/preload-plugin@3.2.11(swup@4.8.2)':
+    dependencies:
+      '@swup/plugin': 4.0.0
+      swup: 4.8.2
+
+  delegate-it@6.3.0:
+    dependencies:
+      typed-query-selector: 2.12.0
+
+  opencollective-postinstall@2.0.3: {}
+
+  path-to-regexp@6.3.0: {}
+
+  prettier-plugin-go-template@0.0.15(prettier@3.6.2):
+    dependencies:
+      prettier: 3.6.2
+      ulid: 2.4.0
+
+  prettier@3.6.2: {}
+
+  swup@4.8.2:
+    dependencies:
+      delegate-it: 6.3.0
+      opencollective-postinstall: 2.0.3
+      path-to-regexp: 6.3.0
+
+  typed-query-selector@2.12.0: {}
+
+  ulid@2.4.0: {}

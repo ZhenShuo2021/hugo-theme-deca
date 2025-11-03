@@ -1,0 +1,69 @@
+{{- /* 1. Base Styles */ -}}
+{{- $variables := resources.Get "css/base/variables.css" }}
+{{- $typography := resources.Get "css/base/typography.css" }}
+{{- $code := resources.Get "css/base/code.css" }}
+{{- $grid := resources.Get "css/base/grid.css" }}
+
+{{- /* 2. Components */ -}}
+{{- $header := resources.Get "css/components/header.css" }}
+{{- $sidebar := resources.Get "css/components/sidebar.css" }}
+{{- $content := resources.Get "css/components/content.css" }}
+{{- $toc := resources.Get "css/components/toc.css" }}
+{{- $navigation := resources.Get "css/components/navigation.css" }}
+{{- $breadcrumbs := resources.Get "css/components/breadcrumbs.css" }}
+{{- $tabs := resources.Get "css/components/tabs.css" }}
+{{- $footer := resources.Get "css/components/footer.css" }}
+{{- $mobileMenu := resources.Get "css/components/mobile-menu.css" }}
+{{- $codeCopy := resources.Get "css/components/code-copy.css" }}
+{{- $gbq := resources.Get "css/components/github-blockquote.css" }}
+
+{{- /* 3. Pages */ -}}
+{{- /* home.css is loaded in head.html because css.html is partialCached */ -}}
+{{- if eq .Kind "home" }}
+  {{- with resources.Get "css/pages/home.css" }}
+    {{- if hugo.IsDevelopment }}
+      <link rel="stylesheet" href="{{ .RelPermalink }}">
+    {{- else }}
+      {{- with . | minify | fingerprint }}
+        <link
+          rel="stylesheet"
+          href="{{ .RelPermalink }}"
+          integrity="{{ .Data.Integrity }}"
+          crossorigin="anonymous">
+      {{- end }}
+    {{- end }}
+  {{- else }}
+    {{- warnf "home.css not found in resources/css/pages/" }}
+  {{- end }}
+{{- end }}
+
+{{- $error404 := resources.Get "css/pages/404.css" }}
+{{- $section := resources.Get "css/pages/section.css" }}
+{{- $blog := resources.Get "css/pages/blog.css" }}
+{{- $taxonomy := resources.Get "css/pages/taxonomy.css" }}
+
+{{- /* 4. Utilities */ -}}
+{{- $scrollbar := resources.Get "css/utilities/scrollbar.css" }}
+
+{{- /* 5. Syntax Highlighting */ -}}
+{{- $chroma := resources.Get "css/vendor/chroma.css" }}
+
+{{- /* 6. Custom CSS (if exists) */ -}}
+{{- $custom := resources.Get "css/custom.css" }}
+
+{{- $css := slice $variables $typography $code $grid $header $sidebar $content $toc $navigation $breadcrumbs $tabs
+  $footer $mobileMenu $codeCopy $gbq $error404 $section $blog $taxonomy $scrollbar $chroma
+}}
+
+{{- if $custom }}
+  {{- $css = $css | append $custom }}
+{{- end }}
+{{- $css = $css | resources.Concat "css/bundle.css" }}
+
+{{- if hugo.IsDevelopment }}
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}">
+{{- else }}
+  {{- with $css | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
+  {{- end }}
+{{- end }}

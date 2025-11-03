@@ -1,0 +1,144 @@
+/* Base layout containers */
+.layout-home,
+.layout-404 {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.layout-home main,
+.layout-404 main {
+  flex: 1;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: var(--header-height);
+  flex-shrink: 0;
+}
+
+/* Common layout base for page and section layouts */
+.layout-blog,
+.layout-page,
+.layout-section {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Header - consistent across all layouts */
+.layout-blog .site-header,
+.layout-page .site-header,
+.layout-section .site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: var(--header-height);
+  flex-shrink: 0;
+}
+
+/* Content Wrapper - Two Column (Sidebar + Content) */
+.layout-blog .content-wrapper,
+.layout-page .content-wrapper,
+.layout-section .content-wrapper {
+  display: grid;
+  grid-template-columns: var(--sidebar-width) 1fr;
+}
+
+.layout-blog .sidebar,
+.layout-page .sidebar,
+.layout-section .sidebar {
+  position: sticky;
+  top: var(--header-height);
+  height: calc(100vh - var(--header-height));
+  overflow-y: auto;
+}
+
+/* Content area - grid layout for main and TOC */
+.layout-blog .content,
+.layout-page .content,
+.layout-section .content {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--toc-width);
+}
+
+/* Main content */
+.layout-blog .content main,
+.layout-page .content main,
+.layout-section .content main {
+  min-width: 0;
+}
+
+/* TOC - sticky */
+.layout-blog .content .toc-column,
+.layout-page .content .toc-column,
+.layout-section .content .toc-column {
+  position: sticky;
+  top: var(--header-height);
+  align-self: start;
+  max-height: calc(100vh - var(--header-height));
+  overflow-y: auto;
+}
+
+.layout-blog .site-footer,
+.layout-page .site-footer,
+.layout-section .site-footer {
+  grid-column: 1 / -1;
+}
+
+/* ===== Responsive ===== */
+
+@media (max-width: 1200px) {
+  .layout-blog .content-wrapper {
+    display: block;
+  }
+
+  .layout-blog .sidebar {
+    display: none;
+  }
+
+  .layout-blog .content {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .layout-page .content,
+  .layout-section .content {
+    grid-template-columns: 1fr;
+  }
+
+  .layout-blog .toc-column,
+  .layout-page .toc-column,
+  .layout-section .toc-column {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .layout-blog .content-wrapper,
+  .layout-page .content-wrapper,
+  .layout-section .content-wrapper {
+    display: block;
+  }
+
+  .layout-blog .sidebar,
+  .layout-page .sidebar,
+  .layout-section .sidebar {
+    display: none;
+  }
+
+  .layout-blog .content,
+  .layout-page .content,
+  .layout-section .content {
+    display: block;
+  }
+
+  .layout-blog .toc-column,
+  .layout-page .toc-column,
+  .layout-section .toc-column {
+    display: none;
+  }
+}

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="{{ site.Language.LanguageCode }}" dir="{{ or site.Language.LanguageDirection `ltr` }}">
+  {{- $meta := .Store.Get "sidebar-meta" }}
+  <head>
+    {{ partial "head.html" . }}
+  </head>
+  <body class="scrollbar-thin">
+    {{ partial "sidebar-debug.html" . }}
+    <div class="layout-{{ .Kind }}">
+      {{ partial "header.html" . }}
+      {{ if or (eq .Kind "404") (eq .Kind "home") (eq .Kind "term")  (eq .Kind "taxonomy") }}
+        <main>
+          {{ block "main" . }}{{ end }}
+        </main>
+      {{ else }}
+        <div class="content-wrapper">
+          {{ if site.Params.sidebarCachedRender }}
+            {{- if $meta }}
+              {{ partialCached "sidebar-cached.html" . $meta.sidebar }}
+            {{- else }}
+              {{ warnf "Failed to get 'sidebar-meta' on page %s" .Path }}
+            {{- end }}
+          {{ else }}
+            {{ partial "sidebar.html" . }}
+          {{ end }}
+          <div class="content" id="swup">
+            <main>
+              {{ block "main" . }}{{ end }}
+            </main>
+            {{ $renderToc :=  and (in .TableOfContents "li") (ne .Kind "section") }}
+            {{ if and (eq .Kind "section") (eq .Params.layout "page-regular") }}
+              {{ $renderToc = true }}
+            {{ end }}
+            {{ if $renderToc -}}
+              <div class="toc-column" id="toc-container">
+                <nav class="toc-nav">
+                  {{ .TableOfContents }}
+                </nav>
+              </div>
+            {{ end }}
+          </div>
+        </div>
+      {{ end }}
+      {{ partial "footer.html" . }}
+    </div>
+
+    <!-- Mobile Components (only visible on mobile) -->
+
+    {{ if site.Params.sidebarCachedRender }}
+      {{ partialCached "mobile-menu-cached.html" . $meta.sidebar }}
+    {{ else }}
+      {{ partial "mobile-menu.html" . }}
+    {{ end }}
+  </body>
+</html>

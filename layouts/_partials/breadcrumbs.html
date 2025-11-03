@@ -1,0 +1,69 @@
+{{- $currentPage := . -}}
+{{- $ancestors := $currentPage.Ancestors.Reverse -}}
+
+{{- /* home page */ -}}
+{{- if gt (len $ancestors) 0 -}}
+  {{- $ancestors = after 1 $ancestors -}}
+{{- end -}}
+
+{{- if or $ancestors (ne $currentPage.RelPermalink "/") -}}
+  <nav class="breadcrumbs" aria-label="頁面導航" role="navigation">
+    <ol class="breadcrumbs__trail">
+      <li class="breadcrumbs__crumb">
+        {{- if $currentPage.IsHome -}}
+          <span class="breadcrumbs__current">
+            <svg class="breadcrumbs__icon" viewBox="0 0 20 20" aria-hidden="true">
+              <path
+                d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+            </svg>
+          </span>
+        {{- else -}}
+          <a
+            href="{{ .Site.Home.RelPermalink }}"
+            class="breadcrumbs__link breadcrumbs__link--home"
+            aria-label="返回首頁"
+            title="首頁">
+            <svg class="breadcrumbs__icon" viewBox="0 0 20 20" aria-hidden="true">
+              <path
+                d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+            </svg>
+          </a>
+        {{- end -}}
+      </li>
+
+      {{- range $ancestors -}}
+        <li class="breadcrumbs__crumb">
+          <svg class="breadcrumbs__separator" viewBox="0 0 6 10" aria-hidden="true">
+            <path
+              d="M1 1l4 4-4 4"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              fill="none" />
+          </svg>
+          <a href="{{ .RelPermalink }}" class="breadcrumbs__link" title="{{ .Title }}">
+            <span class="breadcrumbs__text">{{ or .Params.sidebar_label .Title }}</span>
+          </a>
+        </li>
+      {{- end -}}
+
+      {{- if not $currentPage.IsHome -}}
+        <li class="breadcrumbs__crumb breadcrumbs__crumb--current">
+          <svg class="breadcrumbs__separator" viewBox="0 0 6 10" aria-hidden="true">
+            <path
+              d="M1 1l4 4-4 4"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              fill="none" />
+          </svg>
+          <span class="breadcrumbs__current" aria-current="page">
+            <span class="breadcrumbs__text">{{ or $currentPage.Params.sidebar_label $currentPage.Title }}</span>
+          </span>
+        </li>
+      {{- end -}}
+    </ol>
+  </nav>
+{{- end -}}

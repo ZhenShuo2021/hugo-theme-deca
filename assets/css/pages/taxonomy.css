@@ -1,0 +1,53 @@
+.taxonomy-container {
+  padding: var(--space-xl) 0;
+  max-width: 70ch;
+  margin: 0 auto;
+}
+
+.taxonomy-header {
+  margin-bottom: var(--space-xl);
+}
+
+.taxonomy-title {
+  margin: 0 0 var(--space-md) 0;
+}
+
+.taxonomy-content {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+}
+
+.taxonomy-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: var(--space-sm) var(--space-md);
+}
+
+.taxonomy-item {
+  padding: var(--space-xs) 0;
+}
+
+.taxonomy-link {
+  color: var(--text-primary);
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.taxonomy-link:hover {
+  color: var(--color-accent);
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .taxonomy-container {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .taxonomy-title {
+    font-size: 2rem;
+  }
+
+  .taxonomy-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

@@ -1,0 +1,37 @@
+baseURL = 'https://example.org/'
+defaultContentLanguage = 'en'
+
+enableRobotsTXT = true
+enableGitInfo = false
+
+# min Hugo version: v0.147.9
+[outputFormats.sidebarInit]
+  mediaType = "application/json"
+  baseName = "sidebar-init"
+  isPlainText = true
+  notAlternative = true
+  weight = 1
+
+[outputs]
+  home = ['sidebarInit', 'html']
+
+[taxonomies]
+  tag = "tags"
+
+# Hugo version requirements
+[module]
+  [module.hugoVersion]
+    extended = false
+    min = '0.149.1'
+
+# Markup configuration
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 4
+    ordered = false
+  [markup.highlight]
+    noClasses = false

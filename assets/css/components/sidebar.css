@@ -1,0 +1,129 @@
+.sidebar {
+  background-color: var(--site-bg);
+  padding: var(--space-sm);
+  border-right: 1px solid var(--border-color);
+  transition:
+    background-color var(--transition-base),
+    border-color var(--transition-base);
+}
+
+.sidebar ul {
+  list-style: none;
+}
+
+.sidebar a {
+  display: block;
+  padding: var(--space-xs) var(--space-sm);
+  margin: var(--space-xs) 0;
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast);
+  font-size: 0.9rem;
+}
+
+.sidebar a:not(.active):hover {
+  background-color: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+
+.sidebar a.active {
+  background-color: var(--ifm-color-primary);
+  color: var(--bg-primary);
+}
+
+.sidebar a.active .collapse-icon {
+  color: var(--bg-primary);
+}
+
+/* Collapsible sections */
+.sidebar-toggle {
+  display: none;
+}
+
+.sidebar-item-collapsible {
+  display: block;
+  margin: var(--space-xs) 0;
+  position: relative;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.sidebar-item-collapsible:hover {
+  background-color: var(--bg-tertiary);
+}
+
+.sidebar-item-collapsible .sidebar-link {
+  display: block;
+  padding: var(--space-xs) var(--space-sm);
+  padding-left: 1.6rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.sidebar-item-collapsible.active {
+  background-color: var(--ifm-color-primary);
+}
+
+.sidebar-item-collapsible.active .sidebar-link {
+  color: var(--bg-primary);
+}
+
+/* CSS pseudo element for chevron icon using SVG */
+.sidebar-item-collapsible::before {
+  content: "";
+  position: absolute;
+  left: var(--space-xs);
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  background-color: var(--text-primary);
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9,18 15,12 9,6'%3E%3C/polyline%3E%3C/svg%3E");
+  transition: transform var(--transition-base);
+}
+
+.sidebar-item-collapsible.active::before {
+  background-color: var(--bg-primary);
+}
+
+/* Rotate to chevron-down when expanded */
+.sidebar-toggle:checked + .sidebar-item-collapsible::before {
+  transform: translateY(-50%) rotate(90deg);
+}
+
+.sidebar ul {
+  padding: 0;
+  margin: 0;
+}
+
+ul .sidebar-subsection {
+  overflow: hidden;
+  max-height: 0;
+  margin-inline-start: 12px;
+  border-inline-start: var(--border-color) 1px solid;
+}
+
+ul .sidebar-subsection li {
+  margin-inline-start: 10px;
+}
+
+/* Show subsection when checkbox is checked */
+.sidebar-toggle:checked ~ .sidebar-subsection {
+  max-height: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .sidebar {
+    padding: 0.75rem;
+  }
+}

@@ -1,0 +1,22 @@
+<article class="page-content">
+  {{ partial "breadcrumbs.html" . }}
+
+  {{ $renderToc :=  and (in .TableOfContents "li") (ne .Kind "section") }}
+  {{ if and (eq .Kind "section") (eq .Params.layout "page-regular") }}
+    {{ $renderToc = true }}
+  {{ end }}
+  {{ if $renderToc -}}
+    <input type="checkbox" id="mobile-toc" class="mobile-toc-toggle">
+    <details class="mobile-toc">
+      <summary>
+        <span>On this page</span>
+      </summary>
+      <div class="mobile-toc-list">
+        {{ .TableOfContents }}
+      </div>
+    </details>
+  {{ end }}
+
+  {{ .Content }}
+  {{ partial "page-navigation.html" . }}
+</article>

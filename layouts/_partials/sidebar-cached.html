@@ -1,0 +1,78 @@
+{{- /*
+  Renders a cached sidebar for the current section without dynamic states.
+  This version is optimized for partialCached usage and better performance.
+  All active states and expansion logic are handled by JavaScript.
+  */
+-}}
+
+{{- /* Get sidebar metadata from page store */ -}}
+{{- $meta := .Store.Get "sidebar-meta" }}
+{{- $sidebarData := false }}
+{{- if $meta }}
+  {{- $sidebarData = site.Store.Get (printf "sidebar-data-%s" $meta.sidebar) }}
+{{- end }}
+
+{{- /* Only render sidebar if we have valid data */ -}}
+{{- if and $meta $sidebarData }}
+  {{- $sectionPage := site.GetPage "section" (index site.Params.sidebars $meta.sidebar).section }}
+  <nav class="sidebar">
+    <ul>
+      {{- /* Show section index if it exists */ -}}
+      {{- if $sectionPage.Params.showTopLevelSidebar | default true }}
+        <li>
+          <a href="{{ $sectionPage.RelPermalink }}">
+            {{ or $sectionPage.Params.sidebar_label $sectionPage.Title }}
+          </a>
+        </li>
+        {{- /* Render tree structure without dynamic states */ -}}
+        {{- range $index, $item := $sidebarData.tree }}
+          {{- partial "inline/render-sidebar-item-cached" (dict "item" $item "level" 0 "path" (printf "%d" $index)) }}
+        {{- end }}
+      {{- else }}
+        {{- /* If no section index content, just render tree structure */ -}}
+        {{- range $index, $item := $sidebarData.tree }}
+          {{- partial "inline/render-sidebar-item-cached" (dict "item" $item "level" 0 "path" (printf "%d" $index)) }}
+        {{- end }}
+      {{- end }}
+    </ul>
+  </nav>
+{{- end }}
+
+{{ define "_partials/inline/render-sidebar-item-cached" }}
+  {{ $item := .item }}
+  {{ $page := $item.page }}
+  {{ $level := .level | default 0 }}
+  {{ $path := .path | default "0" }}
+
+  {{/* Get page metadata for display name only */}}
+  {{ $pageMeta := $page.Store.Get "sidebar-meta" }}
+  {{ $displayName := $page.Title }}
+  {{ if $pageMeta }}
+    {{ $displayName = $pageMeta.displayName }}
+  {{ end }}
+
+  {{ $hasChildren := gt (len $item.children) 0 }}
+
+
+  <li>
+    {{ if $hasChildren }}
+      {{ $checkboxId := printf "sidebar-toggle-%s" $path }}
+      <input type="checkbox" id="{{ $checkboxId }}" class="sidebar-toggle" checked>
+      <label for="{{ $checkboxId }}" class="sidebar-item-collapsible">
+        <a href="{{ $page.RelPermalink }}" class="sidebar-link">
+          {{ $displayName }}
+        </a>
+      </label>
+      <ul class="sidebar-subsection">
+        {{ range $index, $child := $item.children }}
+          {{ $childPath := printf "%s__%d" $path $index }}
+          {{ partial "inline/render-sidebar-item-cached" (dict "item" $child "level" (add $level 1) "path" $childPath) }}
+        {{ end }}
+      </ul>
+    {{ else }}
+      <a href="{{ $page.RelPermalink }}">
+        {{ $displayName }}
+      </a>
+    {{ end }}
+  </li>
+{{ end }}

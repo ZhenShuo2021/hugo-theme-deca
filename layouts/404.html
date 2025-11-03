@@ -1,0 +1,29 @@
+{{ define "main" }}
+  <div class="error-page">
+    <div class="error-container">
+      <div class="error-code">404</div>
+      <h1 class="error-title">{{ with site.Params.error404.title }}{{ . }}{{ else }}Page Not Found{{ end }}</h1>
+      <p class="error-description">
+        {{ with site.Params.error404.description }}
+          {{ . }}
+        {{ else }}
+          The page you are looking for might have been removed, had its name changed, or is temporarily
+          unavailable.
+        {{ end }}
+      </p>
+
+      <div class="error-actions">
+        <a href="{{ site.BaseURL }}" class="error-button error-button-primary">
+          {{- $homeIcon := resources.Get "icons/home.svg" -}}
+          <div class="icon">{{ $homeIcon.Content | safeHTML }}</div>
+          Go Home
+        </a>
+        <a href="javascript:history.back()" class="error-button error-button-secondary">
+          {{- $arrowLeftIcon := resources.Get "icons/arrow-left.svg" -}}
+          <div class="icon">{{ $arrowLeftIcon.Content | safeHTML }}</div>
+          Go Back
+        </a>
+      </div>
+    </div>
+  </div>
+{{ end }}

@@ -1,0 +1,167 @@
+<header id="site-header" class="site-header">
+  <nav class="header-nav">
+    {{- partial "inline/headerLogo" . -}}
+    <div class="header-menu">
+      <ul>
+        {{- partial "inline/headerNavigation" . -}}
+        {{- partial "inline/headerIcon" . -}}
+      </ul>
+    </div>
+  </nav>
+</header>
+
+{{ define "_partials/inline/headerLogo" }}
+  <div class="header-brand">
+    {{- with site.Params.header.logo -}}
+      <a href="{{ "" | relLangURL }}" class="logo-link" data-no-swup>
+        {{- if .light -}}
+          {{- $lightLogo := resources.Get .light -}}
+          {{- $darkLogo := resources.Get .dark -}}
+          {{- if $lightLogo -}}
+            <div class="logo-container">
+              {{- if (strings.HasSuffix .light ".svg") -}}
+                <div class="logo logo-light">{{ $lightLogo.Content | safeHTML }}</div>
+                <div class="logo logo-dark">
+                  {{ if $darkLogo }}
+                    {{ $darkLogo.Content | safeHTML }}
+                  {{ else }}
+                    {{ $lightLogo.Content | safeHTML }}
+                  {{ end }}
+                </div>
+              {{- else -}}
+                <img
+                  class="logo logo-light"
+                  src="{{ $lightLogo.RelPermalink }}"
+                  alt="{{ .alt | default site.Title }}">
+                <img
+                  class="logo logo-dark"
+                  src="{{ if $darkLogo }}
+                    {{ $darkLogo.RelPermalink }}
+                  {{ else }}
+                    {{ $lightLogo.RelPermalink }}
+                  {{ end }}"
+                  alt="{{ .alt | default site.Title }}">
+              {{- end -}}
+            </div>
+          {{- end -}}
+        {{- end -}}
+        {{- if .text -}}
+          <span class="logo-text">{{ .text }}</span>
+        {{- end -}}
+      </a>
+    {{- else -}}
+      <a href="{{ `/` | relURL }}" data-no-swup>{{ site.Title }}</a>
+    {{- end -}}
+  </div>
+{{ end }}
+
+{{ define "_partials/inline/headerNavigation" }}
+  {{- $chevronIcon := resources.Get "icons/chevron-down.svg" -}}
+  {{- $currentPage := . -}}
+  {{- $currentSidebar := (.Page.Store.Get "sidebar-meta").sidebar -}}
+  {{- range site.Menus.main -}}
+    <li class="menu-item">
+      {{- if $currentPage.IsMenuCurrent .Menu . -}}
+        <a class="active" aria-current="page" href="{{ .URL }}">
+          {{ .Name }}
+          {{- if .Children -}}
+            <span class="icon menu-chevron">{{ $chevronIcon.Content | safeHTML }}</span>
+          {{- end -}}
+        </a>
+      {{- else if $currentPage.HasMenuCurrent .Menu . }}
+        <a class="ancestor" aria-current="true" href="{{ .URL }}">
+          {{ .Name }}
+          {{- if .Children -}}
+            {{- $chevronIcon := resources.Get "icons/chevron-down.svg" -}}
+            <span class="icon menu-chevron">{{ $chevronIcon.Content | safeHTML }}</span>
+          {{- end -}}
+        </a>
+      {{- else -}}
+        <a href="{{ .URL }}" data-no-swup>
+          {{ .Name }}
+          {{- if .Children -}}
+            {{- $chevronIcon := resources.Get "icons/chevron-down.svg" -}}
+            <span class="icon menu-chevron">{{ $chevronIcon.Content | safeHTML }}</span>
+          {{- end -}}
+        </a>
+      {{- end -}}
+      {{- if .Children -}}
+        {{- $childSidebar := (.Page.Store.Get "sidebar-meta").sidebar -}}
+        {{- $shouldSwup := cond (eq $currentSidebar $childSidebar) "" "data-no-swup" | safeHTMLAttr -}}
+        <ul class="dropdown-menu">
+          {{- range .Children -}}
+            <li>
+              {{- if $currentPage.IsMenuCurrent .Menu . -}}
+                <a class="active" aria-current="page" href="{{ .URL }}" {{ $shouldSwup }}>{{ .Name }}</a>
+              {{- else -}}
+                <a href="{{ .URL }}" {{ $shouldSwup }}>{{ .Name }}</a>
+              {{- end -}}
+            </li>
+          {{- end -}}
+        </ul>
+      {{- end -}}
+    </li>
+  {{- end -}}
+{{ end }}
+
+{{ define "_partials/inline/headerIcon" }}
+  {{- if .IsTranslated -}}
+    <li id="language-switcher" class="menu-item">
+      <button class="header-btn" aria-label="Switch language">
+        {{- $globeIcon := resources.Get "icons/globe.svg" -}}
+        <div class="icon">{{ $globeIcon.Content | safeHTML }}</div>
+      </button>
+      <ul class="dropdown-menu language-menu">
+        {{- range .AllTranslations -}}
+          {{- if eq .Language.Lang site.Language.Lang -}}
+            <li>
+              <a class="active" aria-current="page" href="{{ .RelPermalink }}" data-no-swup>
+                {{ .Language.LanguageName }}
+              </a>
+            </li>
+          {{- else -}}
+            <li>
+              <a href="{{ .RelPermalink }}" data-no-swup>
+                {{ .Language.LanguageName }}
+              </a>
+            </li>
+          {{- end -}}
+        {{- end -}}
+      </ul>
+    </li>
+  {{- end -}}
+
+  {{- range site.Params.header.social -}}
+    <li class="menu-item">
+      <a
+        href="{{ .url }}"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="{{ .name }}"
+        class="header-btn"
+        data-no-swup>
+        <div class="icon">{{ .icon | safeHTML }}</div>
+      </a>
+    </li>
+  {{- end -}}
+
+
+  <li class="menu-item">
+    <button id="theme-toggle" class="header-btn" aria-label="Toggle dark mode">
+      {{- $sunIcon := resources.Get "icons/sun.svg" -}}
+      {{- $moonIcon := resources.Get "icons/moon.svg" -}}
+      <div class="icon theme-light">{{ $sunIcon.Content | safeHTML }}</div>
+      <div class="icon theme-dark">{{ $moonIcon.Content | safeHTML }}</div>
+    </button>
+  </li>
+
+  <li class="menu-item" id="mobile-menu-item">
+    <label for="mobile-menu-toggle" class="header-btn mobile-menu-btn" aria-label="Toggle mobile menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </label>
+  </li>
+{{ end }}

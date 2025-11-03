@@ -1,0 +1,106 @@
+<footer class="site-footer">
+  <div class="footer-container">
+    <div class="footer-content">
+      {{ range site.Params.footer.columns }}
+        <div class="footer-column">
+          <div class="footer-column-title">{{ .title }}</div>
+          <ul class="footer-links">
+            {{ range .items }}
+              <li>
+                {{- $linkURL := "" -}}
+                {{- $linkPage := false -}}
+                {{- $needsNoSwup := false -}}
+
+                {{- if .pageRef -}}
+                  {{- $linkPage = $.Site.GetPage .pageRef -}}
+                  {{- if $linkPage -}}
+                    {{- $linkURL = $linkPage.RelPermalink -}}
+
+                    {{- /* Check if target page belongs to different sidebar */ -}}
+                    {{- $currentMeta := $.Store.Get "sidebar-meta" -}}
+                    {{- $targetMeta := $linkPage.Store.Get "sidebar-meta" -}}
+                    {{- if and $currentMeta $targetMeta -}}
+                      {{- if ne $currentMeta.sidebar $targetMeta.sidebar -}}
+                        {{- $needsNoSwup = true -}}
+                      {{- end -}}
+                    {{- else if or (and $currentMeta (not $targetMeta)) (and (not $currentMeta) $targetMeta) -}}
+                      {{- $needsNoSwup = true -}}
+                    {{- end -}}
+                  {{- else -}}
+                    {{- warnf "Fail to GetPage in footer: %s" (.pageRef | relLangURL) -}}
+                  {{- end -}}
+                {{- else if .url -}}
+                  {{- $linkURL = .url -}}
+                  {{- /* External URLs always need no-swup */ -}}
+                  {{- if .external -}}
+                    {{- $needsNoSwup = true -}}
+                  {{- end -}}
+                {{- end -}}
+
+
+                <a
+                  href="{{ $linkURL }}"
+                  class="footer-link"
+                  {{ if .external }}target="_blank" rel="noopener"{{ end }}{{ if $needsNoSwup }}
+                    data-no-swup
+                  {{ end }}>
+                  {{ .name }}
+                </a>
+              </li>
+            {{ end }}
+          </ul>
+        </div>
+      {{ end }}
+
+
+      <div class="footer-column footer-brand">
+        {{ with site.Params.footer.logo }}
+          <div class="footer-logo">
+            <span class="footer-logo-text">{{ .text | default site.Title }}</span>
+          </div>
+          {{ with resources.Get .image }}
+            <div class="footer-logo-image">
+              <img src="{{ .RelPermalink }}" alt="{{ site.Params.footer.logo.alt | default site.Title }}">
+            </div>
+          {{ end }}
+        {{ else }}
+          <div class="footer-logo">
+            <span class="footer-logo-text">{{ site.Title }}</span>
+          </div>
+        {{ end }}
+
+        {{ with site.Params.footer.description }}
+          <p class="footer-description">{{ . }}</p>
+        {{ end }}
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-copyright">
+        {{ with site.Params.footer.copyright }}
+          {{ . | safeHTML }}
+        {{ else }}
+          © {{ now.Year }} {{ site.Title }}. All rights reserved.
+        {{ end }}
+      </div>
+
+      {{ with site.Params.footer.social }}
+        <ul class="footer-social">
+          {{ range . }}
+            <li>
+              <a
+                href="{{ .url }}"
+                class="footer-social-link"
+                target="_blank"
+                rel="noopener"
+                aria-label="{{ .name }}"
+                data-no-swup>
+                {{ .icon | safeHTML }}
+              </a>
+            </li>
+          {{ end }}
+        </ul>
+      {{ end }}
+    </div>
+  </div>
+</footer>

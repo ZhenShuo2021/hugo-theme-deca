@@ -1,0 +1,37 @@
+[[main]]
+  name = 'Learn Deca'
+  pageRef = '/learn'
+  weight = 10
+
+  [[main]]
+    name = 'Getting Started'
+    parent = 'Learn Deca'
+    pageRef = '/learn/tutorials'
+    weight = 10
+
+  [[main]]
+    name = 'Page Types'
+    parent = 'Learn Deca'
+    pageRef = '/learn/tutorials/content-organization/page-types'
+    weight = 20
+
+  [[main]]
+    name = 'How-to'
+    parent = 'Learn Deca'
+    pageRef = '/learn/how-to'
+    weight = 30
+
+[[main]]
+  name = 'Shortcode'
+  pageRef = '/shortcodes'
+  weight = 30
+
+[[main]]
+  name = 'Reference'
+  pageRef = '/reference'
+  weight = 40
+
+[[main]]
+  name = 'Blog'
+  pageRef = '/blog'
+  weight = 50

@@ -1,0 +1,5 @@
+/* Blog variant: empty sidebar without border */
+.layout-blog .sidebar:empty,
+.layout-blog .sidebar:not(:has(*:not(:empty))) {
+  border: none;
+}

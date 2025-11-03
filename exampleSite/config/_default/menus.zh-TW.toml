@@ -1,0 +1,37 @@
+[[main]]
+  name = '使用教學'
+  pageRef = '/learn'
+  weight = 10
+
+  [[main]]
+    name = '快速入門'
+    parent = '使用教學'
+    pageRef = '/learn/tutorials'
+    weight = 10
+
+  [[main]]
+    name = '頁面類型'
+    parent = '使用教學'
+    pageRef = '/learn/tutorials/content-organization/page-types'
+    weight = 20
+
+  [[main]]
+    name = '設定指南'
+    parent = '使用教學'
+    pageRef = '/learn/how-to'
+    weight = 30
+
+[[main]]
+  name = '短碼'
+  pageRef = '/shortcodes'
+  weight = 30
+
+[[main]]
+  name = '參考'
+  pageRef = '/reference'
+  weight = 40
+
+[[main]]
+  name = '部落格'
+  pageRef = '/blog'
+  weight = 50

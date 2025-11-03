@@ -1,0 +1,51 @@
+{{- /*  
+ Portion of this code are from Hugo (Apache License 2.0)
+ Original code: https://github.com/gohugoio/hugo
+ Modified for this project
+*/ -}}
+
+{{- $currentMeta := .Page.Store.Get "sidebar-meta" -}}
+{{- $targetPage := "" -}}
+{{- $swupAttr := "" -}}
+{{- $dest := .Destination -}}
+{{- if not (hasPrefix $dest "/") -}}
+  {{- $dest = printf "/%s" $dest -}}
+{{- end -}}
+{{- $targetPage = site.GetPage $dest -}}
+{{- if and $targetPage $currentMeta -}}
+  {{- $targetMeta := $targetPage.Store.Get "sidebar-meta" -}}
+  {{- $swupAttr = cond (or (not $targetMeta) (ne $currentMeta.sidebar $targetMeta.sidebar)) "data-no-swup" "" -}}
+{{- end -}}
+
+{{- $u := urls.Parse .Destination -}}
+{{- $href := $u.String -}}
+{{- if strings.HasPrefix $u.String "#" -}}
+  {{- $href = printf "%s#%s" .PageInner.RelPermalink $u.Fragment -}}
+{{- else if and $href (not $u.IsAbs) -}}
+  {{- $path := strings.TrimPrefix "./" $u.Path -}}
+  {{- with or
+    ($.PageInner.GetPage $path)
+    ($.PageInner.Resources.Get $path)
+    (resources.Get $path)
+  -}}
+    {{- $href = .RelPermalink -}}
+    {{- with $u.RawQuery -}}
+      {{- $href = printf "%s?%s" $href . -}}
+    {{- end -}}
+    {{- with $u.Fragment -}}
+      {{- $href = printf "%s#%s" $href . -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+
+<a
+  href="{{ $href }}"
+  {{- if or (strings.HasPrefix .Destination "http:") (strings.HasPrefix .Destination "https:") }}
+    target="_blank"
+  {{- end }}
+  {{- with .Title }}title="{{ . }}"{{ end }}
+  {{ $swupAttr | safeHTMLAttr }}
+  >{{ .Text }}</a
+>
+{{- /* Trim EOF */ -}}

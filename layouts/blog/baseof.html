@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="{{ site.Language.LanguageCode }}" dir="{{ or site.Language.LanguageDirection `ltr` }}">
+  <head>
+    {{ partial "head.html" . }}
+  </head>
+  <body class="scrollbar-thin">
+    {{ partial "sidebar-debug.html" . }}
+    <div class="layout-blog">
+      {{ partial "header.html" . }}
+      {{ if or (eq .Kind "404") (eq .Kind "home") }}
+        <main>
+          {{ block "main" . }}{{ end }}
+        </main>
+      {{ else }}
+        <div class="content-wrapper">
+          <aside class="sidebar">
+            <!-- Future content here -->
+          </aside>
+
+          <div class="content" id="swup">
+            <main>
+              {{ block "main" . }}{{ end }}
+            </main>
+            {{ if and (in .TableOfContents "li") (ne .Kind "section") -}}
+              <div class="toc-column" id="toc-container">
+                <nav class="toc-nav">
+                  {{ .TableOfContents }}
+                </nav>
+              </div>
+            {{ end }}
+          </div>
+        </div>
+      {{ end }}
+      {{ partial "footer.html" . }}
+    </div>
+    {{ partial "mobile-menu.html" . }}
+  </body>
+</html>

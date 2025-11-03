@@ -1,0 +1,22 @@
+{
+  "name": "hugo-theme-deca",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "node scripts/post-install.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.12.4",
+  "devDependencies": {
+    "@awmottaz/prettier-plugin-void-html": "^1.9.0",
+    "prettier": "^3.6.2",
+    "prettier-plugin-go-template": "^0.0.15"
+  },
+  "dependencies": {
+    "swup": "^4.8.2",
+    "@swup/preload-plugin": "^3.2.8"
+  }
+}

@@ -1,0 +1,31 @@
+{{ define "main" }}
+  {{ partial "breadcrumbs.html" . }}
+  <header class="section-header">
+    <h1>{{ .Title }}</h1>
+    {{ if gt (len .RegularPages) 0 }}
+      <div class="section-meta">
+        <span class="post-count">
+          {{ len .RegularPages }} {{ if gt (len .RegularPages) 1 }}articles{{ else }}article{{ end }}
+        </span>
+      </div>
+    {{ end }}
+  </header>
+
+  <div class="section-content">{{ .Content }}</div>
+
+  <div class="posts-list">
+    {{ range .Paginator.Pages }}
+      <article class="post-item">
+        <h2 class="post-title">
+          <a href="{{ .RelPermalink }}" data-no-swup>{{ .LinkTitle }}</a>
+        </h2>
+        <div class="post-meta">
+          <span class="reading-time">{{ .ReadingTime }} min read</span>
+        </div>
+        <div class="post-summary">{{ .Summary | truncate 80 "" | plainify | strings.TrimSpace }}...</div>
+      </article>
+    {{ end }}
+  </div>
+
+  {{ partial "page-navigation.html" . }}
+{{ end }}
