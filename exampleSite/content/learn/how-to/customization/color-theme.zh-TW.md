@@ -12,7 +12,7 @@ Deca 提供完整的顏色自訂系統，支援品牌色彩和深色模式。
 
 ## 自訂方式
 
-建立 `assets/css/custom.css`，並且將 [Docusaurus 主題產生器](https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima)生成的色彩系統貼上，您的 CSS 檔案應該會像這樣：
+建立 `assets/sass/_custom.scss`，並且將 [Docusaurus 主題產生器](https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima)生成的色彩系統貼上，您的 CSS 檔案應該會像這樣：
 
 ```css
 :root {

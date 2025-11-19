@@ -11,7 +11,7 @@
 {{ partial "head/performance.html" . }}
 
 {{/* 樣式表 */}}
-{{ partial "head/css.html" . }}
+{{ partialCached "head/css.html" . }}
 
 {{/* JavaScript */}}
-{{ partial "head/js.html" . }}
+{{ partialCached "head/js.html" . }}
