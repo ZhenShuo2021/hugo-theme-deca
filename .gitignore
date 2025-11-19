@@ -18,5 +18,6 @@ hugo.linux
 
 /exampleSite/.hugo_build.lock
 /exampleSite/public
+/exampleSite/resources/_gen/
 /exampleSite/hugo_stats.json
 /exampleSite/assets/jsconfig.json
