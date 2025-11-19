@@ -1,3 +1,27 @@
 {{ define "main" }}
-  {{ partial "page-regular.html" . }}
+  {{- $meta := .Store.Get "sidebar-meta" }}
+  <div class="content-wrapper">
+    {{ if site.Params.sidebarCachedRender }}
+      {{- if $meta }}
+        {{ partialCached "sidebar-cached.html" . $meta.sidebar }}
+      {{- else }}
+        {{ warnf "Failed to get 'sidebar-meta' on page %s" .Path }}
+      {{- end }}
+    {{ else }}
+      {{ partial "sidebar.html" . }}
+    {{ end }}
+    <div class="content" id="swup">
+      <main>
+        {{ partial "page-regular.html" . }}
+      </main>
+      {{ $renderToc := and (in .TableOfContents "li") (ne .Kind "section") }}
+      {{ if $renderToc -}}
+        <div class="toc-column" id="toc-container">
+          <nav class="toc-nav">
+            {{ .TableOfContents }}
+          </nav>
+        </div>
+      {{ end }}
+    </div>
+  </div>
 {{ end }}

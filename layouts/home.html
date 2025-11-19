@@ -1,102 +1,103 @@
 {{ define "main" }}
-  <div class="home">
-    {{/* Hero */}}
-    {{ with .Params.hero }}
-      <section class="home__hero">
-        <div class="home__hero-content">
-          <h1 class="home__hero-title">{{ .title }}</h1>
-          <p class="home__hero-tagline">{{ .tagline }}</p>
-          {{ with .actions }}
-            <div class="home__hero-actions">
-              {{ range . }}
-                {{- $actionURL := "" -}}
-                {{- if .pageRef -}}
-                  {{- $actionPage := $.Site.GetPage .pageRef -}}
-                  {{- if $actionPage -}}
-                    {{- $actionURL = $actionPage.RelPermalink -}}
-                  {{- else -}}
-                    {{- warnf "Fail to GetPage in hero-actions: %s" (.pageRef | relLangURL) -}}
-                  {{- end -}}
-                {{- else if .link -}}
-                  {{- $actionURL = .link -}}
-                {{- end -}}
-                <a
-                  href="{{ $actionURL }}"
-                  133qwew
-                  class="home__btn {{ if .primary }}
-                    home__btn--primary
-                  {{ else }}
-                    home__btn--secondary
-                  {{ end }}"
-                  {{- if or (strings.HasPrefix $actionURL "http:") (strings.HasPrefix $actionURL "https:") }}
-                    target="_blank"
-                  {{- end }}>
-                  {{ .text }}
-                </a>
-              {{ end }}
-            </div>
-          {{ end }}
-        </div>
-      </section>
-    {{ end }}
-
-    {{/* Features Section */}}
-    {{ with .Params.features }}
-      <section class="home__features">
-        <div class="home__features-grid">
-          {{ range . }}
-            <div class="home__feature">
-              {{ with .icon }}<div class="home__feature-icon">{{ . }}</div>{{ end }}
-              <h2 class="home__feature-title">{{ .title }}</h2>
-              <p class="home__feature-description">{{ .description }}</p>
-            </div>
-          {{ end }}
-        </div>
-      </section>
-    {{ end }}
-
-    {{/* Content Section */}}
-    {{ if .Content }}
-      <section class="home__content">
-        <div class="home__content-wrapper">
-          {{ .Content }}
-        </div>
-      </section>
-    {{ end }}
-
-    {{/* Custom Sections */}}
-    {{ with .Params.sections }}
-      {{ range . }}
-        <section class="home__section">
-          <div class="home__section-wrapper">
-            <h2 class="home__section-title">{{ .title }}</h2>
-            {{ with .description }}<p class="home__section-description">{{ . }}</p>{{ end }}
-            {{ with .items }}
-              <div class="home__section-grid">
+  <main>
+    <div class="home">
+      {{/* Hero */}}
+      {{ with .Params.hero }}
+        <section class="home__hero">
+          <div class="home__hero-content">
+            <h1 class="home__hero-title">{{ .title }}</h1>
+            <p class="home__hero-tagline">{{ .tagline }}</p>
+            {{ with .actions }}
+              <div class="home__hero-actions">
                 {{ range . }}
-                  <div class="home__section-item">
-                    {{- $itemURL := "" -}}
-                    {{- if .pageRef -}}
-                      {{- $itemPage := $.Site.GetPage .pageRef -}}
-                      {{- if $itemPage -}}
-                        {{- $itemURL = $itemPage.RelPermalink -}}
-                      {{- else -}}
-                        {{- warnf "Fail to GetPage in section items: %s" (.pageRef | relLangURL) -}}
-                      {{- end -}}
-                    {{- else if .link -}}
-                      {{- $itemURL = .link -}}
+                  {{- $actionURL := "" -}}
+                  {{- if .pageRef -}}
+                    {{- $actionPage := $.Site.GetPage .pageRef -}}
+                    {{- if $actionPage -}}
+                      {{- $actionURL = $actionPage.RelPermalink -}}
+                    {{- else -}}
+                      {{- warnf "Fail to GetPage in hero-actions: %s" (.pageRef | relLangURL) -}}
                     {{- end -}}
-                    <h3 class="home__section-item-title">
-                      <a href="{{ $itemURL }}" class="home__section-item-link">{{ .title }}</a>
-                    </h3>
-                    <p class="home__section-item-description">{{ .description }}</p>
-                  </div>
+                  {{- else if .link -}}
+                    {{- $actionURL = .link -}}
+                  {{- end -}}
+                  <a
+                    href="{{ $actionURL }}"
+                    class="home__btn {{ if .primary }}
+                      home__btn--primary
+                    {{ else }}
+                      home__btn--secondary
+                    {{ end }}"
+                    {{- if or (strings.HasPrefix $actionURL "http:") (strings.HasPrefix $actionURL "https:") }}
+                      target="_blank"
+                    {{- end }}>
+                    {{ .text }}
+                  </a>
                 {{ end }}
               </div>
             {{ end }}
           </div>
         </section>
       {{ end }}
-    {{ end }}
-  </div>
+
+      {{/* Features Section */}}
+      {{ with .Params.features }}
+        <section class="home__features">
+          <div class="home__features-grid">
+            {{ range . }}
+              <div class="home__feature">
+                {{ with .icon }}<div class="home__feature-icon">{{ . }}</div>{{ end }}
+                <h2 class="home__feature-title">{{ .title }}</h2>
+                <p class="home__feature-description">{{ .description }}</p>
+              </div>
+            {{ end }}
+          </div>
+        </section>
+      {{ end }}
+
+      {{/* Content Section */}}
+      {{ if .Content }}
+        <section class="home__content">
+          <div class="home__content-wrapper">
+            {{ .Content }}
+          </div>
+        </section>
+      {{ end }}
+
+      {{/* Custom Sections */}}
+      {{ with .Params.sections }}
+        {{ range . }}
+          <section class="home__section">
+            <div class="home__section-wrapper">
+              <h2 class="home__section-title">{{ .title }}</h2>
+              {{ with .description }}<p class="home__section-description">{{ . }}</p>{{ end }}
+              {{ with .items }}
+                <div class="home__section-grid">
+                  {{ range . }}
+                    <div class="home__section-item">
+                      {{- $itemURL := "" -}}
+                      {{- if .pageRef -}}
+                        {{- $itemPage := $.Site.GetPage .pageRef -}}
+                        {{- if $itemPage -}}
+                          {{- $itemURL = $itemPage.RelPermalink -}}
+                        {{- else -}}
+                          {{- warnf "Fail to GetPage in section items: %s" (.pageRef | relLangURL) -}}
+                        {{- end -}}
+                      {{- else if .link -}}
+                        {{- $itemURL = .link -}}
+                      {{- end -}}
+                      <h3 class="home__section-item-title">
+                        <a href="{{ $itemURL }}" class="home__section-item-link">{{ .title }}</a>
+                      </h3>
+                      <p class="home__section-item-description">{{ .description }}</p>
+                    </div>
+                  {{ end }}
+                </div>
+              {{ end }}
+            </div>
+          </section>
+        {{ end }}
+      {{ end }}
+    </div>
+  </main>
 {{ end }}

@@ -1,0 +1,20 @@
+{{ define "main" }}
+  <div class="content-wrapper">
+    <aside class="sidebar">
+      <!-- Future content here -->
+    </aside>
+
+    <div class="content" id="swup">
+      <main>
+        {{ partial "page-regular.html" . }}
+      </main>
+      {{ if and (in .TableOfContents "li") (ne .Kind "section") -}}
+        <div class="toc-column" id="toc-container">
+          <nav class="toc-nav">
+            {{ .TableOfContents }}
+          </nav>
+        </div>
+      {{ end }}
+    </div>
+  </div>
+{{ end }}

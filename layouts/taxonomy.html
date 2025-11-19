@@ -1,20 +1,22 @@
 {{ define "main" }}
-  <div class="taxonomy-container">
-    <header class="taxonomy-header">
-      <h1 class="taxonomy-title">{{ .Title }}</h1>
-      {{ if .Content }}
-        <div class="taxonomy-content">
-          {{ .Content }}
-        </div>
-      {{ end }}
-    </header>
+  <main>
+    <div class="taxonomy-container">
+      <header class="taxonomy-header">
+        <h1 class="taxonomy-title">{{ .Title }}</h1>
+        {{ if .Content }}
+          <div class="taxonomy-content">
+            {{ .Content }}
+          </div>
+        {{ end }}
+      </header>
 
-    <div class="taxonomy-grid">
-      {{ range .Pages }}
-        <div class="taxonomy-item">
-          <a href="{{ .RelPermalink }}" class="taxonomy-link" data-no-swup>{{ .LinkTitle }}</a>
-        </div>
-      {{ end }}
+      <div class="taxonomy-grid">
+        {{ range .Pages }}
+          <div class="taxonomy-item">
+            <a href="{{ .RelPermalink }}" class="taxonomy-link" data-no-swup>{{ .LinkTitle }}</a>
+          </div>
+        {{ end }}
+      </div>
     </div>
-  </div>
+  </main>
 {{ end }}
