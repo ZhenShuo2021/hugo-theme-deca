@@ -18,7 +18,7 @@
   align-items: center;
 }
 
-a.breadcrumbs__link {
+.breadcrumbs__link {
   display: inline-flex;
   align-items: center;
   padding: var(--space-sm) 0.75rem;
@@ -26,7 +26,7 @@ a.breadcrumbs__link {
   text-decoration: none;
 }
 
-a.breadcrumbs__link:hover {
+.breadcrumbs__link:hover {
   color: var(--color-accent);
   text-decoration: none;
 }

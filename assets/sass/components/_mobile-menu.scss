@@ -274,8 +274,8 @@
     background-color: transparent;
   }
 
-  .mobile-menu__sidebar-item-collapsible.mobile-menu__link--active
-    .mobile-menu__sidebar-link {
+  .mobile-menu__sidebar-item-collapsible.mobile-menu__link--active,
+  .mobile-menu__sidebar-link {
     color: var(--ifm-color-primary);
   }
 
