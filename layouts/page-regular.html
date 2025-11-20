@@ -12,7 +12,7 @@
       {{ partial "sidebar.html" . }}
     {{ end }}
     <div class="content" id="swup">
-      <main>
+      <main id="main-content">
         {{ partial "page-regular.html" . }}
       </main>
       {{ $renderToc := and (in .TableOfContents "li") (ne .Kind "section") }}

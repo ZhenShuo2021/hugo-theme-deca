@@ -54,12 +54,12 @@ h6 {
   h6 {
     a::after {
       content: "#";
-      margin-left: 0.2em;
       opacity: 0;
       transition: opacity var(--transition-fast);
     }
 
-    &:hover a::after {
+    &:hover a::after,
+    & a:focus::after {
       opacity: 1;
     }
   }

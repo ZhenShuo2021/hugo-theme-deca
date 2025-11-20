@@ -5,6 +5,9 @@
     {{ partial "head.html" . }}
   </head>
   <body class="layout-{{ .Kind }}">
+    <a href="#main-content" class="skip-to-main">
+      {{ i18n "skipToMain" | default "Skip to main content" }}
+    </a>
     {{ partial "sidebar-debug.html" . }}
     <div>
       {{ partial "header.html" . }}
