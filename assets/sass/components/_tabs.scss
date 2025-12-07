@@ -1,4 +1,4 @@
-.tabs-container {
+.tab__container {
   margin: var(--space-lg) 0;
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
@@ -6,13 +6,13 @@
   background-color: var(--bg-primary);
 }
 
-.tabs-nav {
+.tab__nav {
   display: flex;
   border-bottom: 1px solid var(--border-color);
   overflow-x: auto;
 }
 
-.tab-button {
+.tab__button {
   background: none;
   border: none;
   padding: var(--space-md) var(--space-lg);
@@ -23,39 +23,43 @@
   border-bottom: 2px solid transparent;
   white-space: nowrap;
   flex-shrink: 0;
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+
+  &:hover {
+    color: var(--text-primary);
+    background-color: rgba(0, 0, 0, 0.05);
+
+    html.dark & {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+  }
+
+  &.tab--active {
+    color: var(--color-accent);
+    border-bottom-color: var(--color-accent);
+  }
 }
 
-.tab-button:hover {
-  color: var(--text-primary);
-  background-color: rgba(0, 0, 0, 0.05);
-}
-
-html.dark .tab-button:hover {
-  background-color: rgba(255, 255, 255, 0.05);
-}
-
-.tab-button.active {
-  color: var(--color-accent);
-  border-bottom-color: var(--color-accent);
-}
-
-.tabs-content {
+.tab__content {
   position: relative;
 }
 
-.tab-panel {
+.tab__panel {
   display: none;
   padding: var(--space-sm) var(--space-lg);
-}
 
-.tab-panel.active {
-  display: block;
-}
+  &.tab--active {
+    display: block;
+  }
 
-.tab-panel > *:first-child {
-  margin-top: 0;
-}
+  > *:first-child {
+    margin-top: 0;
+  }
 
-.tab-panel > *:last-child {
-  margin-bottom: 0;
+  > *:last-child {
+    margin-bottom: 0;
+  }
 }

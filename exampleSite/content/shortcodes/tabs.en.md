@@ -1,5 +1,4 @@
 ---
-
 title: Tabs
 description: Introduction to the built-in shortcodes in the Deca theme - Tabs
 weight: 10
@@ -13,80 +12,76 @@ Tabs are a common component for displaying variant content in documentation webs
 
 ## Usage
 
-```md
-{{</* tabs labels="LABEL_A,LABEL_B" */>}}
+````md
+{{</* tabs */>}}
+  {{</* tab label="LABEL_A" */>}}
+  Content for LABEL_A
+  {{</* /tab */>}}
 
-{{</* tab */>}}
-Content for LABEL_A
-{{</* /tab */>}}
-
-{{</* tab */>}}
-Content for LABEL_B
-{{</* /tab */>}}
-
+  {{</* tab label="LABEL_B" */>}}
+  Content for LABEL_B
+  {{</* /tab */>}}
 {{</* /tabs */>}}
-```
+````
 
 ## Example
 
 ````md
-{{</* tabs labels="macOS,Windows,Linux" */>}}
+{{</* tabs */>}}
+  {{</* tab label="macOS" */>}}
+  Install using Homebrew:
 
-{{</* tab */>}}
-Install using Homebrew:
+  ```bash
+  brew install hugo
+  ```
+  {{</* /tab */>}}
 
-```bash
-brew install hugo
-```
-{{</* /tab */>}}
+  {{</* tab label="Windows" */>}}
+  Install using Chocolatey:
 
-{{</* tab */>}}
-Install using Chocolatey:
+  ```bash
+  choco install hugo
+  ```
 
-```bash
-choco install hugo
-```
+  Or download the [official release](https://github.com/gohugoio/hugo/releases).
+  {{</* /tab */>}}
 
-Or download the [official release](https://github.com/gohugoio/hugo/releases).
-{{</* /tab */>}}
+  {{</* tab label="Linux" */>}}
+  Install using a package manager, for example on Ubuntu:
 
-{{</* tab */>}}
-Install using a package manager, for example on Ubuntu:
-
-```bash
-sudo apt install hugo
-```
-{{</* /tab */>}}
-
+  ```bash
+  sudo apt install hugo
+  ```
+  {{</* /tab */>}}
 {{</* /tabs */>}}
 ````
 
-{{< tabs labels="macOS,Windows,Linux" >}}
-{{< tab >}}
-Install using Homebrew:
+{{< tabs >}}
+  {{< tab label="macOS" >}}
+  Install using Homebrew:
 
-```bash
-brew install hugo
-```
+  ```bash
+  brew install hugo
+  ```
 
-{{< /tab >}}
+  {{< /tab >}}
 
-{{< tab >}}
-Install using Chocolatey:
+  {{< tab label="Windows" >}}
+  Install using Chocolatey:
 
-```bash
-choco install hugo
-```
+  ```bash
+  choco install hugo
+  ```
 
-Or download the [official release](https://github.com/gohugoio/hugo/releases).
-{{< /tab >}}
+  Or download the [official release](https://github.com/gohugoio/hugo/releases).
+  {{< /tab >}}
 
-{{< tab >}}
-Install using a package manager, for example on Ubuntu:
+  {{< tab label="Linux" >}}
+  Install using a package manager, for example on Ubuntu:
 
-```bash
-sudo apt install hugo
-```
+  ```bash
+  sudo apt install hugo
+  ```
 
-{{< /tab >}}
+  {{< /tab >}}
 {{< /tabs >}}

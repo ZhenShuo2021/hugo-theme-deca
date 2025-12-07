@@ -13,77 +13,77 @@ Tabs 是文檔網站常見的變體展示元件。
 ## 使用方式
 
 ````md
-{{</* tabs labels="LABEL_A,LABEL_B" */>}}
+{{</* tabs */>}}
+  {{</* tab label="LABEL_A" */>}}
+  Content for LABEL_A
+  {{</* /tab */>}}
 
-{{</* tab */>}}
-Content for LABEL_A
-{{</* /tab */>}}
-
-{{</* tab */>}}
-Content for LABEL_B
-{{</* /tab */>}}
-
+  {{</* tab label="LABEL_B" */>}}
+  Content for LABEL_B
+  {{</* /tab */>}}
 {{</* /tabs */>}}
 ````
 
 ## 範例
 
 ````md
-{{</* tabs labels="macOS,Windows,Linux" */>}}
+{{</* tabs */>}}
+  {{</* tab label="macOS" */>}}
+  Install using Homebrew:
 
-{{</* tab */>}}
-Install using Homebrew:
+  ```bash
+  brew install hugo
+  ```
 
-```bash
-brew install hugo
-```
-{{</* /tab */>}}
+  {{</* /tab */>}}
 
-{{</* tab */>}}
-Install using Chocolatey:
+  {{</* tab label="Windows" */>}}
+  Install using Chocolatey:
 
-```bash
-choco install hugo
-```
+  ```bash
+  choco install hugo
+  ```
 
-Or download the [official release](https://github.com/gohugoio/hugo/releases).
-{{</* /tab */>}}
+  Or download the [official release](https://github.com/gohugoio/hugo/releases).
+  {{</* /tab */>}}
 
-{{</* tab */>}}
-Install using package manager, for example on Ubuntu:
+  {{</* tab label="Linux" */>}}
+  Install using package manager, for example on Ubuntu:
 
-```bash
-sudo apt install hugo
-```
-{{</* /tab */>}}
+  ```bash
+  sudo apt install hugo
+  ```
 
+  {{</* /tab */>}}
 {{</* /tabs */>}}
 ````
 
-{{< tabs labels="macOS,Windows,Linux" >}}
-{{< tab >}}
-Install using Homebrew:
+{{< tabs >}}
+  {{< tab label="macOS" >}}
+  Install using Homebrew:
 
-```bash
-brew install hugo
-```
-{{< /tab >}}
+  ```bash
+  brew install hugo
+  ```
 
-{{< tab >}}
-Install using Chocolatey:
+  {{< /tab >}}
 
-```bash
-choco install hugo
-```
+  {{< tab label="Windows" >}}
+  Install using Chocolatey:
 
-Or download the [official release](https://github.com/gohugoio/hugo/releases).
-{{< /tab >}}
+  ```bash
+  choco install hugo
+  ```
 
-{{< tab >}}
-Install using package manager, for example on Ubuntu:
+  Or download the [official release](https://github.com/gohugoio/hugo/releases).
+  {{< /tab >}}
 
-```bash
-sudo apt install hugo
-```
-{{< /tab >}}
+  {{< tab label="Linux" >}}
+  Install using package manager, for example on Ubuntu:
+
+  ```bash
+  sudo apt install hugo
+  ```
+
+  {{< /tab >}}
 {{< /tabs >}}
