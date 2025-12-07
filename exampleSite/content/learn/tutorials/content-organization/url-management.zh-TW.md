@@ -34,7 +34,7 @@ content/
 這是 Hugo 非常強大的功能，很多其他 SSG 都做不到同樣的事情。
 
 > [!NOTE]
-> Hugo-theme-deca 部分功能基於判斷路徑匹配，因此修改可能會導致部分功能異常。
+> Deca 部分功能基於判斷路徑匹配，因此修改可能會導致部分功能異常。
 
 在 hugo.toml 中設定 URL 規則，全部的規則請見[文檔 Configure permalinks](https://gohugo.io/configuration/permalinks/)。最推薦的是部分或全部基於資料夾目錄，因為這最符合網頁邏輯和瀏覽習慣，設定如下：
 

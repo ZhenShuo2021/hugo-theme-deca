@@ -43,7 +43,7 @@ content/
 This is a very powerful feature of Hugo that many other SSGs cannot achieve.
 
 > [!NOTE]
-> Some features of Hugo-theme-deca are based on path matching, so modifications may cause some features to malfunction.
+> Some features of Deca are based on path matching, so modifications may cause some features to malfunction.
 
 ### Custom Rules
 

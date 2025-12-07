@@ -19,7 +19,7 @@ defaults:
     shell: bash
 
 env:
-  REPO_NAME: hugo-theme-deca
+  REPO_NAME: deca
   SITE_PATH: deca
 
 jobs:

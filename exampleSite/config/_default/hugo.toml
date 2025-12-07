@@ -1,6 +1,6 @@
 baseURL = 'https://example.org/'
 defaultContentLanguage = 'zh-TW'
-theme = 'hugo-theme-deca'
+theme = 'deca'
 
 enableRobotsTXT = true
 enableGitInfo = false

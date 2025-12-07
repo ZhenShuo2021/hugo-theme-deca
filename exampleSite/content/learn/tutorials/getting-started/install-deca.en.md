@@ -29,7 +29,7 @@ Add the Deca theme to your site:
 
 ```bash
 git init
-git submodule add https://github.com/ZhenShuo2021/hugo-theme-deca.git themes/hugo-theme-deca
+git submodule add https://github.com/ZhenShuo2021/deca.git themes/deca
 ```
 
 ### Basic Configuration
@@ -41,7 +41,7 @@ baseURL = 'https://example.org/'
 defaultContentLanguage = 'en'
 languageCode = 'en'
 title = 'My Documentation Site'
-theme = 'hugo-theme-deca'
+theme = 'deca'
 
 [markup]
   [markup.goldmark]
@@ -99,7 +99,7 @@ title = 'My Documentation Site'
 
 [module]
   [[module.imports]]
-    path = "github.com/ZhenShuo2021/hugo-theme-deca"
+    path = "github.com/ZhenShuo2021/deca"
 
 [markup]
   [markup.goldmark]

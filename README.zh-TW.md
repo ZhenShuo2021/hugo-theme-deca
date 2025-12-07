@@ -1,6 +1,6 @@
 # Hugo Theme Deca
 
-[英文](https://github.com/zhenshuo2021/hugo-theme-deca/blob/main/README.md)
+[英文](https://github.com/zhenshuo2021/deca/blob/main/README.md)
 
 Deca 是一個為 [Hugo](https://gohugo.io/) 打造的現代化文檔主題，支援無重載換頁（AJAX）和多側邊欄（multi-sidebar）功能，提供流暢且可擴展的文檔瀏覽體驗。
 

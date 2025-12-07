@@ -11,7 +11,7 @@ hero:
       pageRef: "/learn/tutorials"
       primary: true
     - text: "View on GitHub"
-      link: "https://github.com/ZhenShuo2021/hugo-theme-deca"
+      link: "https://github.com/ZhenShuo2021/deca"
       primary: false
 
 # Features Section

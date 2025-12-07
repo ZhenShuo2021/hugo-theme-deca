@@ -1,6 +1,6 @@
 # Hugo Theme Deca
 
-[中文](https://github.com/zhenshuo2021/hugo-theme-deca/blob/main/README.zh-TW.md)
+[中文](https://github.com/zhenshuo2021/deca/blob/main/README.zh-TW.md)
 
 Deca is a modern documentation theme built for [Hugo](https://gohugo.io/), featuring seamless page transitions and multiple sidebars to deliver a smoother and more scalable documentation browsing experience.
 
