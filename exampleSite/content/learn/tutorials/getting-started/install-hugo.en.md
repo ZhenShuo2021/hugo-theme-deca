@@ -10,34 +10,34 @@ tags:
 
 Hugo is a fast static site generator. The Deca theme requires Hugo 0.149.1 or newer.
 
-{{< tabs labels="macOS,Windows,Linux" >}}
-{{< tab >}}
-Install using Homebrew:
+{{< tabs >}}
+  {{< tab label="macOS" >}}
+  Install using Homebrew:
 
-```bash
-brew install hugo
-```
+  ```bash
+  brew install hugo
+  ```
 
-{{< /tab >}}
+  {{< /tab >}}
 
-{{< tab >}}
-Install using Chocolatey:
+  {{< tab label="Windows" >}}
+  Install using Chocolatey:
 
-```bash
-choco install hugo
-```
+  ```bash
+  choco install hugo
+  ```
 
-Or download the [official release](https://github.com/gohugoio/hugo/releases).
-{{< /tab >}}
+  Or download the [official release](https://github.com/gohugoio/hugo/releases).
+  {{< /tab >}}
 
-{{< tab >}}
-Install using package manager, for example on Ubuntu:
+  {{< tab label="Linux" >}}
+  Install using package manager, for example on Ubuntu:
 
-```bash
-sudo apt install hugo
-```
+  ```bash
+  sudo apt install hugo
+  ```
 
-{{< /tab >}}
+  {{< /tab >}}
 {{< /tabs >}}
 
 ## Verify Installation

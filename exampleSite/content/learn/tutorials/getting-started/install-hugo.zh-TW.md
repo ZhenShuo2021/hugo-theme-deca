@@ -10,35 +10,35 @@ tags:
 
 Hugo 是一個快速的靜態網站產生器，Deca 主題需要 Hugo 0.149.1 或更新版本。
 
-{{< tabs labels="macOS,Windows,Linux" >}}
-{{< tab >}}
-使用 Homebrew 安裝：
+{{< tabs >}}
+  {{< tab label="macOS" >}}
+  使用 Homebrew 安裝：
 
-```bash
-brew install hugo
-```
+  ```bash
+  brew install hugo
+  ```
 
-{{< /tab >}}
+  {{< /tab >}}
 
-{{< tab >}}
-使用 Chocolatey 安裝：
+  {{< tab label="Windows" >}}
+  使用 Chocolatey 安裝：
 
-```bash
-choco install hugo
-```
+  ```bash
+  choco install hugo
+  ```
 
-或下載 [官方發布版本](https://github.com/gohugoio/hugo/releases)。
+  或下載 [官方發布版本](https://github.com/gohugoio/hugo/releases)。
 
-{{< /tab >}}
+  {{< /tab >}}
 
-{{< tab >}}
-使用套件管理器安裝，例如 Ubuntu：
+  {{< tab label="Linux" >}}
+  使用套件管理器安裝，例如 Ubuntu：
 
-```bash
-sudo apt install hugo
-```
+  ```bash
+  sudo apt install hugo
+  ```
 
-{{< /tab >}}
+  {{< /tab >}}
 {{< /tabs >}}
 
 ## 驗證安裝

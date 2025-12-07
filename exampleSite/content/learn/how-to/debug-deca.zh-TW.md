@@ -14,55 +14,55 @@ Deca 主題包含除錯系統，幫助您了解網站的結構、導航和內容
 
 要啟用除錯側邊欄，您需要在執行 Hugo 時將 `HUGO_DEBUG_SIDEBAR` 環境變數設定為 `true`。
 
-{{< tabs labels="macOS/Linux,Windows (PowerShell),Windows (命令提示字元)" >}}
+{{< tabs >}}
 
-{{< tab >}}
+  {{< tab label="macOS/Linux" >}}
 
-```bash
-# 設定環境變數並執行 Hugo 伺服器
-export HUGO_DEBUG_SIDEBAR=true
-hugo server
-```
+  ```bash
+  # 設定環境變數並執行 Hugo 伺服器
+  export HUGO_DEBUG_SIDEBAR=true
+  hugo server
+  ```
 
-或在單一指令中執行：
+  或在單一指令中執行：
 
-```bash
-HUGO_DEBUG_SIDEBAR=true hugo server
-```
+  ```bash
+  HUGO_DEBUG_SIDEBAR=true hugo server
+  ```
 
-{{< /tab >}}
+  {{< /tab >}}
 
-{{< tab >}}
+  {{< tab label="Windows (PowerShell)" >}}
 
-```powershell
-# 設定環境變數並執行 Hugo 伺服器
-$env:HUGO_DEBUG_SIDEBAR="true"
-hugo server
-```
+  ```powershell
+  # 設定環境變數並執行 Hugo 伺服器
+  $env:HUGO_DEBUG_SIDEBAR="true"
+  hugo server
+  ```
 
-或在單一指令中執行：
+  或在單一指令中執行：
 
-```powershell
-$env:HUGO_DEBUG_SIDEBAR="true"; hugo server
-```
+  ```powershell
+  $env:HUGO_DEBUG_SIDEBAR="true"; hugo server
+  ```
 
-{{< /tab >}}
+  {{< /tab >}}
 
-{{< tab >}}
+  {{< tab label="Windows (命令提示字元)" >}}
 
-```cmd
-# 設定環境變數並執行 Hugo 伺服器
-set HUGO_DEBUG_SIDEBAR=true
-hugo server
-```
+  ```cmd
+  # 設定環境變數並執行 Hugo 伺服器
+  set HUGO_DEBUG_SIDEBAR=true
+  hugo server
+  ```
 
-或在單一指令中執行：
+  或在單一指令中執行：
 
-```cmd
-set HUGO_DEBUG_SIDEBAR=true && hugo server
-```
+  ```cmd
+  set HUGO_DEBUG_SIDEBAR=true && hugo server
+  ```
 
-{{< /tab >}}
+  {{< /tab >}}
 
 {{< /tabs >}}
 
@@ -109,42 +109,42 @@ set HUGO_DEBUG_SIDEBAR=true && hugo server
 
 要停用除錯模式，只需移除環境變數或將其設定為 `false`：
 
-{{< tabs labels="macOS/Linux,Windows (PowerShell),Windows (命令提示字元)" >}}
+{{< tabs >}}
 
-{{< tab >}}
+  {{< tab label="macOS/Linux" >}}
 
-```bash
-# 移除環境變數
-unset HUGO_DEBUG_SIDEBAR
+  ```bash
+  # 移除環境變數
+  unset HUGO_DEBUG_SIDEBAR
 
-# 或設定為 false
-export HUGO_DEBUG_SIDEBAR=false
-hugo server
-```
+  # 或設定為 false
+  export HUGO_DEBUG_SIDEBAR=false
+  hugo server
+  ```
 
-{{< /tab >}}
+  {{< /tab >}}
 
-{{< tab >}}
+  {{< tab label="Windows (PowerShell)" >}}
 
-```powershell
-# 移除環境變數
-Remove-Item Env:HUGO_DEBUG_SIDEBAR
+  ```powershell
+  # 移除環境變數
+  Remove-Item Env:HUGO_DEBUG_SIDEBAR
 
-# 或設定為 false
-$env:HUGO_DEBUG_SIDEBAR="false"
-hugo server
-```
+  # 或設定為 false
+  $env:HUGO_DEBUG_SIDEBAR="false"
+  hugo server
+  ```
 
-{{< /tab >}}
+  {{< /tab >}}
 
-{{< tab >}}
+  {{< tab label="Windows (命令提示字元)" >}}
 
-```cmd
-# 設定為 false
-set HUGO_DEBUG_SIDEBAR=false
-hugo server
-```
+  ```cmd
+  # 設定為 false
+  set HUGO_DEBUG_SIDEBAR=false
+  hugo server
+  ```
 
-{{< /tab >}}
+  {{< /tab >}}
 
 {{< /tabs >}}
