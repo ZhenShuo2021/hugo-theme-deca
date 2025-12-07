@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="{{ site.Language.LanguageCode }}" dir="{{ or site.Language.LanguageDirection `ltr` }}">
+  {{- $noop := partialCached "sidebar-init.html" . -}}
   {{- $meta := .Store.Get "sidebar-meta" }}
   <head>
     {{ partial "head.html" . }}

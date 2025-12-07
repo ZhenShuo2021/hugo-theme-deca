@@ -1,4 +1,6 @@
 {{- /* 
+  DEPRECATED because live reload has issue updating "sidebar-meta". Use partialCached instead.
+
   Initialize sidebar data
   This file executes before all other pages are rendered, ensuring that the Store contains the complete sidebar data.
 */ -}}

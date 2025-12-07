@@ -43,16 +43,6 @@ languageCode = 'en'
 title = '我的文檔網站'
 theme = 'hugo-theme-deca'
 
-[outputFormats.sidebarInit]
-  mediaType = "application/json"
-  baseName = "sidebar-init"
-  isPlainText = true
-  notAlternative = true
-  weight = 1
-
-[outputs]
-  home = ['sidebarInit', 'html']
-
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]

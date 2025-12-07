@@ -4,17 +4,6 @@ defaultContentLanguage = 'en'
 enableRobotsTXT = true
 enableGitInfo = false
 
-# min Hugo version: v0.147.9
-[outputFormats.sidebarInit]
-  mediaType = "application/json"
-  baseName = "sidebar-init"
-  isPlainText = true
-  notAlternative = true
-  weight = 1
-
-[outputs]
-  home = ['sidebarInit', 'html']
-
 [taxonomies]
   tag = "tags"
 

@@ -43,16 +43,6 @@ languageCode = 'en'
 title = 'My Documentation Site'
 theme = 'hugo-theme-deca'
 
-[outputFormats.sidebarInit]
-  mediaType = "application/json"
-  baseName = "sidebar-init"
-  isPlainText = true
-  notAlternative = true
-  weight = 1
-
-[outputs]
-  home = ['sidebarInit', 'html']
-
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]
