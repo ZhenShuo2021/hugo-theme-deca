@@ -47,11 +47,11 @@ a.page-nav-link:hover {
 .page-nav-direction {
   display: flex;
   align-items: center;
-  gap: var(--space-sm);
+  gap: var(--space-xs);
   font-size: 0.875rem;
   font-weight: 500;
   color: var(--text-secondary);
-  margin-bottom: var(--space-sm);
+  margin-bottom: var(--space-xs);
 }
 
 .page-nav-next .page-nav-direction {

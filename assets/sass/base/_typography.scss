@@ -91,7 +91,7 @@ table:not(:has(pre), pre *) {
 }
 
 th:not(:has(pre), pre *) {
-  padding: var(--space-sm) var(--space-md);
+  padding: var(--space-xs) var(--space-md);
   text-align: left;
   font-weight: 600;
   background-color: var(--bg-secondary);
@@ -104,7 +104,7 @@ th:not(:has(pre), pre *):last-child {
 }
 
 td:not(:has(pre), pre *) {
-  padding: var(--space-sm) var(--space-md);
+  padding: var(--space-xs) var(--space-md);
   border-bottom: 1px solid var(--border-color);
   border-right: 1px solid var(--border-color);
 }

@@ -20,11 +20,11 @@
 .taxonomy-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: var(--space-sm) var(--space-md);
+  gap: var(--space-xs) var(--space-md);
 }
 
 .taxonomy-item {
-  padding: var(--space-xs) 0;
+  padding: var(--space-2xs) 0;
 }
 
 .taxonomy-link {

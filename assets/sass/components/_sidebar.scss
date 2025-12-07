@@ -1,6 +1,6 @@
 .sidebar {
   background-color: var(--site-bg);
-  padding: var(--space-sm);
+  padding: var(--space-xs);
   border-right: 1px solid var(--border-color);
   transition:
     background-color var(--transition-base),
@@ -13,8 +13,8 @@
 
 .sidebar a {
   display: block;
-  padding: var(--space-xs) var(--space-sm);
-  margin: var(--space-xs) 0;
+  padding: var(--space-2xs) var(--space-xs);
+  margin: var(--space-2xs) 0;
   color: var(--text-secondary);
   text-decoration: none;
   border-radius: var(--radius-sm);
@@ -45,7 +45,7 @@
 
 .sidebar-item-collapsible {
   display: block;
-  margin: var(--space-xs) 0;
+  margin: var(--space-2xs) 0;
   position: relative;
   cursor: pointer;
   border-radius: var(--radius-sm);
@@ -60,7 +60,7 @@
 
 .sidebar-item-collapsible .sidebar-link {
   display: block;
-  padding: var(--space-xs) var(--space-sm);
+  padding: var(--space-2xs) var(--space-xs);
   padding-left: 1.6rem;
   color: var(--text-secondary);
   text-decoration: none;
@@ -81,7 +81,7 @@
 .sidebar-item-collapsible::before {
   content: "";
   position: absolute;
-  left: var(--space-xs);
+  left: var(--space-2xs);
   top: 50%;
   transform: translateY(-50%);
   width: 16px;

@@ -12,7 +12,7 @@
   }
 
   .mobile-toc summary {
-    padding: var(--space-sm) var(--space-md);
+    padding: var(--space-xs) var(--space-md);
     font-weight: 600;
     font-size: 0.9375rem;
     color: var(--text-primary);
@@ -28,7 +28,7 @@
   .mobile-toc summary::before {
     content: "▶";
     display: inline-block;
-    margin-right: var(--space-sm);
+    margin-right: var(--space-xs);
     font-size: 0.75rem;
     transition: transform var(--transition-base);
   }
@@ -54,12 +54,12 @@
   }
 
   .mobile-toc-list li {
-    margin-bottom: var(--space-sm);
+    margin-bottom: var(--space-xs);
   }
 
   .mobile-toc-list a {
     display: block;
-    padding: var(--space-xs) var(--space-sm);
+    padding: var(--space-2xs) var(--space-xs);
     color: var(--text-secondary);
     text-decoration: none;
     font-size: 0.875rem;
@@ -69,7 +69,7 @@
 
   .mobile-toc-list ul ul {
     margin-left: var(--space-md);
-    margin-top: var(--space-xs);
+    margin-top: var(--space-2xs);
   }
 
   .mobile-toc-list ul ul a {
@@ -94,7 +94,7 @@
 
 .toc-nav h3 {
   margin: 0;
-  padding: var(--space-md) var(--space-md) var(--space-sm) var(--space-md);
+  padding: var(--space-md) var(--space-md) var(--space-xs) var(--space-md);
   font-size: 0.9rem;
   font-weight: 600;
   color: var(--text-secondary);
@@ -109,7 +109,7 @@
   min-height: 0;
   overflow-y: auto;
   margin: var(--space-md);
-  padding-inline-end: var(--space-sm);
+  padding-inline-end: var(--space-xs);
 }
 
 .toc-nav #TableOfContents ul {

@@ -1,7 +1,7 @@
 /* Github flavored Block Quote */
 .gbq {
   margin: var(--space-md) 0;
-  padding: var(--space-xs) var(--space-md);
+  padding: var(--space-2xs) var(--space-md);
   border-left: 4px solid;
   border-color: var(--border-color);
 }
@@ -9,8 +9,8 @@
 .gbq__header {
   display: flex;
   align-items: center;
-  gap: var(--space-sm);
-  margin-bottom: var(--space-sm);
+  gap: var(--space-xs);
+  margin-bottom: var(--space-xs);
   font-weight: 600;
 }
 
