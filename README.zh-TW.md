@@ -2,7 +2,7 @@
 
 [英文](https://github.com/zhenshuo2021/deca/blob/main/README.md)
 
-Deca 是一個為 [Hugo](https://gohugo.io/) 打造的現代化文檔主題，支援無重載換頁（AJAX）和多側邊欄（multi-sidebar）功能，提供流暢且可擴展的文檔瀏覽體驗。
+Deca 是一個現代化的 [Hugo](https://gohugo.io/) 文檔主題，支援無重載換頁（AJAX）和多側邊欄（multi-sidebar）功能，提供流暢且可擴展的文檔瀏覽體驗。
 
 ![screenshot](./images/deca-screenshot.png)
 
@@ -21,7 +21,7 @@ Deca 是一個為 [Hugo](https://gohugo.io/) 打造的現代化文檔主題，�
 
 Deca 整合無重載換頁的 Swup 以及頁面預載功能，提供如同單頁應用網站的絲滑瀏覽體驗，頁面切換無白屏閃爍、無等待延遲，同時保留靜態網站的 SEO 優勢與載入速度。
 
-除此之外，Deca 大量使用快取功能完整發揮 Hugo 高效的優勢，這是目前 Hugo 生態所有文檔網站都不具備的能力。Deca 不只快取側邊欄數據，讓網站構建時只須讀取快取不需重複遍歷；原生[跳過摺疊的 sidebar](https://github.com/facebook/docusaurus/pull/5136) 以加速構建；針對大型網站，Deca 支援 `sidebarCachedRender` 選項，進一步優化構建效能。
+除此之外，Deca 大量使用快取功能完整發揮 Hugo 高效的優勢，這是目前 Hugo 生態所有文檔網站都不具備的能力。Deca 不只快取側邊欄數據，讓網站構建時只須讀取快取不需重複遍歷；原生跳過摺疊的 sidebar 以加速構建；針對大型網站，Deca 支援 `sidebarCachedRender` 選項，進一步優化構建效能。
 
 ## 授權條款
 

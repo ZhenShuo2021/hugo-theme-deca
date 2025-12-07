@@ -21,7 +21,7 @@ Deca is a modern documentation theme built for [Hugo](https://gohugo.io/), featu
 
 Deca integrates seamless page navigation with Swup and page preloading, delivering a silky-smooth browsing experience with no white-screen flashes or loading delays, while retaining the SEO benefits and fast initial load times of static sites.
 
-Beyond that, Deca extensively uses caching to fully leverage Hugo's performance advantages—a capability currently unavailable in other Hugo documentation themes. Deca not only caches sidebar data to avoid repeated traversal during builds but also natively [skips collapsed sidebars](https://github.com/facebook/docusaurus/pull/5136) to accelerate builds. For large-scale sites, Deca supports the `sidebarCachedRender` option to further optimize build performance.
+Beyond that, Deca extensively uses caching to fully leverage Hugo's performance advantages—a capability currently unavailable in other Hugo documentation themes. Deca not only caches sidebar data to avoid repeated traversal during builds but also natively skips collapsed sidebars to accelerate builds. For large-scale sites, Deca supports the `sidebarCachedRender` option to further optimize build performance.
 
 ## License
 
